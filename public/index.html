@@ -23,7 +23,7 @@
 			<li ng-repeat="user in user.users">
 				{{user.name}}
 			</li>
-		</ul>    	
+		</ul>
 
 		<!-- create new user -->
 		<h2>Create New User:</h2>
@@ -34,9 +34,18 @@
 			<input type="submit" value="Create a New User"/>
 		</form>
 
+    <!-- update user -->
+
+    <form ng-submit="user.updateUser(user)"> <!-- dont know what to pass in -->
+			<input type="text" ng-model="user.editedObject.name" placeholder="name"/>
+			<input type="text" ng-model="user.editedObject.image" placeholder="image"/>
+			<input type="text" ng-model="user.editedObject.bio" placeholder="bio"/>
+			<input type="submit" value="Edit User"/>
+		</form>
+
+    <!-- delete user -->
 
 
-    
     </div>
 
 

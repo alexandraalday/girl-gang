@@ -3,7 +3,7 @@ const app = angular.module('girlGang', []);
     app.controller('UserController', ['$http', function($http){
       const controller = this;
       this.users = [];
-
+      this.editedObject = {};
       this.getUsers = function(){
         $http({
           method: 'GET',
@@ -43,7 +43,7 @@ const app = angular.module('girlGang', []);
         $http({
           method: 'PUT',
           url: '/users/' + user._id,
-          data: editedObject
+          data: this.editedObject
 
         }).then(
           function(response){
@@ -54,6 +54,9 @@ const app = angular.module('girlGang', []);
           }
         );
       }
+      this.toggleEdit = function(){
+        this.editDisplay = !this.editDisplay;
+      };
 
       this.deleteUser = function(user){
         $http({
