@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const app = express();
-
+const port = process.env.PORT || 3000;
 //middleware
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
@@ -25,13 +25,12 @@ app.get('/', (req, res)=>{
 
 
 //mongoose connection
-mongoose.connect('mongodb://localhost:27017/girlgang');
-mongoose.connection.once('open', ()=>{
-  console.log('mongoosin');
-});
+const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/girlgang'
+
+mongoose.connect(mongoUri);
 
 
 //port
-app.listen(3000, ()=>{
+app.listen(port, ()=>{
 	console.log('listening bruh');
 });
