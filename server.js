@@ -12,7 +12,8 @@ app.use(express.static('public'));
 
 //controllers
 
-
+const user = require('./controllers/users.js')
+app.use('/users', user)
 
 
 //index route
