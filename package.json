@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/alexandraalday/girl-gang/issues"
   },
-  "homepage": "https://github.com/alexandraalday/girl-gang#readme"
+  "homepage": "https://github.com/alexandraalday/girl-gang#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "mongoose": "^4.11.7"
+  }
 }
