@@ -14,5 +14,34 @@
     {{2+2}}
     {{2+3}}
     {{5*2}}
+
+
+   <!--  list of all users -->
+   <h2>List of Users:</h2>
+    <div ng-controller="UserController as user">
+		<ul>
+			<li ng-repeat="user in user.users">
+				{{user.name}}
+			</li>
+		</ul>    	
+
+		<!-- create new user -->
+		<h2>Create New User:</h2>
+		<form ng-submit="user.createUser()">
+			<input type="text" ng-model="user.name" placeholder="name"/>
+			<input type="text" ng-model="user.image" placeholder="image"/>
+			<input type="text" ng-model="user.bio" placeholder="bio"/>
+			<input type="submit" value="Create a New User"/>
+		</form>
+
+
+
+    
+    </div>
+
+
+
+
+
   </body>
 </html>
