@@ -14,7 +14,8 @@ app.use(express.static('public'));
 
 const user = require('./controllers/users.js')
 app.use('/users', user)
-
+const gif = require('./controllers/gif.js')
+app.use('/gifs', gif)
 
 //index route
 app.get('/', (req, res)=>{
