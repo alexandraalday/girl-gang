@@ -20,30 +20,65 @@
 
   <div>
 
-    <ul>
-      <li ng-repeat="giphy in gif.allGifs" ng-click="gif.setCurrentGif(giphy._id)">{{giphy.name}}<br/>
+    <ul> <!-- this is what's triggering the modal in the setcurrent gif function -->
+      <li ng-repeat="giphy in gif.allGifs" ng-click="gif.setCurrentGif(giphy._id)">{{giphy.name}} <br/>
       <img ng-src="{{giphy.url}}"/><br/>
-      <!-- button to show the edit form -->
-      <button class="btn btn-primary" ng-click="gif.toggleEdit()">Edit {{giphy.name}}</button>
       </li>
     </ul>
-    <div ng-if="gif.editDisplay">
-      <form ng-submit="gif.updateGif(gif.currentGif._id)">
-        <input type="text" placeholder="{{gif.currentGif.name}}" ng-model="gif.editedGif.name"><br/>
-        <input type="text" placeholder="{{gif.currentGif.url}}" ng-model="gif.editedGif.url"><br/>
-        <input type="text" placeholder="{{gif.currentGif.tag}}" ng-model="gif.editedGif.tag"><br/>
-        <button type="submit" ng-click="gif.updateGif(gif.currentGif._id)" ng-click="gif.currentGif = {}">Edit {{gif.currentGif.name}}</button>
-
-      </form>
-      {{gif.currentGif._id}}
+  </div>
+</div>
+<!-- gif show modal -->
+<div ng-if="gif.modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title"  id="exampleModalLabel">{{gif.currentGif.name}} </h1>
+        <button class="btn btn-default" ng-click="gif.toggleModal()">X</button>
+      </div>
+      <div class="modal-body">
+        <img ng-src="{{gif.currentGif.url}}"/><br/>
+        <!-- button to show the edit form -->
+        <button class="btn btn-primary" ng-click="gif.toggleEdit()">Edit {{giphy.name}}</button>
+        <!-- button to delete the gif -->
+        <button class="btn btn-default" ng-click="gif.deleteGif(gif.currentGif._id)">Delete</button>
+        <!-- edit form display -->
+        <div ng-if="gif.editDisplay">
+          <form ng-submit="gif.updateGif(gif.currentGif._id)">
+            <input type="text" placeholder="{{gif.currentGif.name}}" ng-model="gif.editedGif.name"><br/>
+            <input type="text" placeholder="{{gif.currentGif.url}}" ng-model="gif.editedGif.url"><br/>
+            <input type="text" placeholder="{{gif.currentGif.tag}}" ng-model="gif.editedGif.tag"><br/>
+            <button type="submit" ng-click="gif.updateGif(gif.currentGif._id)" ng-click="gif.currentGif = {}">Edit {{gif.currentGif.name}}</button>
+          </form>
+        </div>
+      </div>
     </div>
-    <button class="btn btn-default" ng-click="gif.deleteGif(gif.currentGif._id)">Delete</button>
   </div>
 </div>
 
-<!-- gif show modal -->
-<div ng-if="gif.modal">
-  <h1>gif show modal </h1>
-</div>
+          <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div> -->
+
+
+
+
+
+
+
+
+
+
+
 </div><!-- end row -->
 </div><!-- end container -->

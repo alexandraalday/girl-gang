@@ -165,8 +165,8 @@ app.controller('GifController', ['$http', function($http){
         controller.currentGif = response.data[0];
         //controller.displayGif = true;
         //sets the url, not sure why this is the only one we did this with.
-        controller.currentGif.url = response.data[0].url;
         controller.modal = true;
+        controller.currentGif.url = response.data[0].url;
         console.log(controller.currentGif);
       }, function(err){
         console.log(err);
@@ -197,7 +197,7 @@ app.controller('GifController', ['$http', function($http){
         url: '/gifs/' + gif,
       }).then(function(response){
         controller.getGifs();
-        //controller.displayGif = false;
+        controller.modal = false;
       }, function(err) {
         console.log('error in the delete call');
         console.log(err);
