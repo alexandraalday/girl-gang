@@ -125,6 +125,7 @@ app.controller('GifController', ['$http', function($http){
         }
       }).then(function(response){
         //this will update the gifs list with the new gif instantly
+        controller.newDisplay = false;
         controller.getGifs();
         //this resets the add new gif form text boxes
         controller.name = '',

@@ -10,7 +10,7 @@
   <div ng-if="gif.newDisplay">
     <form ng-submit="gif.addGif()">
       <input type="text" placeholder="gif name" ng-model="gif.name"><br/>
-      <input type="text" placeholder="gif url" ng-model="gif.url"><br/>
+      <input type="URL" placeholder="gif url" ng-model="gif.url"><br/>
       <input type="text" placeholder="gif tag" ng-model="gif.tag"><br/>
       <button type="submit" class="btn btn-default" ng-click="gif.currentGif.name =null">Create Gif</button>
     </form>
@@ -28,7 +28,7 @@
   </div>
 </div>
 <!-- gif show modal -->
-<div ng-if="gif.modal">
+<div ng-if="gif.modal" id="gifmodal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
