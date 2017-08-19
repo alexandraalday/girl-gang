@@ -25,6 +25,10 @@ app.use('/music', music)
 const lit = require('./controllers/lit.js')
 app.use('/lit', lit)
 
+const session = require('./controllers/session.js')
+app.use('/session', session)
+
+
 
 //index route
 app.get('/', (req, res)=>{
