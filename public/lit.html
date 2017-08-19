@@ -7,37 +7,55 @@
   <h1> Lit about Lit </h1>
   <h4> Yak It Up About All That Yakking, Help Get That Female Word Count Achieved for the Day</h4>
   <div class="col-lg-10">
-    <button class="btn btn-success" ng-click="gif.toggleNew()">Add New Lit Post</button>
-    <div ng-if="gif.newDisplay">
+    <button class="btn btn-success" ng-click="lit.toggleNew()">Add New Lit Post</button>
+    <div ng-if="lit.newDisplay">
     <form ng-submit="lit.addLit()">
-      <input type="text" placeholder="lit name" ng-model="lit.postAuthor"><br/>
-      <input type="URL" placeholder="lit url" ng-model="lit.url"><br/>
-      <input type="text" placeholder="lit comment" ng-model="lit.comment"><br/>
-      <button type="submit" class="btn btn-default" ng-click="gif.currentLit.name =null">Create Lit Post</button>
+      <input type="text" placeholder="Post Title" ng-model="lit.postTitle"><br/>
+      <input type="URL" placeholder="Lit Link" ng-model="lit.url"><br/>
+      <input type="text" placeholder="Your Commentary" ng-model="lit.comment"><br/>
+      <button type="submit" class="btn btn-default" ng-click="lit.currentLit.postTitle =null">Create Lit Post</button>
     </form>
   </div>
 </div><!--end of col-lg-10 -->
 </div><!-- end of jumbotron -->
 
   <div>
-    <h4>Words, Words, Words</h4>
     <ul>
-      <li ng-repeat="lit in lit.allContent" ng-click="lit.setCurrentLit(lit._id)">{{lit.name}}</li>
-
+      <li ng-repeat="lit in lit.allContent" ng-click="lit.setCurrentLit(lit._id)">{{lit.postTitle}}</li> <br/>
+      <a href="{{lit.url}}"/><br/>
     </ul>
+  </div>
+</div>
 
-    <!-- edit form -->
-    <div ng-if="lit.editDisplay">
-      <form ng-submit="lit.updateLit(lit.currentLit._id)">
+<!-- gif show modal -->
+<div ng-if="lit.modal" id="litmodal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title"  id="exampleModalLabel">{{lit.currentLit.postTitle}} </h1>
+        <button class="btn btn-default" ng-click="lit.toggleModal()">X</button>
+      </div>
+      <div class="modal-body">
+        <a href="{{lit.currentUrl.url}}"/><br/>
+        <!-- button to show the edit form -->
+        <button class="btn btn-primary" ng-click="lit.toggleEdit()">Edit {{lit.name}}</button>
+        <!-- button to delete the lit link -->
+        <button class="btn btn-default" ng-click="lit.deleteLit(lit.currentLit._id)">Delete</button>
 
-        <input type="text" placeholder="{lit.currentLit.postAuthor}}" ng-model="gif.editedLit.postAuthor"><br/>
-        <input type="text" placeholder="{{lit.currentGif.url}}" ng-model="lit.editedLit.url"><br/>
-        <input type="text" placeholder="{{lit.currentLit.tag}}" ng-model="gif.editedLit.tag"><br/>
-        <button type="submit" ng-click="gif.updateLit(lit.currentLit._id)">Edit {{lit.currentLit.name}}</button>
+      <!-- edit form display-->
+      <div ng-if="lit.editDisplay">
+        <form ng-submit="lit.updateLit(lit.currentLit._id)">
 
-      </form>
-      {{lit.currentLit._id}}
+          <input type="text" placeholder="{{lit.currentLit.postTitle}}" ng-model="lit.editedLit.postTitle"><br/>
+          <input type="text" placeholder="{{lit.currentLit.url}}" ng-model="lit.editedLit.url"><br/>
+          <input type="text" placeholder="{{lit.currentLit.comment}}" ng-model="lit.editedLit.comment"><br/>
+          <button type="submit" ng-click="lit.updateLit(lit.currentLit._id)" ng-click="lit.currentLit = {""}">Edit {{lit.currentLit.name}}</button>
+        </form>
+        </div>
+      </div>
     </div>
-    <button ng-click="gif.deleteLit(lit.currentLit._id)">Delete</button>
-  </div><!-- end row -->
-  </div><!-- end container -->
+  </div>
+</div>
+
+</div><!-- end row -->
+</div><!-- end container -->
