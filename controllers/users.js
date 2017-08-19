@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user.js')
+//will we need to require other models here also?
+//for ex: const Lit = require('../models/lit.js')
 
 //index route
 router.get('/', (req, res)=> {
