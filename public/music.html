@@ -13,8 +13,9 @@
 
   <div class="jumbotron">
     <h1>M U S I C</h1>
-    <h4>Bad Ass Songs for Badass Babes</h4>
+    <h4>Badass Songs for Badass Babes</h4>
 
+<!--     Add New Track Section -->
     <div class="col-lg-10">
       <button class="btn btn-success" type="submit" ng-click="music.toggleNewDisplay()">Add A New Track</button>
       <div ng-if="music.newDisplay">
@@ -33,31 +34,52 @@
 
   <div>
 
+<!--     List of all Tracks with Modal for More Info-->
+
     <ul>
       <li ng-repeat="song in music.allMusic" ng-click="music.setCurrentMusic(song._id)">
-        Title: {{song.name}}<br/>
-        Artist: {{song.artist}}<br/>
-        With Angular: <iframe ng-src="https://open.spotify.com/embed/" + "{{song.link}}" + " width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
-        Spotify Embed: <div ng-bind-html="renderHtml(song.embed)"></div>
+        <a href="#">{{song.name}}</a> by: {{song.artist}}<br/>
+        Spotify iFrame With Angular:<br/> <iframe ng-src="https://open.spotify.com/embed/" + "{{song.link}}" + " width="300" height="80" frameborder="0" allowtransparency="true"></iframe><br/>
+        Spotify Direct Embed Link: <br/> <div ng-bind-html="renderHtml(song.embed)"></div><br/>
         <iframe src="https://open.spotify.com/embed/track/3vmu0mRcxLhV1xkl13CflM" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
-        <button class="btn btn-primary" ng-click="music.toggleEdit()">Edit Song</button>
-        <button class="btn btn-default" ng-click="music.deleteMusic(music.currentMusic._id)">Delete Song</button>
         </li>
     </ul>
 
 
-    <!-- edit form -->
-    <div class="form-group" ng-if="music.editDisplay">
-      <form ng-submit="music.updateMusic(music.currentMusic._id)">
-        <input type="text" placeholder="{{music.currentMusic.name}}" ng-model="music.editedMusic.name"><br/>
-        <input type="text" placeholder="{{music.currentMusic.artist}}" ng-model="music.editedMusic.artist"><br/>
-        <input type="text" placeholder="{{music.currentMusic.link}}" ng-model="music.editedMusic.link"><br/>
-        <input type="text" placeholder="{{music.currentMusic.tag}}" ng-model="music.editedMusic.tag"><br/>
-        <input type="text" placeholder="{{music.currentMusic.author}}" ng-model="music.editedMusic.author"><br/>
-        <button type="submit" ng-click="music.updateMusic(music.currentMusic._id)">Confirm</button>
-        <button class="" ng-click="music.currentMusic.name = null">Cancel</button>
-      </form>
-      {{music.currentMusic._id}}
+    <!--    Modal -->
+    <div ng-if="music.modal" id="musicmodal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title"  id="musicModalLabel">{{music.currentMusic.name}} - {{music.currentMusic.artist}} </h1>
+            <button class="btn btn-default" ng-click="music.toggleModal()">X</button>
+          </div>
+          <div class="modal-body">
+            With Angular: <br/> <iframe ng-src="https://open.spotify.com/embed/" + "{{song.link}}" + " width="300" height="380" frameborder="0" allowtransparency="true"></iframe> <br/>
+            Spotify Embed: <br/> <div ng-bind-html="renderHtml(song.embed)"></div>
+            <iframe src="https://open.spotify.com/embed/track/3vmu0mRcxLhV1xkl13CflM" width="300" height="380" frameborder="0" allowtransparency="true"></iframe><br/>
+            <!-- button to show the edit form -->
+            <button class="btn btn-primary" ng-click="music.toggleEdit()">Edit {{giphy.name}}</button>
+
+      <!--   Delete Button -->
+          <button class="btn btn-default" ng-click="music.deleteMusic(music.currentMusic._id)">Delete</button>
+
+    <!--     Edit Form -->
+        <div class="form-group" ng-if="music.editDisplay">
+          <form ng-submit="music.updateMusic(music.currentMusic._id)">
+            <input type="text" placeholder="{{music.currentMusic.name}}" ng-model="music.editedMusic.name"><br/>
+            <input type="text" placeholder="{{music.currentMusic.artist}}" ng-model="music.editedMusic.artist"><br/>
+            <input type="text" placeholder="{{music.currentMusic.link}}" ng-model="music.editedMusic.link"><br/>
+            <input type="text" placeholder="{{music.currentMusic.tag}}" ng-model="music.editedMusic.tag"><br/>
+            <input type="text" placeholder="{{music.currentMusic.author}}" ng-model="music.editedMusic.author"><br/>
+            <button type="submit" ng-click="music.updateMusic(music.currentMusic._id)">Confirm</button>
+            <button class="" ng-click="music.currentMusic.name = null">Cancel</button>
+          </form>
+          {{music.currentMusic._id}}
+        </div>
+      </div>
+    </div>
+      </div>
     </div>
   </div>
 </div>
