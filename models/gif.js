@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 //schema
 const gifSchema = mongoose.Schema({
  	name: String,
- 	image: String,
+ 	url: String,
   tag: String,
   author: String
 });
