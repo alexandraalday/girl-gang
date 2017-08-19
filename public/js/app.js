@@ -1,8 +1,10 @@
 const app = angular.module('girlGang', []);
 
+
 ///////////////////////
 // USERS CONTROLLER
 ///////////////////////
+
 
 app.controller('UserController', ['$http', function($http){
   //an empty array so we can push the gifs we make into it to display on the page
@@ -213,27 +215,34 @@ app.controller('GifController', ['$http', function($http){
 // MUSIC CONTROLLER
 ///////////////////////
 
-app.controller('MusicController', ['$http', function($http){
+app.controller('MusicController', ['$http', '$scope', function($http, $scope){
     const controller = this;
     this.allMusic = [];
     this.currentMusic = {};
     this.editMusic = {};
     this.editDisplay = false
     this.newDisplay = false;
-    this.newSong = {};
+    // this.newSong = {};
+
+    this.MusicCtrl = function($scope, $sce) {
+      $scope.setProject = function (id) {
+        $scope.song = $sce.trustAsResourceUrl($scope.song.link);
+      }
+    }
 
 
     this.addMusic = function(){
       $http({
         method: 'POST',
         url: '/music',
-        data: controller.newSong
+        data: {
+          name: this.name,
+          artist: this.artist,
+          link: this.link.split('.com/')[1],
+          tag: this.tag,
+          author: this.author
+        }
       }).then(function(response){
-        console.log(response);
-        console.log(response.data.link.split('.com/')[1]);
-        console.log(response.data.embed);
-        response.data.link = response.data.link.split('.com/')[1];
-        response.data.embed = '<iframe src="https://open.spotify.com/embed/' + response.data.link + '"width="300" height="380" frameborder="0" allowtransparency="true"></iframe>'
         // call all songs
         controller.getMusic();
         // reset form
