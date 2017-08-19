@@ -1,35 +1,41 @@
 <div ng-controller="MusicController as music">
 
-  <h1> rhythym is a dancer</h1>
+<div class="container">
+  <div class="row">
 
-  <div>
-    <button type="submit" ng-click="music.toggleNewDisplay()">Add A New Track</button>
-    <div ng-if="music.newDisplay">
-      <form ng-submit="music.addMusic()">
-        <input type="text" placeholder="name" ng-model="music.name"><br/>
-        <input type="text" placeholder="artist" ng-model="music.artist"><br/>
-        <input type="text" placeholder="link" ng-model="music.link"><br/>
-        <input type="text" placeholder="tag" ng-model="music.tag"><br/>
-        <input type="text" placeholder="author" ng-model="music.author"><br/>
-        <button type="submit">Add Song</button>
-      </form>
-    </div>
-  </div>
-
-  <div>
+  <div class="jumbotron">
+    <h1>M U S I C</h1>
     <h4>Bad Ass Songs for Badass Babes</h4>
+
+    <div class="col-lg-10">
+      <button class="btn btn-success" type="submit" ng-click="music.toggleNewDisplay()">Add A New Track</button>
+      <div ng-if="music.newDisplay">
+        <form ng-submit="music.addMusic()">
+          <input type="text" placeholder="name" ng-model="music.name"><br/>
+          <input type="text" placeholder="artist" ng-model="music.artist"><br/>
+          <input type="text" placeholder="link" ng-model="music.link"><br/>
+          <input type="text" placeholder="tag" ng-model="music.tag"><br/>
+          <input type="text" placeholder="author" ng-model="music.author"><br/>
+          <button class="btn btn-default" type="submit">Add Song</button>
+        </form>
+      </div>
+    </div>
+    </div>
+
+  <div>
+
     <ul>
       <li ng-repeat="song in music.allMusic" ng-click="music.setCurrentMusic(song._id)">
         Title: {{song.name}}<br/>
         Artist: {{song.artist}}<br/>
-        <button ng-click="music.toggleEdit()">Edit Song</button>
-        <button ng-click="music.deleteMusic(music.currentMusic._id)">Delete Song</button>
+        <button class="btn btn-primary" ng-click="music.toggleEdit()">Edit Song</button>
+        <button class="btn btn-default" ng-click="music.deleteMusic(music.currentMusic._id)">Delete Song</button>
         </li>
     </ul>
 
 
     <!-- edit form -->
-    <div ng-if="music.editDisplay">
+    <div class="form-group" ng-if="music.editDisplay">
       <form ng-submit="music.updateMusic(music.currentMusic._id)">
         <input type="text" placeholder="{{music.currentMusic.name}}" ng-model="music.editedMusic.name"><br/>
         <input type="text" placeholder="{{music.currentMusic.artist}}" ng-model="music.editedMusic.artist"><br/>
@@ -37,9 +43,13 @@
         <input type="text" placeholder="{{music.currentMusic.tag}}" ng-model="music.editedMusic.tag"><br/>
         <input type="text" placeholder="{{music.currentMusic.author}}" ng-model="music.editedMusic.author"><br/>
         <button type="submit" ng-click="music.updateMusic(music.currentMusic._id)">Confirm</button>
-        <button ng-click="music.currentMusic.name = null">Cancel</button>
+        <button class="" ng-click="music.currentMusic.name = null">Cancel</button>
       </form>
       {{music.currentMusic._id}}
     </div>
   </div>
 </div>
+
+
+</div><!-- end row -->
+</div><!-- end container -->
