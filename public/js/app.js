@@ -1,9 +1,50 @@
 const app = angular.module('girlGang', []);
 
 app.controller('UserController', ['$http', function($http){
+  //an empty array so we can push the gifs we make into it to display on the page
+  this.allGifs = [];
+  //assigning this to a variable so we can use it in our functions
+  const controller = this;
+  //empty object so we can later use this variable to select a certain gif
+  this.currentGif = {};
+  //empty object we can later use this variable to edit a certain gif
+  this.editGif = {};
+  //ajax call to add a new User
+  this.addUser = function(){
+    $http({
+      method: 'POST',
+      url: '/users',
+      data: {
+        name: this.name,
+        image: this.image,
+        bio: this.bio
+      }
+    }).then(function(response){
+      console.log(response.data);
+      //controller.getUsers();
+      //these controllers will reset the new user form
+      controller.name = '',
+      controller.image = '',
+      controller.bio = ''
+    }, function(err){
+      console.log(error);
+    })
+  }
+  //ajax call to show all  the users
+  this.getUsers = function(){
+    $http({
+      method: 'GET',
+      url: '/users'
+    }).then(function(response){
+      controller.allGifs = response.data;
+    }, function(err){
+      console.log(err);
+      console.log('broke in show user call');
+    })
+  }
 
-
-
+  //call the function so all the users render automagically
+  this.getUsers()
 }])
 
 
@@ -100,13 +141,6 @@ app.controller('GifController', ['$http', function($http){
         console.log(err);
       })
     }
-
-
-
-
-
-
-
 
 
     //call the function so all the gifs render automagically
