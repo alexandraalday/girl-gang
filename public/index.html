@@ -11,11 +11,6 @@
   <body>
     <h1>Pretty Girls Like Gangsta Music</h1>
 
-    {{2+2}}
-    {{2+3}}
-    {{5*2}}
-
-
    <!--  list of all users -->
    <h2>List of Users:</h2>
     <div ng-controller="UserController as user">
@@ -36,7 +31,26 @@
 
     <!-- update user -->
 
-    <form ng-submit="user.updateUser(user)"> <!-- dont know what to pass in -->
+    <!-- <a href="#" ng-click="user.indexOfEditFormToShow = $index;">Edit This Todo</a> -->
+          <form ng-if="$index === user.indexOfEditFormToShow" ng-submit="user.editedObject():">
+            <input type="text" ng-model="user.editedObject" placeholder="name" />
+
+
+            <input type="text" ng-model="user.image" placeholder="image"/>
+      			<input type="text" ng-model="user.bio" placeholder="bio"/>
+
+
+            <input type="submit" value="Update Description"/>
+
+    <form ng-submit="user.editedObject(user)"> <!-- dont know what to pass in -->
+
+
+      <!-- delete user -->
+
+      <button ng-click="ctrl.deleteUser(user)">Delete User</button>
+
+      <!-- edit form -->
+
 			<input type="text" ng-model="user.editedObject.name" placeholder="name"/>
 			<input type="text" ng-model="user.editedObject.image" placeholder="image"/>
 			<input type="text" ng-model="user.editedObject.bio" placeholder="bio"/>
@@ -45,6 +59,7 @@
 
     <!-- delete user -->
 
+    <button ng-click="ctrl.deleteTodo(todo)">Delete User</button>
 
     </div>
 
