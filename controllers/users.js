@@ -12,7 +12,7 @@ router.get('/', (req, res)=> {
 //show route
 router.get('/:id', (req, res)=> {
   User.find({ _id : req.params.id }, function(err, foundUser) {
-    res.send(foundUser)
+    res.json(foundUser)
   })
 })
 
@@ -25,7 +25,7 @@ router.post('/', (req, res)=> {
 })
 //edit route
 router.put('/:id', (req, res)=> {
-  User.findByIdAndUpdate(req.params.id, req.body, { new : true }, (err, updatedUser)=>{
+  User.findByIdAndUpdate(req.params.id, {name: req.params.name, image: req.params.image, bio: req.params.bio}, { new : true }, (err, updatedUser)=>{
     res.json(updatedUser)
   })
 })

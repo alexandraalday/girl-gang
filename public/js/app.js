@@ -2,8 +2,7 @@ const app = angular.module('girlGang', []);
 
     app.controller('UserController', ['$http', function($http){
       const controller = this;
-      this.users = [];
-      this.editedObject = {};
+
       this.getUsers = function(){
         $http({
           method: 'GET',
@@ -23,12 +22,10 @@ const app = angular.module('girlGang', []);
           method: 'POST',
           url: '/users',
           data: {
-
             name: this.name,
             image: this.image,
             bio: this.bio,
             author: this.author
-
           }
         }).then(
           function(response){
@@ -39,29 +36,26 @@ const app = angular.module('girlGang', []);
         );
       }
 
-      this.updateUser = function(user) {
+      this.updateUser = function(id) {
+      	console.log('update function called')
         $http({
           method: 'PUT',
-          url: '/users/' + user._id,
-          data: this.editedObject
-
+          url: '/users/' + id
         }).then(
           function(response){
+          	console.log(response)
             controller.getUsers();
           },
           function(error){
-
-          }
-        );
+          	console.log(error)
+          });
       }
-      this.toggleEdit = function(){
-        this.editDisplay = !this.editDisplay;
-      };
 
-      this.deleteUser = function(user){
+
+      this.deleteUser = function(id){
         $http({
           method: 'DELETE',
-          url: '/users/' + user._id
+          url: '/users/' + id
         }).then(
           function(response){
             controller.getUsers();
@@ -78,20 +72,9 @@ const app = angular.module('girlGang', []);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+///////////////////////
+// GIFS CONTROLLER
+///////////////////////
 
 
 //controller for gifs
@@ -182,17 +165,95 @@ app.controller('GifController', ['$http', function($http){
       }, function(err) {
         console.log('error in the delete call');
         console.log(err);
+            }
+        );
+      }
+
+      this.getGifs();
+}])
+
+///////////////////////
+// MUSIC CONTROLLER
+///////////////////////
+
+app.controller('MusicController', ['$http', function($http){
+    const controller = this;
+    this.allMusic = [];
+    this.currentMusic = {};
+    this.editMusic = {};
+
+    this.addMusic = function(){
+      $http({
+        method: 'POST',
+        url: '/music',
+        data: {
+          name: this.name,
+          artist: this.artist,
+          link: this.link,
+          tag: this.tag,
+          author: this.author
+        }
+      }).then(function(response){
+        controller.getMusic();
+        // reset form
+        controller.name = '',
+        controller.artist = '',
+        controller.link = '',
+        controller.tag = '',
+        controller.author = ''
+      }, function(err){
+        console.log(err);
+      })
+    }
+
+    this.getMusic = function(){
+      $http({
+        method: 'GET',
+        url: '/music'
+      }).then(function(response){
+        controller.allMusic = response.data;
+      }, function(err) {
+        console.log(err);
+      })
+    }
+
+    this.setCurrentMusic = function(id){ //so we can edit it in the next function
+      $http({
+        method: 'GET',
+        url: '/music/' + id
+      }).then(function(response){
+        controller.currentMusic = response.data[0];
+        // controller.currentGif.url = response.data[0].url;
+        console.log(controller.currentMusic);
+      }, function(err){
+        console.log(err);
+      })
+    }
+
+    this.updateMusic = function(id){
+      $http({
+        method: 'PUT',
+        url: '/music/' + id,
+        data: this.editedMusic
+      }).then(function(response){
+        controller.getMusic();
+        controller.currentMusic = {}
+      }, function(err){
+        console.log(err);
+      })
+    }
+
+    this.deleteMusic = function(music){
+      $http({
+        method: 'DELETE',
+        url: '/music/' + music,
+      }).then(function(response){
+        controller.getMusic();
+      }, function(err) {
+        console.log(err);
       })
     }
 
 
-
-
-
-
-
-
-
-    //call the function so all the gifs render automagically
-    this.getGifs()
+    this.getMusic()
 }])
