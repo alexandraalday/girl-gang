@@ -1,0 +1,34 @@
+<div ng-controller="LitController as lit">
+
+  <h1> Lit about Lit </h1>
+
+  <div>
+    <form ng-submit="lit.addLit()">
+      <input type="text" placeholder="lit name" ng-model="lit.postAuthor"><br/>
+      <input type="URL" placeholder="lit url" ng-model="lit.url"><br/>
+      <input type="text" placeholder="lit comment" ng-model="lit.comment"><br/>
+      <button type="submit">Create Lit Post</button>
+    </form>
+  </div>
+
+  <div>
+    <h4>Words, Words, Words</h4>
+    <ul>
+      <li ng-repeat="lit in lit.allContent" ng-click="lit.setCurrentLit(lit._id)">{{lit.name}}</li>
+    </ul>
+
+    <!-- edit form -->
+    <div>
+      <form ng-submit="lit.updateLit(lit.currentLit._id)">
+
+        <input type="text" placeholder="{lit.currentLit.postAuthor}}" ng-model="gif.editedLit.postAuthor"><br/>
+        <input type="text" placeholder="{{lit.currentGif.url}}" ng-model="lit.editedLit.url"><br/>
+        <input type="text" placeholder="{{lit.currentLit.tag}}" ng-model="gif.editedLit.tag"><br/>
+        <button type="submit" ng-click="gif.updateLit(lit.currentLit._id)">Edit {{lit.currentLit.name}}</button>
+
+      </form>
+      {{lit.currentLit._id}}
+    </div>
+    <button ng-click="gif.deleteLit(lit.currentLit._id)">Delete</button>
+  </div>
+</div>

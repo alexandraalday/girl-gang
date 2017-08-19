@@ -12,37 +12,33 @@
   </head>
   <body>
     <h1>Pretty Girls Like Gangsta Music</h1>
+    <h3>users on users</h3>
+    <section ng-controller="UserController as user">
+      <div> <!-- form to add a new user -->
+        <form ng-submit="user.addUser()">
+          <input type="text" placeholder="name" ng-model="user.name"><br/>
+          <input type="text" placeholder="image url" ng-model="user.image"><br/>
+          <input type="text" placeholder="bio" ng-model="user.bio"><br/>
+          <button type="submit">Create User</button>
+        </form>
+      </div>
+      <h5>ALL DA USERS</h5>
+        <ul>
+          <li ng-repeat="people in user.allUsers" ng-click="user.setCurrentUser(people._id)">{{people.name}}</li>
+        </ul>
+        <!-- edit form -->
+      <div>
+        <form ng-submit="user.updateUser(user.currentUser._id)">
+          <input type="text" placeholder="{{user.currentUser.name}}" ng-model="user.editUser.name">
+          <input type="text" placeholder="{{user.currentUser.image}}" ng-model="user.editUser.image">
+          <input type="text" placeholder="{{user.currentUser.bio}}" ng-model="user.editUser.bio">
+          <button type="submit" ng-click="user.updateUser(user.currentUser._id)">Edit {{user.currentUser.name}}</button>
+        </form>
+      </div>
+      <button ng-click="user.deleteUser(user.currentUser._id)">Delete</button>
+    </section>
 
 
-   <!--  list of all users -->
-   <h2>List of Users:</h2>
-    <div ng-controller="UserController as user">
-		<ul>
-			<li ng-repeat="user in user.users">
-				{{user.name}}
-			</li>
-		</ul>
-
-		<!-- create new user -->
-		<h2>Create New User:</h2>
-		<form ng-submit="user.createUser()">
-			<input type="text" ng-model="user.name" placeholder="name"/>
-			<input type="text" ng-model="user.image" placeholder="image"/>
-			<input type="text" ng-model="user.bio" placeholder="bio"/>
-			<input type="submit" value="Create a New User"/>
-		</form>
-
-    <!-- update user -->
-
-    <form ng-submit="user.updateUser(user)"> <!-- dont know what to pass in -->
-			<input type="text" ng-model="user.editedObject.name" placeholder="name"/>
-			<input type="text" ng-model="user.editedObject.image" placeholder="image"/>
-			<input type="text" ng-model="user.editedObject.bio" placeholder="bio"/>
-			<input type="submit" value="Edit User"/>
-		</form>
-
-    <!-- delete user -->
-    </div>
 
     <!-- adds all the html for the gifs part -->
     <section ng-include="'./gif.html'"></section>
