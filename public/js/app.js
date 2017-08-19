@@ -181,6 +181,8 @@ app.controller('MusicController', ['$http', function($http){
     this.allMusic = [];
     this.currentMusic = {};
     this.editMusic = {};
+    this.editDisplay = false
+    this.newDisplay = false;
 
     this.addMusic = function(){
       $http({
@@ -196,6 +198,7 @@ app.controller('MusicController', ['$http', function($http){
       }).then(function(response){
         controller.getMusic();
         // reset form
+        controller.newDisplay = false;
         controller.name = '',
         controller.artist = '',
         controller.link = '',
@@ -223,7 +226,6 @@ app.controller('MusicController', ['$http', function($http){
         url: '/music/' + id
       }).then(function(response){
         controller.currentMusic = response.data[0];
-        // controller.currentGif.url = response.data[0].url;
         console.log(controller.currentMusic);
       }, function(err){
         console.log(err);
@@ -237,6 +239,7 @@ app.controller('MusicController', ['$http', function($http){
         data: this.editedMusic
       }).then(function(response){
         controller.getMusic();
+        controller.editDisplay = false;
         controller.currentMusic = {}
       }, function(err){
         console.log(err);
@@ -253,6 +256,13 @@ app.controller('MusicController', ['$http', function($http){
         console.log(err);
       })
     }
+
+    this.toggleEdit = function(){
+    	this.editDisplay = !this.editDisplay;
+	};
+	this.toggleNewDisplay = function(){
+	    this.newDisplay = !this.newDisplay;
+	}
 
 
     this.getMusic()
