@@ -166,6 +166,7 @@ app.controller('GifController', ['$http', function($http){
         //controller.displayGif = true;
         //sets the url, not sure why this is the only one we did this with.
         controller.currentGif.url = response.data[0].url;
+        controller.modal = true;
         console.log(controller.currentGif);
       }, function(err){
         console.log(err);
