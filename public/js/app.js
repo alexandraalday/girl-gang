@@ -291,3 +291,86 @@ app.controller('MusicController', ['$http', function($http){
 
     this.getMusic()
 }])
+
+
+///////////////////////
+// LIT CONTROLLER
+///////////////////////
+
+app.controller('LitController', ['$http', function($http){
+    const controller = this;
+    this.allLit = [];
+    this.currentLit = {};
+    this.editLit = {};
+
+    this.addLit = function(){
+      $http({
+        method: 'POST',
+        url: '/lit',
+        data: {
+          postAuthor: this.postAuthor,
+          url: this.url,
+          comment: this.comment
+        }
+      }).then(function(response){
+        controller.getLit();
+        // reset form
+        controller.postAuthor = '',
+        controller.url = '',
+        controller.comment = ''
+      }, function(err){
+        console.log(err);
+      })
+    }
+
+    this.getLit = function(){
+      $http({
+        method: 'GET',
+        url: '/lit'
+      }).then(function(response){
+        controller.allLit = response.data;
+      }, function(err) {
+        console.log(err);
+      })
+    }
+
+    this.setCurrentLit = function(id){ //so we can edit it in the next function
+      $http({
+        method: 'GET',
+        url: '/lit/' + id
+      }).then(function(response){
+        controller.currentLit = response.data[0];
+        // controller.currentLit.url = response.data[0].url;
+        console.log(controller.currentLit);
+      }, function(err){
+        console.log(err);
+      })
+    }
+
+    this.updateLit = function(id){
+      $http({
+        method: 'PUT',
+        url: '/lit/' + id,
+        data: this.editedLit
+      }).then(function(response){
+        controller.getLit();
+        controller.currentLit = {}
+      }, function(err){
+        console.log(err);
+      })
+    }
+
+    this.deleteLit = function(lit){
+      $http({
+        method: 'DELETE',
+        url: '/lit/' + lit,
+      }).then(function(response){
+        controller.getLit();
+      }, function(err) {
+        console.log(err);
+      })
+    }
+
+
+    this.getLit()
+}])

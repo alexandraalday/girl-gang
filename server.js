@@ -22,6 +22,9 @@ app.use('/gifs', gif)
 const music = require('./controllers/music.js')
 app.use('/music', music)
 
+const lit = require('./controllers/lit.js')
+app.use('/lit', lit)
+
 
 //index route
 app.get('/', (req, res)=>{
