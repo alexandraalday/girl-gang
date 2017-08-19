@@ -11,11 +11,12 @@
       <button class="btn btn-success" type="submit" ng-click="music.toggleNewDisplay()">Add A New Track</button>
       <div ng-if="music.newDisplay">
         <form ng-submit="music.addMusic()">
-          <input type="text" placeholder="name" ng-model="music.name"><br/>
-          <input type="text" placeholder="artist" ng-model="music.artist"><br/>
-          <input type="text" placeholder="link" ng-model="music.link"><br/>
-          <input type="text" placeholder="tag" ng-model="music.tag"><br/>
-          <input type="text" placeholder="author" ng-model="music.author"><br/>
+          <input type="text" placeholder="name" ng-model="music.newSong.name"><br/>
+          <input type="text" placeholder="artist" ng-model="music.newSong.artist"><br/>
+          <input type="text" placeholder="link" ng-model="music.newSong.link"><br/>
+          <input type="text" placeholder="tag" ng-model="music.newSong.tag"><br/>
+          <input type="text" placeholder="author" ng-model="music.newSong.author"><br/>
+          <input class="ng-hide" type="text" placeholder="embed" ng-model="music.newSong.embed" value=''><br/>
           <button class="btn btn-default" type="submit">Add Song</button>
         </form>
       </div>
@@ -28,6 +29,7 @@
       <li ng-repeat="song in music.allMusic" ng-click="music.setCurrentMusic(song._id)">
         Title: {{song.name}}<br/>
         Artist: {{song.artist}}<br/>
+        Spotify: {{song.embed}}
         <button class="btn btn-primary" ng-click="music.toggleEdit()">Edit Song</button>
         <button class="btn btn-default" ng-click="music.deleteMusic(music.currentMusic._id)">Delete Song</button>
         </li>
