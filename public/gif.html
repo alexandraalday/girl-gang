@@ -1,33 +1,44 @@
-<div ng-controller="GifController as gif">
+ <div ng-controller="GifController as gif">
+<div class="container">
+  <div class="row">
 
-  <h1> gifs on gifs </h1>
-  <button ng-click="gif.toggleNewDisplay()">add New Gif</button>
-  <div ng-if="gif.newDisplay"> <!-- this will be toggle viewed from an add Gif button-->
+  <div class="jumbotron">
+  <h1> G I F S </h1>
+  <h4> Get Your Giggle On, Feminista </h4>
+  <div class="col-lg-10">
+  <button class="btn btn-success" ng-click="gif.toggleNew()">Add New Gif</button>
+  <div ng-if="gif.newDisplay">
     <form ng-submit="gif.addGif()">
       <input type="text" placeholder="gif name" ng-model="gif.name"><br/>
       <input type="text" placeholder="gif url" ng-model="gif.url"><br/>
       <input type="text" placeholder="gif tag" ng-model="gif.tag"><br/>
-      <button type="submit">Create Gif</button>
+      <button type="submit" class="btn btn-default" ng-click="gif.currentGif.name =null">Create Gif</button>
     </form>
   </div>
+</div><!--end of col-lg-10 -->
+</div><!-- end of jumbotron -->
 
   <div>
-    <h5>All DA GIFS</h5>
-    <ul>
-      <li ng-repeat="giphy in gif.allGifs" ng-click="gif.setCurrentGif(giphy._id)">{{giphy.name}}</li>
-    </ul>
 
-    <!-- edit form -->
-    <div>
+    <ul>
+      <li ng-repeat="giphy in gif.allGifs" ng-click="gif.setCurrentGif(giphy._id)">{{giphy.name}}<br/>
+      <img ng-src="{{giphy.url}}"/><br/>
+      <!-- button to show the edit form -->
+      <button class="btn btn-primary" ng-click="gif.toggleEdit()">Edit {{giphy.name}}</button>
+      </li>
+    </ul>
+    <div ng-if="gif.editDisplay">
       <form ng-submit="gif.updateGif(gif.currentGif._id)">
         <input type="text" placeholder="{{gif.currentGif.name}}" ng-model="gif.editedGif.name"><br/>
         <input type="text" placeholder="{{gif.currentGif.url}}" ng-model="gif.editedGif.url"><br/>
         <input type="text" placeholder="{{gif.currentGif.tag}}" ng-model="gif.editedGif.tag"><br/>
-        <button type="submit" ng-click="gif.updateGif(gif.currentGif._id)">Edit {{gif.currentGif.name}}</button>
+        <button type="submit" ng-click="gif.updateGif(gif.currentGif._id)" ng-click="gif.currentGif = {}">Edit {{gif.currentGif.name}}</button>
 
       </form>
       {{gif.currentGif._id}}
     </div>
-    <button ng-click="gif.deleteGif(gif.currentGif._id)">Delete</button>
+    <button class="btn btn-default" ng-click="gif.deleteGif(gif.currentGif._id)">Delete</button>
   </div>
 </div>
+</div><!-- end row -->
+</div><!-- end container -->
