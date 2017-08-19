@@ -23,8 +23,18 @@
       </div>
       <h5>ALL DA USERS</h5>
         <ul>
-          <li ng-repeat="people in user.allGifs">{{people.name}}</li>
+          <li ng-repeat="people in user.allUsers" ng-click="user.setCurrentUser(people._id)">{{people.name}}</li>
         </ul>
+        <!-- edit form -->
+      <div>
+        <form ng-submit="user.updateUser(user.currentUser._id)">
+          <input type="text" placeholder="{{user.currentUser.name}}" ng-model="user.editUser.name">
+          <input type="text" placeholder="{{user.currentUser.image}}" ng-model="user.editUser.image">
+          <input type="text" placeholder="{{user.currentUser.bio}}" ng-model="user.editUser.bio">
+          <button type="submit" ng-click="user.updateUser(user.currentUser._id)">Edit {{user.currentUser.name}}</button>
+        </form>
+      </div>
+      <button ng-click="user.deleteUser(user.currentUser._id)">Delete</button>
     </section>
 
     <!-- adds all the html for the gifs part -->

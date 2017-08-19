@@ -2,13 +2,13 @@ const app = angular.module('girlGang', []);
 
 app.controller('UserController', ['$http', function($http){
   //an empty array so we can push the gifs we make into it to display on the page
-  this.allGifs = [];
+  this.allUsers = [];
   //assigning this to a variable so we can use it in our functions
   const controller = this;
   //empty object so we can later use this variable to select a certain gif
-  this.currentGif = {};
+  this.currentUser = {};
   //empty object we can later use this variable to edit a certain gif
-  this.editGif = {};
+  this.editUser = {};
   //ajax call to add a new User
   this.addUser = function(){
     $http({
@@ -21,7 +21,8 @@ app.controller('UserController', ['$http', function($http){
       }
     }).then(function(response){
       console.log(response.data);
-      //controller.getUsers();
+      //so it will automagically add this user to the users list
+      controller.getUsers();
       //these controllers will reset the new user form
       controller.name = '',
       controller.image = '',
@@ -36,10 +37,51 @@ app.controller('UserController', ['$http', function($http){
       method: 'GET',
       url: '/users'
     }).then(function(response){
-      controller.allGifs = response.data;
+      controller.allUsers = response.data;
     }, function(err){
       console.log(err);
       console.log('broke in show user call');
+    })
+  }
+  //ajax call to identify a certain user by id
+  this.setCurrentUser = function(id){
+    $http({
+      method: 'GET',
+      url: '/users/' + id
+    }).then(function(response){
+      controller.currentUser = response.data[0]
+      //dont know what we just do this one
+      controller.currentUser.url = response.data[0].url
+      console.log(controller.currentUser);
+    }, function(err){
+      console.log(err);
+      console.log('error in set current user call');
+    })
+  }
+  //ajax call to update the user
+  this.updateUser = function(id){
+    $http({
+      method: 'PUT',
+      url: '/users/' + id,
+      data: this.editUser
+    }).then(function(response){
+      controller.getUsers();
+      controller.currentUser = {};
+    }, function(error){
+      console.log(error);
+      console.log('error in update route');
+    })
+  }
+  //ajax call to delete the user
+  this.deleteUser = function(user){
+    $http({
+      method: 'DELETE',
+      url: '/users/' + user,
+    }).then(function(response){
+      controller.getUsers()
+    }, function(err){
+      console.log('err in delete route');
+      console.log(err);
     })
   }
 
