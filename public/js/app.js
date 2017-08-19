@@ -102,6 +102,7 @@ app.controller('GifController', ['$http', function($http){
     //an empty array so we can push the gifs we make into it to display on the page
     this.allGifs = [];
     this.newDisplay = false;
+    this.editDisplay = false;
     //assigning this to a variable so we can use it in our functions
     const controller = this;
     //empty object so we can later use this variable to select a certain gif
@@ -129,8 +130,11 @@ app.controller('GifController', ['$http', function($http){
         console.log(err);
       })
     }
-    this.toggleNewDisplay = function(){
+    this.toggleNew = function(){
       this.newDisplay = !this.newDisplay;
+    }
+    this.toggleEdit = function(){
+      this.editDisplay = !this.editDisplay;
     }
     //ajax call to display all the gifs to the page
     this.getGifs = function(){
