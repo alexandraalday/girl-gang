@@ -24,7 +24,7 @@ router.post('/', (req, res)=> {
   })
 })
 //edit route
-router.put('/:id/:name/:image/:bio', (req, res)=> {
+router.put('/:id', (req, res)=> {
   User.findByIdAndUpdate(req.params.id, {name: req.params.name, image: req.params.image, bio: req.params.bio}, { new : true }, (err, updatedUser)=>{
     res.json(updatedUser)
   })

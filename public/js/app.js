@@ -72,20 +72,9 @@ const app = angular.module('girlGang', []);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+///////////////////////
+// GIFS CONTROLLER
+///////////////////////
 
 
 //controller for gifs
@@ -176,17 +165,95 @@ app.controller('GifController', ['$http', function($http){
       }, function(err) {
         console.log('error in the delete call');
         console.log(err);
+            }
+        );
+      }
+
+      this.getGifs();
+}])
+
+///////////////////////
+// MUSIC CONTROLLER
+///////////////////////
+
+app.controller('MusicController', ['$http', function($http){
+    const controller = this;
+    this.allMusic = [];
+    this.currentMusic = {};
+    this.editMusic = {};
+
+    this.addMusic = function(){
+      $http({
+        method: 'POST',
+        url: '/music',
+        data: {
+          name: this.name,
+          artist: this.artist,
+          link: this.link,
+          tag: this.tag,
+          author: this.author
+        }
+      }).then(function(response){
+        controller.getMusic();
+        // reset form
+        controller.name = '',
+        controller.artist = '',
+        controller.link = '',
+        controller.tag = '',
+        controller.author = ''
+      }, function(err){
+        console.log(err);
+      })
+    }
+
+    this.getMusic = function(){
+      $http({
+        method: 'GET',
+        url: '/music'
+      }).then(function(response){
+        controller.allMusic = response.data;
+      }, function(err) {
+        console.log(err);
+      })
+    }
+
+    this.setCurrentMusic = function(id){ //so we can edit it in the next function
+      $http({
+        method: 'GET',
+        url: '/music/' + id
+      }).then(function(response){
+        controller.currentMusic = response.data[0];
+        // controller.currentGif.url = response.data[0].url;
+        console.log(controller.currentMusic);
+      }, function(err){
+        console.log(err);
+      })
+    }
+
+    this.updateMusic = function(id){
+      $http({
+        method: 'PUT',
+        url: '/music/' + id,
+        data: this.editedMusic
+      }).then(function(response){
+        controller.getMusic();
+        controller.currentMusic = {}
+      }, function(err){
+        console.log(err);
+      })
+    }
+
+    this.deleteMusic = function(music){
+      $http({
+        method: 'DELETE',
+        url: '/music/' + music,
+      }).then(function(response){
+        controller.getMusic();
+      }, function(err) {
+        console.log(err);
       })
     }
 
 
-
-
-
-
-
-
-
-    //call the function so all the gifs render automagically
-    this.getGifs()
+    this.getMusic()
 }])
