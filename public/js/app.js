@@ -2,8 +2,7 @@ const app = angular.module('girlGang', []);
 
     app.controller('UserController', ['$http', function($http){
       const controller = this;
-      this.users = [];
-      this.editedObject = {};
+
       this.getUsers = function(){
         $http({
           method: 'GET',
@@ -23,12 +22,10 @@ const app = angular.module('girlGang', []);
           method: 'POST',
           url: '/users',
           data: {
-
             name: this.name,
             image: this.image,
             bio: this.bio,
             author: this.author
-
           }
         }).then(
           function(response){
@@ -39,29 +36,26 @@ const app = angular.module('girlGang', []);
         );
       }
 
-      this.updateUser = function(user) {
+      this.updateUser = function(id) {
+      	console.log('update function called')
         $http({
           method: 'PUT',
-          url: '/users/' + user._id,
-          data: this.editedObject
-
+          url: '/users/' + id
         }).then(
           function(response){
+          	console.log(response)
             controller.getUsers();
           },
           function(error){
-
-          }
-        );
+          	console.log(error)
+          });
       }
-      this.toggleEdit = function(){
-        this.editDisplay = !this.editDisplay;
-      };
 
-      this.deleteUser = function(user){
+
+      this.deleteUser = function(id){
         $http({
           method: 'DELETE',
-          url: '/users/' + user._id
+          url: '/users/' + id
         }).then(
           function(response){
             controller.getUsers();
