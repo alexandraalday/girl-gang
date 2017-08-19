@@ -310,14 +310,14 @@ app.controller('LitController', ['$http', function($http){
         data: {
           postAuthor: this.postAuthor,
           url: this.url,
-          comment: this.comment,
+          comment: this.comment
         }
       }).then(function(response){
         controller.getLit();
         // reset form
         controller.postAuthor = '',
         controller.url = '',
-        controller.comment = '',
+        controller.comment = ''
       }, function(err){
         console.log(err);
       })
