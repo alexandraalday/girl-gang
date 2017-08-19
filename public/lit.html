@@ -1,24 +1,33 @@
 <div ng-controller="LitController as lit">
 
-  <h1> Lit about Lit </h1>
+<div class="container">
+  <div class="row">
 
-  <div>
+  <div class="jumbotron">
+  <h1> Lit about Lit </h1>
+  <h4> Yak It Up About All That Yakking, Help Get That Female Word Count Achieved for the Day</h4>
+  <div class="col-lg-10">
+    <button class="btn btn-success" ng-click="gif.toggleNew()">Add New Lit Post</button>
+    <div ng-if="gif.newDisplay">
     <form ng-submit="lit.addLit()">
       <input type="text" placeholder="lit name" ng-model="lit.postAuthor"><br/>
       <input type="URL" placeholder="lit url" ng-model="lit.url"><br/>
       <input type="text" placeholder="lit comment" ng-model="lit.comment"><br/>
-      <button type="submit">Create Lit Post</button>
+      <button type="submit" class="btn btn-default" ng-click="gif.currentLit.name =null">Create Lit Post</button>
     </form>
   </div>
+</div><!--end of col-lg-10 -->
+</div><!-- end of jumbotron -->
 
   <div>
     <h4>Words, Words, Words</h4>
     <ul>
       <li ng-repeat="lit in lit.allContent" ng-click="lit.setCurrentLit(lit._id)">{{lit.name}}</li>
+
     </ul>
 
     <!-- edit form -->
-    <div>
+    <div ng-if="lit.editDisplay">
       <form ng-submit="lit.updateLit(lit.currentLit._id)">
 
         <input type="text" placeholder="{lit.currentLit.postAuthor}}" ng-model="gif.editedLit.postAuthor"><br/>
@@ -30,5 +39,5 @@
       {{lit.currentLit._id}}
     </div>
     <button ng-click="gif.deleteLit(lit.currentLit._id)">Delete</button>
-  </div>
-</div>
+  </div><!-- end row -->
+  </div><!-- end container -->
