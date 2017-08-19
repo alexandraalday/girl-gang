@@ -322,11 +322,17 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
 ///////////////////////
 
 app.controller('LitController', ['$http', function($http){
-    const controller = this;
+    //an empty array so we can can push the lit we make into it to display on the page
     this.allLit = [];
     this.currentLit = {};
     this.editLit = {};
-
+    //assigning this to a variable so we can use it in our functions
+    const controller = this;
+    //empty object so we can later use this variable to select a certain gif
+    this.currentLit = {};
+    //empty object we can later use this variable to edit a certain gif
+    this.editLit = {};
+    //ajax function to add a gif
     this.addLit = function(){
       $http({
         method: 'POST',
@@ -337,6 +343,8 @@ app.controller('LitController', ['$http', function($http){
           comment: this.comment
         }
       }).then(function(response){
+        //this will update the lit list with the new lit instantly
+        controller.newDisplay = false;
         controller.getLit();
         // reset form
         controller.postAuthor = '',
@@ -346,7 +354,16 @@ app.controller('LitController', ['$http', function($http){
         console.log(err);
       })
     }
-
+    this.toggleNew = function(){
+      this.newDisplay = !this.newDisplay;
+    }
+    this.toggleEdit = function(){
+      this.editDisplay = !this.editDisplay;
+    }
+    this.toggleModal = function(){
+      this.modal = !this.modal;
+    }
+  //ajax call to display all the lit posts to the page
     this.getLit = function(){
       $http({
         method: 'GET',
@@ -354,6 +371,7 @@ app.controller('LitController', ['$http', function($http){
       }).then(function(response){
         controller.allLit = response.data;
       }, function(err) {
+        console.log('we are women who run with the wolves');
         console.log(err);
       })
     }
@@ -365,12 +383,15 @@ app.controller('LitController', ['$http', function($http){
       }).then(function(response){
         controller.currentLit = response.data[0];
         // controller.currentLit.url = response.data[0].url;
+
+        controller.modal = true;
+        controller.currentLit.url = response.data[0].url;
         console.log(controller.currentLit);
       }, function(err){
         console.log(err);
       })
     }
-
+    //ajax call to update lit
     this.updateLit = function(id){
       $http({
         method: 'PUT',
@@ -390,11 +411,13 @@ app.controller('LitController', ['$http', function($http){
         url: '/lit/' + lit,
       }).then(function(response){
         controller.getLit();
+        controller.modal = false;
       }, function(err) {
         console.log(err);
-      })
-    }
+      }
+    );
+  }
 
 
-    this.getLit()
+    this.getLit();
 }])
