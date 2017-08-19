@@ -274,6 +274,7 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
         url: '/music/' + id
       }).then(function(response){
         controller.currentMusic = response.data[0];
+        controller.modal = true;
         console.log(controller.currentMusic);
       }, function(err){
         console.log(err);
@@ -300,6 +301,7 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
         url: '/music/' + music,
       }).then(function(response){
         controller.getMusic();
+        controller.modal = false;
       }, function(err) {
         console.log(err);
       })
@@ -307,11 +309,13 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
 
     this.toggleEdit = function(){
     	this.editDisplay = !this.editDisplay;
-	};
-	this.toggleNewDisplay = function(){
-	    this.newDisplay = !this.newDisplay;
-	}
-
+	  };
+  	this.toggleNewDisplay = function(){
+  	    this.newDisplay = !this.newDisplay;
+  	}
+    this.toggleModal = function(){
+      this.modal = !this.modal;
+    }
 
     this.getMusic()
 }])
