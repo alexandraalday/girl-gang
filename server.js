@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT || 3000;
+
+
 //middleware
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
@@ -11,11 +13,15 @@ app.use(express.static('public'));
 
 
 //controllers
-
 const user = require('./controllers/users.js')
 app.use('/users', user)
+
 const gif = require('./controllers/gif.js')
 app.use('/gifs', gif)
+
+const music = require('./controllers/music.js')
+app.use('/music', music)
+
 
 //index route
 app.get('/', (req, res)=>{
@@ -23,12 +29,8 @@ app.get('/', (req, res)=>{
 });
 
 
-
-
-
 //mongoose connection
 const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/girlgang'
-
 mongoose.connect(mongoUri);
 
 
