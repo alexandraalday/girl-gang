@@ -207,19 +207,21 @@ app.controller('MusicController', ['$http', function($http){
     this.editMusic = {};
     this.editDisplay = false
     this.newDisplay = false;
+    this.newSong = {};
+
 
     this.addMusic = function(){
       $http({
         method: 'POST',
         url: '/music',
-        data: {
-          name: this.name,
-          artist: this.artist,
-          link: this.link,
-          tag: this.tag,
-          author: this.author
-        }
+        data: controller.newSong
       }).then(function(response){
+        console.log(response);
+        console.log(response.data.link.split('.com/')[1]);
+        console.log(response.data.embed);
+        response.data.link = response.data.link.split('.com/')[1];
+        response.data.embed = '<iframe src="https://open.spotify.com/embed/' + response.data.link + '"width="300" height="380" frameborder="0" allowtransparency="true"></iframe>'
+        // call all songs
         controller.getMusic();
         // reset form
         controller.newDisplay = false;

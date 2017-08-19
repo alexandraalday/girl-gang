@@ -16,13 +16,13 @@ router.get('/:id', (req, res)=> {
   })
 })
 
-
 //new route
 router.post('/', (req, res)=> {
-  Music.create(req.body, (err, createdMusic)=> { //req.body > req.params?
+  Music.create(req.body, (err, createdMusic)=> { 
     res.json(createdMusic)
   })
 })
+
 //edit route
 router.put('/:id', (req, res)=> {
   Music.findByIdAndUpdate(req.params.id, req.body, { new : true }, (err, updatedMusic)=>{
