@@ -5,9 +5,9 @@ const mongoose = require('mongoose');
 const musicSchema = mongoose.Schema({
  	name: String, 
  	artist: String,
- 	album: String,
-	year: Date,
-	author: []
+	link: String,
+	tag: String,
+	author: String
 });
 
 const User = mongoose.model('Music', musicSchema);

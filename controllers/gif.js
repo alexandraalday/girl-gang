@@ -25,14 +25,14 @@ router.post('/', (req, res)=> {
 })
 //edit route
 router.put('/:id', (req, res)=> {
-  User.findByIdAndUpdate(req.params.id, req.body, { new : true }, (err, updatedGif)=>{
+  Gif.findByIdAndUpdate(req.params.id, req.body, { new : true }, (err, updatedGif)=>{
     res.json(updatedGif)
   })
 })
 
 //delete route'
 router.delete('/:id', (req, res)=> {
-  User.findByIdAndRemove(req.params.id, (err, deleteGif)=>{
+  Gif.findByIdAndRemove(req.params.id, (err, deletedGif)=>{
     res.json(deletedGif)
   })
 })
