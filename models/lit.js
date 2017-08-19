@@ -5,8 +5,7 @@ const mongoose = require('mongoose');
 const litSchema = mongoose.Schema({
  	postAuthor: String,
  	url: String,
-  litAuthor: String
-  comment: String,
+  comment: String
 });
 
 const Lit = mongoose.model('Lit', litSchema);
