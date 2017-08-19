@@ -1,94 +1,10 @@
 const app = angular.module('girlGang', []);
 
-    app.controller('UserController', ['$http', function($http){
-      const controller = this;
-      this.users = [];
-      this.editedObject = {};
-      this.getUsers = function(){
-        $http({
-          method: 'GET',
-          url: '/users'
-        }).then(
-          function(response){
-            controller.users = response.data;
-          },
-          function(error){
+app.controller('UserController', ['$http', function($http){
 
-          }
-        );
-      }
 
-      this.createUser = function(){
-        $http({
-          method: 'POST',
-          url: '/users',
-          data: {
 
-            name: this.name,
-            image: this.image,
-            bio: this.bio,
-            author: this.author
-
-          }
-        }).then(
-          function(response){
-            controller.getUsers();
-          },
-          function(error){
-          }
-        );
-      }
-
-      this.updateUser = function(user) {
-        $http({
-          method: 'PUT',
-          url: '/users/' + user._id,
-          data: this.editedObject
-
-        }).then(
-          function(response){
-            controller.getUsers();
-          },
-          function(error){
-
-          }
-        );
-      }
-      this.toggleEdit = function(){
-        this.editDisplay = !this.editDisplay;
-      };
-
-      this.deleteUser = function(user){
-        $http({
-          method: 'DELETE',
-          url: '/users/' + user._id
-        }).then(
-          function(response){
-            controller.getUsers();
-          },
-          function(error){
-          }
-        );
-      }
-
-      this.getUsers();
 }])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
