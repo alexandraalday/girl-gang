@@ -1,5 +1,11 @@
 const app = angular.module('girlGang', []);
 
+
+///////////////////////
+// USERS CONTROLLER
+///////////////////////
+
+
 app.controller('UserController', ['$http', function($http){
   //an empty array so we can push the gifs we make into it to display on the page
   this.allUsers = [];
@@ -101,6 +107,8 @@ app.controller('GifController', ['$http', function($http){
     //an empty array so we can push the gifs we make into it to display on the page
     this.allGifs = [];
     this.newDisplay = false;
+    this.editDisplay = false;
+    this.modal = false;
     //assigning this to a variable so we can use it in our functions
     const controller = this;
     //empty object so we can later use this variable to select a certain gif
@@ -119,6 +127,7 @@ app.controller('GifController', ['$http', function($http){
         }
       }).then(function(response){
         //this will update the gifs list with the new gif instantly
+        controller.newDisplay = false;
         controller.getGifs();
         //this resets the add new gif form text boxes
         controller.name = '',
@@ -128,8 +137,14 @@ app.controller('GifController', ['$http', function($http){
         console.log(err);
       })
     }
-    this.toggleNewDisplay = function(){
+    this.toggleNew = function(){
       this.newDisplay = !this.newDisplay;
+    }
+    this.toggleEdit = function(){
+      this.editDisplay = !this.editDisplay;
+    }
+    this.toggleModal = function(){
+      this.modal = !this.modal;
     }
     //ajax call to display all the gifs to the page
     this.getGifs = function(){
@@ -153,6 +168,7 @@ app.controller('GifController', ['$http', function($http){
         controller.currentGif = response.data[0];
         //controller.displayGif = true;
         //sets the url, not sure why this is the only one we did this with.
+        controller.modal = true;
         controller.currentGif.url = response.data[0].url;
         console.log(controller.currentGif);
       }, function(err){
@@ -184,7 +200,7 @@ app.controller('GifController', ['$http', function($http){
         url: '/gifs/' + gif,
       }).then(function(response){
         controller.getGifs();
-        //controller.displayGif = false;
+        controller.modal = false;
       }, function(err) {
         console.log('error in the delete call');
         console.log(err);
