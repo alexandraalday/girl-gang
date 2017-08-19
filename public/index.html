@@ -7,64 +7,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" charset="utf-8"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js" charset="utf-8"></script>
     <script src="./js/app.js" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/main.css">
   </head>
   <body>
-    <h1>Pretty Girls Like Gangsta Music</h1>
-<<<<<<< HEAD
+    <h1>Pretty Girls Like Gangsta Music</h1
 
-   <!--  list of all users -->
-   <h2>List of Users:</h2>
-    <div ng-controller="UserController as user">
-		<ul>
-			<li ng-repeat="user in user.users">
-				{{user.name}}
-			</li>
-		</ul>
-
-		<!-- create new user -->
-		<h2>Create New User:</h2>
-		<form ng-submit="user.createUser()">
-			<input type="text" ng-model="user.name" placeholder="name"/>
-			<input type="text" ng-model="user.image" placeholder="image"/>
-			<input type="text" ng-model="user.bio" placeholder="bio"/>
-			<input type="submit" value="Create a New User"/>
-		</form>
-
-    <!-- update user -->
-
-    <!-- >Edit This Todo</a> -->
-
-            <input type="text" ng-model="user.editedObject" placeholder="name" />
-
-
-            <input type="text" ng-model="user.image" placeholder="image"/>
-      			<input type="text" ng-model="user.bio" placeholder="bio"/>
-
-
-            <input type="submit" value="Update Description"/>
-
-    <form ng-submit="user.editedObject(user)"> <!-- dont know what to pass in -->
-
-
-      <!-- delete user -->
-
-      <button ng-click="ctrl.deleteUser(user)">Delete User</button>
-
-      <!-- edit form -->
-
-			<input type="text" ng-model="user.editedObject.name" placeholder="name"/>
-			<input type="text" ng-model="user.editedObject.image" placeholder="image"/>
-			<input type="text" ng-model="user.editedObject.bio" placeholder="bio"/>
-			<input type="submit" value="Edit User"/>
-		</form>
-
-    <!-- delete user -->
-
-    <button ng-click="ctrl.deleteTodo(todo)">Delete User</button>
-
-    </div>
-=======
     <h3>users on users</h3>
     <section ng-controller="UserController as user">
       <div> <!-- form to add a new user -->
@@ -90,7 +38,7 @@
       </div>
       <button ng-click="user.deleteUser(user.currentUser._id)">Delete</button>
     </section>
->>>>>>> 014049ed2b95fa7434dae9511ba1b117cad51e31
+
 
     <!-- adds all the html for the gifs part -->
     <section ng-include="'./gif.html'"></section>

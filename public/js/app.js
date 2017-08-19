@@ -101,6 +101,7 @@ app.controller('UserController', ['$http', function($http){
 app.controller('GifController', ['$http', function($http){
     //an empty array so we can push the gifs we make into it to display on the page
     this.allGifs = [];
+    this.newDisplay = false;
     //assigning this to a variable so we can use it in our functions
     const controller = this;
     //empty object so we can later use this variable to select a certain gif
@@ -127,6 +128,9 @@ app.controller('GifController', ['$http', function($http){
       }, function(err){
         console.log(err);
       })
+    }
+    this.toggleNewDisplay = function(){
+      this.newDisplay = !this.newDisplay;
     }
     //ajax call to display all the gifs to the page
     this.getGifs = function(){
@@ -201,6 +205,8 @@ app.controller('MusicController', ['$http', function($http){
     this.allMusic = [];
     this.currentMusic = {};
     this.editMusic = {};
+    this.editDisplay = false
+    this.newDisplay = false;
 
     this.addMusic = function(){
       $http({
@@ -216,6 +222,7 @@ app.controller('MusicController', ['$http', function($http){
       }).then(function(response){
         controller.getMusic();
         // reset form
+        controller.newDisplay = false;
         controller.name = '',
         controller.artist = '',
         controller.link = '',
@@ -243,7 +250,6 @@ app.controller('MusicController', ['$http', function($http){
         url: '/music/' + id
       }).then(function(response){
         controller.currentMusic = response.data[0];
-        // controller.currentGif.url = response.data[0].url;
         console.log(controller.currentMusic);
       }, function(err){
         console.log(err);
@@ -257,6 +263,7 @@ app.controller('MusicController', ['$http', function($http){
         data: this.editedMusic
       }).then(function(response){
         controller.getMusic();
+        controller.editDisplay = false;
         controller.currentMusic = {}
       }, function(err){
         console.log(err);
@@ -273,6 +280,13 @@ app.controller('MusicController', ['$http', function($http){
         console.log(err);
       })
     }
+
+    this.toggleEdit = function(){
+    	this.editDisplay = !this.editDisplay;
+	};
+	this.toggleNewDisplay = function(){
+	    this.newDisplay = !this.newDisplay;
+	}
 
 
     this.getMusic()

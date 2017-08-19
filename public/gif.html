@@ -1,8 +1,8 @@
 <div ng-controller="GifController as gif">
 
   <h1> gifs on gifs </h1>
-
-  <div>
+  <button ng-click="gif.toggleNewDisplay()">add New Gif</button>
+  <div ng-if="gif.newDisplay"> <!-- this will be toggle viewed from an add Gif button-->
     <form ng-submit="gif.addGif()">
       <input type="text" placeholder="gif name" ng-model="gif.name"><br/>
       <input type="text" placeholder="gif url" ng-model="gif.url"><br/>
