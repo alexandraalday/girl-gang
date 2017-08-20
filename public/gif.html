@@ -33,7 +33,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title"  id="exampleModalLabel">{{gif.currentGif.name}} </h1>
-        <button class="btn btn-default" ng-click="gif.toggleModal()">X</button>
+        <span class="float:right"><button class="btn btn-default" ng-click="gif.toggleModal()">X √</button></span>
       </div>
       <div class="modal-body">
         <img ng-src="{{gif.currentGif.url}}"/><br/>
@@ -44,9 +44,9 @@
         <!-- edit form display -->
         <div ng-if="gif.editDisplay">
           <form ng-submit="gif.updateGif(gif.currentGif._id)">
-            <input type="text" placeholder="{{gif.currentGif.name}}" ng-model="gif.editedGif.name"><br/>
-            <input type="text" placeholder="{{gif.currentGif.url}}" ng-model="gif.editedGif.url"><br/>
-            <input type="text" placeholder="{{gif.currentGif.tag}}" ng-model="gif.editedGif.tag"><br/>
+            <input type="text" placeholder="gif name" value="gif name" ng-model="gif.editedGif.name"><br/>
+            <input type="text" placeholder="gif url" value="gif url" ng-model="gif.editedGif.url"><br/>
+            <input type="text" placeholder="gif tag" value="gif tag" ng-model="gif.editedGif.tag"><br/>
             <button type="submit" ng-click="gif.updateGif(gif.currentGif._id)" ng-click="gif.currentGif = {}">Edit {{gif.currentGif.name}}</button>
           </form>
         </div>

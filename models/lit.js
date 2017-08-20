@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 //schema
 const litSchema = mongoose.Schema({
- 	postAuthor: String,
+ 	postTitle: String,
  	url: String,
   comment: String
 });
