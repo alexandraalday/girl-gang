@@ -216,6 +216,14 @@ app.controller('GifController', ['$http', function($http){
 // MUSIC CONTROLLER
 ///////////////////////
 
+
+app.config(['$sceDelegateProvider', function($sceDelegateProvider) {
+    $sceDelegateProvider.resourceUrlWhitelist([
+        'self',
+        'https://open.spotify.com/embed/**'
+    ]);
+}]);
+
 app.controller('MusicController', ['$http', '$scope', '$sce', function($http, $scope, $sce){
     const controller = this;
     this.allMusic = [];
@@ -224,18 +232,6 @@ app.controller('MusicController', ['$http', '$scope', '$sce', function($http, $s
     this.editDisplay = false
     this.newDisplay = false;
 
-    // $scope.trustSrc = function(src) {
-    //   return $sce.trustAsResourceUrl(src);
-    // }
-
-    this.config = function($sceDelegateProvider, apiUrl){
-      $sceDelegateProvider.resourceUrlWhitelist([
-            // Allow same origin resource loads.
-            'self',
-            // Allow loading from our assets domain.  
-             'http://open.spotify.com/embed/**'
-      ]);
-    }
 
     this.addMusic = function(){
       const spotifyId = this.link.split('.com/')[1]
@@ -246,13 +242,12 @@ app.controller('MusicController', ['$http', '$scope', '$sce', function($http, $s
           name: this.name,
           artist: this.artist,
           link: this.link.split('.com/')[1],
-          embed: '<iframe src="http://open.spotify.com/embed/' + spotifyId + '" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>',
+          embed: 'https://open.spotify.com/embed/' + spotifyId,
           tag: this.tag,
           author: this.author
         }
       }).then(function(response){
         console.log(response.data.link);
-        // $scope.link = response.data.link
         // call all songs
         controller.getMusic();
         // reset form
