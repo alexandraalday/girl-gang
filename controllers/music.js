@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Music = require('../models/music.js')
+// const morgan = require('morgan');
 
 //index route
 router.get('/', (req, res)=> {
@@ -18,7 +19,7 @@ router.get('/:id', (req, res)=> {
 
 //new route
 router.post('/', (req, res)=> {
-  Music.create(req.body, (err, createdMusic)=> { 
+  Music.create(req.body, (err, createdMusic)=> {
     res.json(createdMusic)
   })
 })

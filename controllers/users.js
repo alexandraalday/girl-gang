@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user.js')
+// const morgan = require('morgan');
 //will we need to require other models here also?
 //for ex: const Lit = require('../models/lit.js')
 
