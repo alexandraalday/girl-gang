@@ -40,8 +40,6 @@
       <li ng-repeat="song in music.allMusic" ng-click="music.setCurrentMusic(song._id)">
         <a href="#">{{song.name}}</a> by: {{song.artist}}<br/>
         Spotify iFrame With Angular:<br/> <iframe ng-src="https://open.spotify.com/embed/" + "{{song.link}}" + " width="300" height="80" frameborder="0" allowtransparency="true"></iframe><br/>
-        Spotify Direct Embed Link: <br/> <div ng-bind-html="renderHtml(song.embed)"></div><br/>
-        <iframe src="https://open.spotify.com/embed/track/3vmu0mRcxLhV1xkl13CflM" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
         </li>
     </ul>
 
@@ -56,8 +54,6 @@
           </div>
           <div class="modal-body">
             With Angular: <br/> <iframe ng-src="https://open.spotify.com/embed/" + "{{song.link}}" + " width="300" height="380" frameborder="0" allowtransparency="true"></iframe> <br/>
-            Spotify Embed: <br/> <div ng-bind-html="renderHtml(song.embed)"></div>
-            <iframe src="https://open.spotify.com/embed/track/3vmu0mRcxLhV1xkl13CflM" width="300" height="380" frameborder="0" allowtransparency="true"></iframe><br/>
             <!-- button to show the edit form -->
             <button class="btn btn-primary" ng-click="music.toggleEdit()">Edit {{giphy.name}}</button>
 

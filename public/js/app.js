@@ -222,13 +222,7 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
     this.editMusic = {};
     this.editDisplay = false
     this.newDisplay = false;
-    // this.newSong = {};
 
-    this.MusicCtrl = function($scope, $sce) {
-      $scope.setProject = function (id) {
-        $scope.song = $sce.trustAsResourceUrl($scope.song.link);
-      }
-    }
 
 
     this.addMusic = function(){
