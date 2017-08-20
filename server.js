@@ -1,54 +1,48 @@
-//dependencies
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const app = express();
-const cookieParser =  require('cookie-parser');
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const port = process.env.PORT || 3000;
-const User = require("./models/user.js")
+const express = require('express')
+const cookieParser = require('cookie-parser')
+const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
+const passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy
+const port = process.env.PORT || 3000
+const app = express()
 
-//middleware
-app.use(bodyParser.urlencoded({extended:false}));
-app.use(bodyParser.json());
-app.use(express.static('public'));
-app.use(cookieParser())
-app.use(require('express-session')({
-	secret: 'our_secret',
-	resave: false,
-	saveUninitialized: false
-}))
-app.use(passport.initialize());
-app.use(passport.session())
 
 
 //controllers
-const user = require('./controllers/users.js')
-app.use('/users', user)
+const users = require('./controllers/users.js')
+const poop = require('./controllers/passport.js')
 
-const gif = require('./controllers/gif.js')
-app.use('/gifs', gif)
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(cookieParser())
+app.use(require('express-session')({
+	secret: 'fuck you',
+	resave: false,
+	saveUninitialized: false
+}))
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(express.static('public'))
 
-const music = require('./controllers/music.js')
-app.use('/music', music)
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'ejs');
 
-const lit = require('./controllers/lit.js')
-app.use('/lit', lit)
+app.use('/passport', poop)
 
-const passportController = require('./controllers/passport.js')
-app.use('/passport', passportController)
+//passport congif
+const User = require('./models/user')
+passport.use(new LocalStrategy(User.authenticate()))
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
 
-
-// passport config
-const Poop = require('./models/user.js');
-passport.use(new LocalStrategy(Poop.authenticate()));
-passport.serializeUser(Poop.serializeUser());
-passport.deserializeUser(Poop.deserializeUser());
+//mongoose connection
+const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/girlgang'
+mongoose.connect(mongoUri);
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use((req, res, next)=> {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
@@ -59,7 +53,7 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
+    app.use((err, req, res, next) => {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
@@ -70,7 +64,7 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
+app.use((err, req, res, next)=> {
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
@@ -79,15 +73,8 @@ app.use(function(err, req, res, next) {
 });
 
 
-//index route
-app.get('/', (req, res)=>{
-	res.send('yeah boiiiiii');
-});
 
 
-//mongoose connection
-const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/girlgang'
-mongoose.connect(mongoUri);
 
 
 //port
@@ -96,5 +83,3 @@ app.listen(port, ()=>{
 	console.log('Server running on this port: ' + port);
 
 });
-
-module.exports = app;
