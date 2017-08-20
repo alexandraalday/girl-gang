@@ -7,12 +7,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" charset="utf-8"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js" charset="utf-8"></script>
     <script src="./js/app.js" charset="utf-8"></script>
+    <link href="https://fonts.googleapis.com/css?family=Yesteryear" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/main.css">
   </head>
   <body>
 
-<!--   Navbar section -->
+<!--   Navbar Section -->
   <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -25,25 +26,31 @@
       </button>
       <a class="navbar-brand" href="#">GIRLGANG</a>
     </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">About <span class="sr-only">(current)</span></a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#gifs">Gifs</a></li>
-        <li><a href="#music">Music</a></li>
-        <li><a href="#lit">Lit</a></li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">About <span class="sr-only">(current)</span></a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#gifs">Gifs</a></li>
+          <li><a href="#music">Music</a></li>
+          <li><a href="#lit">Lit</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 
+<!--   Header Section -->
+  <header>
+    <div class="jumbotron text-center" id="heading">
+      <div class="container intro-text">
+        <h1 id="title">Girl Gang</h1>
+        <h2 id="tagline">femme ain't frail</h2>
+      </div>
+    </div>
+  </header>
 
 
-
-    <h1>Pretty Girls Like Gangsta Music</h1>
 
 
 
@@ -74,16 +81,16 @@
     </section>
 
 
-    <!-- adds all the html for the gifs part -->
-    <section id="gifs" ng-include="'./gif.html'"></section>
+  <!-- adds all the html for the gifs part -->
+  <section id="gifs" ng-include="'./gif.html'"></section>
 
 
-    <!-- adds all the html for the gifs part -->
-    <section id="music" ng-include="'./music.html'"></section>
+  <!-- adds all the html for the gifs part -->
+  <section id="music" ng-include="'./music.html'"></section>
 
 
-    <!-- adds all the html for the lit part -->
-    <section id="lit" ng-include="'./lit.html'"></section>
+  <!-- adds all the html for the lit part -->
+  <section id="lit" ng-include="'./lit.html'"></section>
 
   </body>
 </html>
