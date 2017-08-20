@@ -4,17 +4,6 @@
 }
 
 
-#modal-title {
-  display: inline-block;
-}
-
-
-
-#gifmodal {
-  position: absolute;
-  z-index: 10;
-}
-
 li {
 	list-style: none;
   top: 0;
@@ -23,6 +12,31 @@ li {
 a {
 	color: #f759c2;
 }
+
+/***********************
+/* modal styles
+***********************/
+
+
+
+#modal-title {
+  display: inline-block;
+}
+
+#closebutton {
+	float:right;
+}
+
+#gifmodal {
+  position: absolute;
+  z-index: 10;
+}
+
+#gifmodal, #musicmodal, #litmodal {
+	text-align: center;
+}
+
+
 
 
 /***********************

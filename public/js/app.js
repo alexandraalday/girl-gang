@@ -1,4 +1,4 @@
-const app = angular.module('girlGang', []); 
+const app = angular.module('girlGang', []);
   angular.module('app', ['ngSanitize']);
 
 
@@ -224,11 +224,21 @@ app.controller('MusicController', ['$http', '$scope', '$sce', function($http, $s
     this.editDisplay = false
     this.newDisplay = false;
 
-    $scope.trustSrc = function(src) {
-      return $sce.trustAsResourceUrl(src);
+    // $scope.trustSrc = function(src) {
+    //   return $sce.trustAsResourceUrl(src);
+    // }
+
+    this.config = function($sceDelegateProvider, apiUrl){
+      $sceDelegateProvider.resourceUrlWhitelist([
+            // Allow same origin resource loads.
+            'self',
+            // Allow loading from our assets domain.  
+             'http://open.spotify.com/embed/**'
+      ]);
     }
 
     this.addMusic = function(){
+      const spotifyId = this.link.split('.com/')[1]
       $http({
         method: 'POST',
         url: '/music',
@@ -236,12 +246,13 @@ app.controller('MusicController', ['$http', '$scope', '$sce', function($http, $s
           name: this.name,
           artist: this.artist,
           link: this.link.split('.com/')[1],
+          embed: '<iframe src="http://open.spotify.com/embed/' + spotifyId + '" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>',
           tag: this.tag,
           author: this.author
         }
       }).then(function(response){
         console.log(response.data.link);
-        $scope.link = response.data.link
+        // $scope.link = response.data.link
         // call all songs
         controller.getMusic();
         // reset form
@@ -288,7 +299,7 @@ app.controller('MusicController', ['$http', '$scope', '$sce', function($http, $s
       }).then(function(response){
         controller.getMusic();
         controller.editDisplay = false;
-        controller.currentMusic = {}
+        // controller.currentMusic = {}    ....if you keep this it blanks out the modal after edit. i suggest we remove. 
       }, function(err){
         console.log(err);
       })
@@ -310,7 +321,7 @@ app.controller('MusicController', ['$http', '$scope', '$sce', function($http, $s
     	this.editDisplay = !this.editDisplay;
 	  };
   	this.toggleNewDisplay = function(){
-  	    this.newDisplay = !this.newDisplay;
+  	  this.newDisplay = !this.newDisplay;
   	}
     this.toggleModal = function(){
       this.modal = !this.modal;
@@ -327,8 +338,11 @@ app.controller('MusicController', ['$http', '$scope', '$sce', function($http, $s
 app.controller('LitController', ['$http', function($http){
     //an empty array so we can can push the lit we make into it to display on the page
     this.allLit = [];
+    this.newDisplay = false;
+    this.editDisplay = false;
+    this.modal = false;
     this.currentLit = {};
-    this.editLit = {};
+
     //assigning this to a variable so we can use it in our functions
     const controller = this;
     //empty object so we can later use this variable to select a certain gif
@@ -341,18 +355,22 @@ app.controller('LitController', ['$http', function($http){
         method: 'POST',
         url: '/lit',
         data: {
-          postAuthor: this.postAuthor,
+          postTitle: this.postTitle,
+          author: this.author,
           url: this.url,
-          comment: this.comment
+          comment: this.comment,
+          tag: String
         }
       }).then(function(response){
         //this will update the lit list with the new lit instantly
         controller.newDisplay = false;
         controller.getLit();
         // reset form
-        controller.postAuthor = '',
+        controller.postTitle = '',
+        controller.author = '',
         controller.url = '',
-        controller.comment = ''
+        controller.comment = '',
+        controller.tag = ''
       }, function(err){
         console.log(err);
       })
@@ -362,6 +380,12 @@ app.controller('LitController', ['$http', function($http){
     }
     this.toggleEdit = function(){
       this.editDisplay = !this.editDisplay;
+      // reset form as an experiment for active bug still in Trello (8/20/17)
+      controller.postTitle = '',
+      controller.author = '',
+      controller.url = '',
+      controller.comment = '',
+      controller.tag = ''
     }
     this.toggleModal = function(){
       this.modal = !this.modal;
@@ -403,6 +427,7 @@ app.controller('LitController', ['$http', function($http){
       }).then(function(response){
         controller.getLit();
         controller.currentLit = {}
+        //this is where I should try to reset an empty input form if attempt above doesn't work
       }, function(err){
         console.log(err);
       })
