@@ -322,8 +322,11 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
 app.controller('LitController', ['$http', function($http){
     //an empty array so we can can push the lit we make into it to display on the page
     this.allLit = [];
+    this.newDisplay = false;
+    this.editDisplay = false;
+    this.modal = false;
     this.currentLit = {};
-    this.editLit = {};
+
     //assigning this to a variable so we can use it in our functions
     const controller = this;
     //empty object so we can later use this variable to select a certain gif
@@ -336,18 +339,22 @@ app.controller('LitController', ['$http', function($http){
         method: 'POST',
         url: '/lit',
         data: {
-          postAuthor: this.postAuthor,
+          postTitle: this.postTitle,
+          author: this.author,
           url: this.url,
-          comment: this.comment
+          comment: this.comment,
+          tag: String
         }
       }).then(function(response){
         //this will update the lit list with the new lit instantly
         controller.newDisplay = false;
         controller.getLit();
         // reset form
-        controller.postAuthor = '',
+        controller.postTitle = '',
+        controller.author = '',
         controller.url = '',
-        controller.comment = ''
+        controller.comment = '',
+        controller.tag = ''
       }, function(err){
         console.log(err);
       })
@@ -357,6 +364,12 @@ app.controller('LitController', ['$http', function($http){
     }
     this.toggleEdit = function(){
       this.editDisplay = !this.editDisplay;
+      // reset form as an experiment for active bug still in Trello (8/20/17)
+      controller.postTitle = '',
+      controller.author = '',
+      controller.url = '',
+      controller.comment = '',
+      controller.tag = ''
     }
     this.toggleModal = function(){
       this.modal = !this.modal;
@@ -398,6 +411,7 @@ app.controller('LitController', ['$http', function($http){
       }).then(function(response){
         controller.getLit();
         controller.currentLit = {}
+        //this is where I should try to reset an empty input form if attempt above doesn't work
       }, function(err){
         console.log(err);
       })
