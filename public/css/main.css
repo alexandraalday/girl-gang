@@ -3,13 +3,12 @@
   src: url('../assets/adrip1.ttf') format('opentype');
 }
 
-<<<<<<< HEAD
-=======
+
 #modal-title {
   display: inline-block;
 }
 
->>>>>>> 1bb459e88236a2e436f5b7958ccd0f5188823110
+
 
 #gifmodal {
   position: absolute;
@@ -108,4 +107,48 @@ a {
 	font-family: 'Yesteryear', cursive;
 	color: #f759c2;
 	font-size: 6em;
+}
+
+/***********************
+/* about styles
+***********************/
+
+#about {
+	margin: 5% 2%;
+	text-align: center;
+}
+
+#icon-gif, #icon-music, #icon-lit {
+	font-size: 6em;
+}
+
+#about a {
+  text-decoration: none;
+  padding-bottom: 2px;
+  transition: 0.2s ease-in;
+  -moz-transition: 0.2s ease-in;
+  -webkit-transition: 0.2s ease-in;
+}
+#about a:after {
+  content:'';
+  display: block;
+  height: 3px;
+  width: 0;
+  background: transparent;
+  transition: 0.2s ease-in;
+  -moz-transition: 0.2s ease-in;
+  -webkit-transition: 0.2s ease-in;
+}
+#about a:hover:after {
+  width: 100%;
+  background: #06BEE0;
+  transition: 0.2s ease-in;
+  -moz-transition: 0.2s ease-in;
+  -webkit-transition: 0.2s ease-in;
+}
+#about a:hover {
+  cursor: pointer;
+  transition: 0.5s ease-in;
+  -moz-transition: 0.5s ease-in;
+  -webkit-transition: 0.5s ease-in;
 }
