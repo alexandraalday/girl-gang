@@ -224,11 +224,21 @@ app.controller('MusicController', ['$http', '$scope', '$sce', function($http, $s
     this.editDisplay = false
     this.newDisplay = false;
 
-    $scope.trustSrc = function(src) {
-      return $sce.trustAsResourceUrl(src);
+    // $scope.trustSrc = function(src) {
+    //   return $sce.trustAsResourceUrl(src);
+    // }
+
+    this.config = function($sceDelegateProvider, apiUrl){
+      $sceDelegateProvider.resourceUrlWhitelist([
+            // Allow same origin resource loads.
+            'self',
+            // Allow loading from our assets domain.  
+             'http://open.spotify.com/embed/**'
+      ]);
     }
 
     this.addMusic = function(){
+      const spotifyId = this.link.split('.com/')[1]
       $http({
         method: 'POST',
         url: '/music',
@@ -236,12 +246,13 @@ app.controller('MusicController', ['$http', '$scope', '$sce', function($http, $s
           name: this.name,
           artist: this.artist,
           link: this.link.split('.com/')[1],
+          embed: '<iframe src="http://open.spotify.com/embed/' + spotifyId + '" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>',
           tag: this.tag,
           author: this.author
         }
       }).then(function(response){
         console.log(response.data.link);
-        $scope.link = response.data.link
+        // $scope.link = response.data.link
         // call all songs
         controller.getMusic();
         // reset form
@@ -288,7 +299,7 @@ app.controller('MusicController', ['$http', '$scope', '$sce', function($http, $s
       }).then(function(response){
         controller.getMusic();
         controller.editDisplay = false;
-        controller.currentMusic = {}
+        // controller.currentMusic = {}    ....if you keep this it blanks out the modal after edit. i suggest we remove. 
       }, function(err){
         console.log(err);
       })
@@ -310,7 +321,7 @@ app.controller('MusicController', ['$http', '$scope', '$sce', function($http, $s
     	this.editDisplay = !this.editDisplay;
 	  };
   	this.toggleNewDisplay = function(){
-  	    this.newDisplay = !this.newDisplay;
+  	  this.newDisplay = !this.newDisplay;
   	}
     this.toggleModal = function(){
       this.modal = !this.modal;
