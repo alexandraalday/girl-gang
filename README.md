@@ -1,5 +1,5 @@
 # PROJECT: GIRLGANG
-**LIVE SITE:** 
+**LIVE SITE:** http://girl-gang.herokuapp.com/
 
 ## TEAM
 Alexandra Alday<br>
