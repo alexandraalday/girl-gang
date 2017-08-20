@@ -3,10 +3,13 @@
   src: url('../assets/adrip1.ttf') format('opentype');
 }
 
+<<<<<<< HEAD
+=======
 #modal-title {
   display: inline-block;
 }
 
+>>>>>>> 1bb459e88236a2e436f5b7958ccd0f5188823110
 
 #gifmodal {
   position: absolute;
@@ -18,6 +21,9 @@ li {
   top: 0;
 }
 
+a {
+	color: #f759c2;
+}
 
 
 /***********************
@@ -30,6 +36,38 @@ li {
 
 .navbar {
   margin: 0;
+  font-weight: bold;
+}
+
+.site-nav a {
+  text-decoration: none;
+  padding-bottom: 2px;
+  transition: 0.2s ease-in;
+  -moz-transition: 0.2s ease-in;
+  -webkit-transition: 0.2s ease-in;
+}
+.site-nav a:after {
+  content:'';
+  display: block;
+  height: 3px;
+  width: 0;
+  background: transparent;
+  transition: 0.2s ease-in;
+  -moz-transition: 0.2s ease-in;
+  -webkit-transition: 0.2s ease-in;
+}
+.site-nav a:hover:after {
+  width: 100%;
+  background: #06BEE0;
+  transition: 0.2s ease-in;
+  -moz-transition: 0.2s ease-in;
+  -webkit-transition: 0.2s ease-in;
+}
+.site-nav a:hover {
+  cursor: pointer;
+  transition: 0.5s ease-in;
+  -moz-transition: 0.5s ease-in;
+  -webkit-transition: 0.5s ease-in;
 }
 
 
@@ -41,8 +79,8 @@ li {
   background: transparent;
   min-height: 100%;
   position: relative;
-  padding-top: 10%;
-  padding-bottom: 10%
+  padding-top: 3%;
+  padding-bottom: 1%
 }
 
 #heading:before {
@@ -53,7 +91,7 @@ li {
   z-index: -1;
   top: 0px;
   left: 0px;
-  background: url("http://i.imgur.com/1Re4ZAZ.jpg") center center fixed no-repeat;
+  background: url("https://i.pinimg.com/originals/5a/6e/9e/5a6e9e93166a0344228e918d045c7d2b.jpg") center center fixed no-repeat;
   background-size: cover;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -61,7 +99,9 @@ li {
 
 #title {
 	font-family: 'A-Dripping-Marker';
+	color: #f759c2;
 	font-size: 15em;
+	text-shadow: -4px 3px 0 #3a50d9, -14px 7px 0 #0a0e27;
 }
 
 #tagline {

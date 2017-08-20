@@ -35,13 +35,15 @@
   <div>
 
 <!--     List of all Tracks with Modal for More Info-->
-
+<div class="row">
     <ul>
       <li ng-repeat="song in music.allMusic" ng-click="music.setCurrentMusic(song._id)">
         <a href="#">{{song.name}}</a> by: {{song.artist}}<br/>
-        Spotify iFrame With Angular:<br/> <iframe ng-src="https://open.spotify.com/embed/" + "{{song.link}}" + " width="300" height="80" frameborder="0" allowtransparency="true"></iframe><br/>
+        <iframe type ="text/html" width="300" height="80" frameborder="0" allowtransparency="true" ng-src="http://open.spotify.com/embed/" + {{trustSrc(link)}}" ></iframe> <br/><br/>
+
         </li>
     </ul>
+  </div>
 
 
     <!--    Modal -->
@@ -55,11 +57,12 @@
           </div>
           <div class="modal-body">
 
-            <h1 class="modal-title"  id="musicModalLabel">{{music.currentMusic.name}} - {{music.currentMusic.artist}} </h1>
+            <h1 id="musicModalLabel">{{music.currentMusic.name}} - {{music.currentMusic.artist}} </h1>
 
             With Angular: <br/> <iframe ng-src="https://open.spotify.com/embed/" + "{{song.link}}" + " width="300" height="380" frameborder="0" allowtransparency="true"></iframe> <br/>
+
             <!-- button to show the edit form -->
-            <button class="btn btn-primary" ng-click="music.toggleEdit()">Edit {{giphy.name}}</button>
+            <button class="btn btn-primary" ng-click="music.toggleEdit()">Edit</button>
 
       <!--   Delete Button -->
           <button class="btn btn-default" ng-click="music.deleteMusic(music.currentMusic._id)">Delete</button>

@@ -1,4 +1,5 @@
-const app = angular.module('girlGang', []);
+const app = angular.module('girlGang', []); 
+  angular.module('app', ['ngSanitize']);
 
 
 ///////////////////////
@@ -215,7 +216,7 @@ app.controller('GifController', ['$http', function($http){
 // MUSIC CONTROLLER
 ///////////////////////
 
-app.controller('MusicController', ['$http', '$scope', function($http, $scope){
+app.controller('MusicController', ['$http', '$scope', '$sce', function($http, $scope, $sce){
     const controller = this;
     this.allMusic = [];
     this.currentMusic = {};
@@ -223,7 +224,9 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
     this.editDisplay = false
     this.newDisplay = false;
 
-
+    $scope.trustSrc = function(src) {
+      return $sce.trustAsResourceUrl(src);
+    }
 
     this.addMusic = function(){
       $http({
@@ -237,6 +240,8 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
           author: this.author
         }
       }).then(function(response){
+        console.log(response.data.link);
+        $scope.link = response.data.link
         // call all songs
         controller.getMusic();
         // reset form

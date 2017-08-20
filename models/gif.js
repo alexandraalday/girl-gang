@@ -5,8 +5,8 @@ const mongoose = require('mongoose');
 const gifSchema = mongoose.Schema({
  	name: String,
  	url: String,
-  tag: String,
-  author: String
+  	tag: String,
+  	author: String
 });
 
 const Gif = mongoose.model('Gif', gifSchema);
