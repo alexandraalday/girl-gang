@@ -3,6 +3,13 @@
   src: url('../assets/adrip1.ttf') format('opentype');
 }
 
+<<<<<<< HEAD
+=======
+#modal-title {
+  display: inline-block;
+}
+
+>>>>>>> 1bb459e88236a2e436f5b7958ccd0f5188823110
 
 #gifmodal {
   position: absolute;
@@ -11,12 +18,13 @@
 
 li {
 	list-style: none;
+  top: 0;
 }
 
 
 
 /***********************
-/* navigation styles 
+/* navigation styles
 ***********************/
 
 #navigation {
@@ -29,7 +37,7 @@ li {
 
 
 /***********************
-/* header styles 
+/* header styles
 ***********************/
 
 #heading {
@@ -56,7 +64,7 @@ li {
 
 #title {
 	font-family: 'A-Dripping-Marker';
-	font-size: 15em; 
+	font-size: 15em;
 }
 
 #tagline {
