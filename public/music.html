@@ -10,7 +10,7 @@
 
 <!--     Add New Track Section -->
     <div class="col-lg-10">
-      <button class="btn btn-secondary" type="submit" ng-click="music.toggleNewDisplay()">Add A New Track</button>
+      <button class="btn btn-default" type="submit" ng-click="music.toggleNewDisplay()">Add A New Track</button>
       <div ng-if="music.newDisplay">
         <form ng-submit="music.addMusic()">
           <input type="text" placeholder="name" ng-model="music.name"><br/>
@@ -43,9 +43,7 @@
  
 
     <!--    Modal -->
-    <div id="modal">
     <div ng-if="music.modal" id="musicmodal">
-    <div class="modal custom fade">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -79,8 +77,6 @@
     </div>
       </div>
     </div>
-  </div>
-</div>
 </div>
 
 </div><!-- end row -->
