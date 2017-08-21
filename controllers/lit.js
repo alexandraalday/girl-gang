@@ -22,6 +22,7 @@ router.post('/', (req, res)=> {
     res.json(createdLit)
   })
 })
+
 //edit route
 router.put('/:id', (req, res)=> {
   Lit.findByIdAndUpdate(req.params.id, req.body, { new : true }, (err, updatedLit)=>{

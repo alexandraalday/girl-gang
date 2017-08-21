@@ -3,20 +3,103 @@
 <html ng-app="girlGang">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <link href="https://image.spreadshirtmedia.com/image-server/v1/designs/12686956,width%3D178,height%3D178.png" rel="icon" type="image/png" >
+    <title>GIRL GANG</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" charset="utf-8"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js" charset="utf-8"></script>
     <script src="./js/app.js" charset="utf-8"></script>
+    <link href="https://fonts.googleapis.com/css?family=Yesteryear" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/main.css">
   </head>
   <body>
-    <h1>Pretty Girls Like Gangsta Music</h1
 
-    <h3>users on users</h3>
-    <section ng-controller="UserController as user">
-      <div> <!-- form to add a new user -->
-        <form ng-submit="user.addUser()">
+<!--   Navbar Section -->
+  <nav class="navbar navbar-inverse navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="site-nav">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#" style="color: #f759c2;">GIRLGANG</a>
+    </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#" style="color: #f759c2;">About <span class="sr-only">(current)</span></a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#gifs" style="color: #f759c2;">GIFS</a></li>
+          <li><a href="#music" style="color: #f759c2;">MUSIC</a></li>
+          <li><a href="#lit" style="color: #f759c2;">LIT</a></li>
+          <li><a href="#">LOGIN</a></li>
+          <li><a href="#" style="color: #f759c2;">REGISTER</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+      </div>
+  </div><!-- /.container-fluid -->
+</nav>
+
+<!--   Header Section -->
+  <header>
+    <div class="jumbotron text-center" id="heading">
+      <div class="container intro-text">
+        <h1 id="title">Girl Gang</h1>
+        <h2 id="tagline">femme ain't frail</h2>
+      </div>
+    </div>
+  </header>
+
+
+<!--   Description Section  -->
+      <div id="about" class="row">
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <span id="icon-music" class="glyphicon glyphicon-picture"></span>
+            <div class="card-body">
+              <h4 class="card-title">   
+                <a href="#gifs">GIFS</a>
+              </h4>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <span id="icon-music" class="glyphicon glyphicon-headphones"></span>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#music">MUSIC</a>
+              </h4>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <span id="icon-lit" class="glyphicon glyphicon-book"></span>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#lit">LIT</a>
+              </h4>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure perspiciatis mollitia recusandae vero vel quam!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+<!-- /.row -->
+
+
+
+<!--     Hiding User section for now because we aren't going to show it  -->
+<!--     <section ng-controller="UserController as user">
+      <div> --> <!-- form to add a new user -->
+  <!--       <form ng-submit="user.addUser()">
           <input type="text" placeholder="name" ng-model="user.name"><br/>
           <input type="text" placeholder="image url" ng-model="user.image"><br/>
           <input type="text" placeholder="bio" ng-model="user.bio"><br/>
@@ -26,9 +109,9 @@
       <h5>ALL DA USERS</h5>
         <ul>
           <li ng-repeat="people in user.allUsers" ng-click="user.setCurrentUser(people._id)">{{people.name}}</li>
-        </ul>
+        </ul> -->
         <!-- edit form -->
-      <div>
+ <!--      <div>
         <form ng-submit="user.updateUser(user.currentUser._id)">
           <input type="text" placeholder="{{user.currentUser.name}}" ng-model="user.editUser.name">
           <input type="text" placeholder="{{user.currentUser.image}}" ng-model="user.editUser.image">
@@ -37,19 +120,19 @@
         </form>
       </div>
       <button ng-click="user.deleteUser(user.currentUser._id)">Delete</button>
-    </section>
+    </section> -->
 
 
-    <!-- adds all the html for the gifs part -->
-    <section ng-include="'./gif.html'"></section>
+  <!-- adds all the html for the gifs part -->
+  <section id="gifs" ng-include="'./gif.html'"></section>
 
 
-    <!-- adds all the html for the gifs part -->
-    <section ng-include="'./music.html'"></section>
+  <!-- adds all the html for the gifs part -->
+  <section id="music" ng-include="'./music.html'"></section>
 
 
-    <!-- adds all the html for the lit part -->
-    <section ng-include="'./lit.html'"></section>
+  <!-- adds all the html for the lit part -->
+  <section id="lit" ng-include="'./lit.html'"></section>
 
   </body>
 </html>

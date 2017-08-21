@@ -23,6 +23,7 @@ router.post('/', (req, res)=> {
     res.json(createdGif)
   })
 })
+
 //edit route
 router.put('/:id', (req, res)=> {
   Gif.findByIdAndUpdate(req.params.id, req.body, { new : true }, (err, updatedGif)=>{

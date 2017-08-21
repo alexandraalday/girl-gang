@@ -3,9 +3,11 @@ const mongoose = require('mongoose');
 
 //schema
 const litSchema = mongoose.Schema({
- 	postAuthor: String,
+ 	postTitle: String,
+  author: String,
  	url: String,
-  comment: String
+  comment: String,
+  tag: String
 });
 
 const Lit = mongoose.model('Lit', litSchema);

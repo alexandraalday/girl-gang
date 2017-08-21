@@ -1,4 +1,244 @@
+@font-face {
+  font-family: 'A-Dripping-Marker';
+  src: url('../assets/adrip1.ttf') format('opentype');
+}
+
+
+li {
+	list-style: none;
+  top: 0;
+}
+
+a {
+	color: #f759c2;
+}
+
+/***********************
+/* modal styles
+***********************/
+
+#modal.modal-header {
+	background: #06BEE0;
+	color: #06BEE0;
+}
+
+#modal-title {
+  display: inline-block;
+}
+
+#closebutton {
+	float:right;
+}
+
 #gifmodal {
   position: absolute;
   z-index: 10;
+}
+
+#gifmodal, #musicmodal, #litmodal {
+	text-align: center;
+}
+
+
+
+
+
+/***********************
+/* navigation styles
+***********************/
+
+#navigation {
+  padding: 0;
+}
+
+.navbar {
+  margin: 0;
+  font-weight: bold;
+}
+
+.site-nav a {
+  text-decoration: none;
+  padding-bottom: 2px;
+  transition: 0.2s ease-in;
+  -moz-transition: 0.2s ease-in;
+  -webkit-transition: 0.2s ease-in;
+}
+.site-nav a:after {
+  content:'';
+  display: block;
+  height: 3px;
+  width: 0;
+  background: transparent;
+  transition: 0.2s ease-in;
+  -moz-transition: 0.2s ease-in;
+  -webkit-transition: 0.2s ease-in;
+}
+.site-nav a:hover:after {
+  width: 100%;
+  background: #06BEE0;
+  transition: 0.2s ease-in;
+  -moz-transition: 0.2s ease-in;
+  -webkit-transition: 0.2s ease-in;
+}
+.site-nav a:hover {
+  cursor: pointer;
+  transition: 0.5s ease-in;
+  -moz-transition: 0.5s ease-in;
+  -webkit-transition: 0.5s ease-in;
+}
+
+
+/***********************
+/* header styles
+***********************/
+
+#heading {
+  background: transparent;
+  min-height: 100%;
+  position: relative;
+  padding-top: 3%;
+  padding-bottom: 1%
+}
+
+#heading:before {
+  content: ' ';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+  top: 0px;
+  left: 0px;
+  background: url("https://i.pinimg.com/originals/5a/6e/9e/5a6e9e93166a0344228e918d045c7d2b.jpg") center center fixed no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+}
+
+#title {
+	font-family: 'A-Dripping-Marker';
+	color: #f759c2;
+	font-size: 15em;
+	text-shadow: -4px 3px 0 #3a50d9, -14px 7px 0 #0a0e27;
+}
+
+#tagline {
+	font-family: 'Yesteryear', cursive;
+	color: #f759c2;
+	font-size: 6em;
+}
+
+/***********************
+/* about styles
+***********************/
+
+#about {
+	margin: 5% 2%;
+	text-align: center;
+}
+
+#icon-gif, #icon-music, #icon-lit {
+	font-size: 6em;
+}
+
+#about a {
+  text-decoration: none;
+  padding-bottom: 2px;
+  transition: 0.2s ease-in;
+  -moz-transition: 0.2s ease-in;
+  -webkit-transition: 0.2s ease-in;
+}
+#about a:after {
+  content:'';
+  display: block;
+  height: 3px;
+  width: 0;
+  background: transparent;
+  transition: 0.2s ease-in;
+  -moz-transition: 0.2s ease-in;
+  -webkit-transition: 0.2s ease-in;
+}
+#about a:hover:after {
+  width: 100%;
+  background: #06BEE0;
+  transition: 0.2s ease-in;
+  -moz-transition: 0.2s ease-in;
+  -webkit-transition: 0.2s ease-in;
+}
+#about a:hover {
+  cursor: pointer;
+  transition: 0.5s ease-in;
+  -moz-transition: 0.5s ease-in;
+  -webkit-transition: 0.5s ease-in;
+}
+
+
+/***********************
+/* gif section styles
+***********************/
+
+#gif-container {
+	width: 100%;
+	padding-bottom: 5%;
+}
+
+#gif-jumbotron  {
+	background-color: white;
+    background: linear-gradient(to right, #06BEE0, #C704F6);
+	width: 100%;
+	text-align: center;
+	padding: 8%;
+}
+
+#gif-jumbotron h1 {
+	font-family: 'A-Dripping-Marker';
+	font-size: 7em;
+	color: #fff;
+}
+
+/***********************
+/* music section styles
+***********************/
+
+#music-container {
+	width: 100%;
+	padding-bottom: 5%;
+} 
+
+#music-jumbotron  {
+	background-color: white;
+    background: linear-gradient(to right, #06BEE0, #C704F6);
+	width: 100%;
+	text-align: center;
+	padding: 8%;
+}
+
+#music-jumbotron h1 {
+	font-family: 'A-Dripping-Marker';
+	font-size: 7em;
+	color: #fff;
+}
+
+
+
+/***********************
+/* lit section styles
+***********************/
+
+#lit-container {
+	width: 100%;
+	padding-bottom: 5%;
+} 
+
+#lit-jumbotron  {
+	background-color: white;
+    background: linear-gradient(to right, #06BEE0, #C704F6);
+	width: 100%;
+	text-align: center;
+	padding: 8%;
+}
+
+#lit-jumbotron h1 {
+	font-family: 'A-Dripping-Marker';
+	font-size: 7em;
+	color: #fff;
 }
