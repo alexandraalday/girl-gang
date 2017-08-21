@@ -16,7 +16,7 @@
 
     <!--  creating a form to login -->
     <section ng-controller="UserController as user">
-      <form ng-submit="addUser()"">
+      <form ng-submit="user.addUser()"">
         <input type="email" ng-model="user.email" placeholder="email"><br/>
         <input type="password" ng-model="user.password" placeholder="password"><br/>
         <button type="submit" class="btn btn-default" >Login</button>

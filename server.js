@@ -3,6 +3,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const app = express();
+const session = require('express-session')
+
 const port = process.env.PORT || 3000;
 
 
@@ -10,7 +12,11 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 app.use(express.static('public'));
-
+app.use(session({
+	secret: process.env.SECRET,
+	resave: false,
+	saveUnitialized: false
+}))
 
 //controllers
 const user = require('./controllers/users.js')
