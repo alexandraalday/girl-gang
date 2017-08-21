@@ -195,6 +195,11 @@ a {
 	color: #fff;
 }
 
+#gif-container img {
+	height: 300px;
+	width: 400px;
+}
+
 /***********************
 /* music section styles
 ***********************/
