@@ -5,8 +5,9 @@
   <div class="jumbotron" id="gif-jumbotron">
   <h1> Gifs </h1>
   <h4> Get Your Giggle On, Feminista </h4>
+  <!-- Add New Gif Section -->
   <div class="col-lg-10">
-  <button class="btn btn-default" ng-click="gif.toggleNew()">Add New Gif</button>
+  <button class="btn btn-default" ng-click="gif.toggleNew()">Add a New Gif</button>
   <div ng-if="gif.newDisplay">
     <form ng-submit="gif.addGif()">
       <input type="text" placeholder="gif name" ng-model="gif.name"><br/>
