@@ -1,13 +1,13 @@
 <div ng-controller="LitController as lit">
 
-<div class="container">
+<div class="container" id="lit-container">
   <div class="row">
 
-  <div class="jumbotron">
+  <div class="jumbotron" id="lit-jumbotron">
   <h1> Lit about Lit </h1>
   <h4> Yak It Up About All That Yakking, Help Get That Female Word Count Achieved for the Day</h4>
   <div class="col-lg-10">
-    <button class="btn btn-success" ng-click="lit.toggleNew()">Add New Lit Post</button>
+    <button class="btn btn-default" ng-click="lit.toggleNew()">Add New Lit Post</button>
     <div ng-if="lit.newDisplay">
     <form ng-submit="lit.addLit()">
       <input type="text" placeholder="Post Title" ng-model="lit.postTitle"><br/>
@@ -21,11 +21,16 @@
   </div>
 </div><!--end of col-lg-10 -->
 </div><!-- end of jumbotron -->
-
-  <div>
+<div class="row">
     <ul>
-      <li ng-repeat="lit in lit.allContent" ng-click="lit.setCurrentLit(lit._id)">{{lit.postTitle}}</li> <br/>
-      <a href="{{lit.url}}"/><br/>
+      <li ng-repeat="song in music.allMusic" ng-click="music.setCurrentMusic(song._id)">
+
+  <div class="row">
+    <ul>
+      <li ng-repeat="lit in lit.allContent" ng-click="lit.setCurrentLit(lit._id)">
+        <div class="col-md-4 portfolio-item">
+          <a href="{{lit.url}}"/>{{lit.postTitle}}</a><br/>
+      </li>
     </ul>
   </div>
 </div>

@@ -1,12 +1,12 @@
  <div ng-controller="GifController as gif">
-<div class="container">
+<div class="container" id="gif-container">
   <div class="row">
 
-  <div class="jumbotron">
-  <h1> G I F S </h1>
+  <div class="jumbotron" id="gif-jumbotron">
+  <h1> Gifs </h1>
   <h4> Get Your Giggle On, Feminista </h4>
   <div class="col-lg-10">
-  <button class="btn btn-success" ng-click="gif.toggleNew()">Add New Gif</button>
+  <button class="btn btn-default" ng-click="gif.toggleNew()">Add New Gif</button>
   <div ng-if="gif.newDisplay">
     <form ng-submit="gif.addGif()">
       <input type="text" placeholder="gif name" ng-model="gif.name"><br/>

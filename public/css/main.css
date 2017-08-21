@@ -17,6 +17,10 @@ a {
 /* modal styles
 ***********************/
 
+#modal.modal-header {
+	background: #06BEE0;
+	color: #06BEE0;
+}
 
 #modal-title {
   display: inline-block;
@@ -165,4 +169,92 @@ a {
   transition: 0.5s ease-in;
   -moz-transition: 0.5s ease-in;
   -webkit-transition: 0.5s ease-in;
+}
+
+
+/***********************
+/* gif section styles
+***********************/
+
+#gif-container {
+	width: 100%;
+	padding-bottom: 5%;
+}
+
+#gif-jumbotron  {
+	background-color: white;
+    background: linear-gradient(to right, #06BEE0, #C704F6);
+	width: 100%;
+	text-align: center;
+	padding: 8%;
+}
+
+#gif-jumbotron h1 {
+	font-family: 'A-Dripping-Marker';
+	font-size: 7em;
+	color: #fff;
+}
+
+/***********************
+/* music section styles
+***********************/
+
+#music-container {
+	width: 100%;
+	padding-bottom: 5%;
+}
+
+#music-jumbotron  {
+	background-color: #ffffff;
+	width: 100%;
+	text-align: center;
+	padding: 8%;
+}
+
+#music-jumbotron h1 {
+	font-family: 'A-Dripping-Marker';
+	font-size: 7em;
+	display: inline-block;
+}
+
+#music-jumbotron button {  
+    border: 3px solid transparent;
+    border-image: linear-gradient(to right, #06BEE0 0%, #C704F6 100%);
+    border-image-slice: 1;
+    background: #fff;
+    color: #000;
+    font-size: 1em;
+ /*   padding: 10px 40px;*/
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+#music-jumbotron button:hover{
+    background-color: white;
+    background: linear-gradient(to right, #06BEE0, #C704F6);
+    color: #fff;
+}
+
+/***********************
+/* lit section styles
+***********************/
+
+#lit-container {
+	width: 100%;
+	padding-bottom: 5%;
+} 
+
+#lit-jumbotron  {
+	background-color: white;
+    background: linear-gradient(to right, #06BEE0, #C704F6);
+	width: 100%;
+	text-align: center;
+	padding: 8%;
+}
+
+#lit-jumbotron h1 {
+	font-family: 'A-Dripping-Marker';
+	font-size: 7em;
+	color: #fff;
 }
