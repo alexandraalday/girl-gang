@@ -241,6 +241,7 @@ app.controller('MusicController', ['$http', function($http){
         data: {
           link: this.link.split('.com/')[1],
           embed: 'https://open.spotify.com/embed/' + spotifyId,
+          likes: this.likes,
           tag: this.tag,
           author: this.author
         }
@@ -256,6 +257,20 @@ app.controller('MusicController', ['$http', function($http){
       }, function(err){
         console.log(err);
       })
+    }
+
+    this.likeMusic = function(id){
+        $http({
+          method: 'PUT',
+          url: '/music/like/' + id
+        }).then(function(response){
+          console.log(response)
+          // // console.log(response.data[0].likes)
+          // this.likes = response.data.likes++
+          controller.getMusic();
+        }, function(err){
+            console.log(err);
+        })
     }
 
     this.getMusic = function(){

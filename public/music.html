@@ -33,12 +33,14 @@
           <iframe width="300" height="80" frameborder="0" allowtransparency="true" ng-src="{{song.embed}}"></iframe>
           <div id="action-icons">
             <button class="btn btn-default" ng-click="music.toggleModal()"><span class="glyphicon glyphicon-pencil"></span></button>
-            <button class="btn btn-danger"><span class="glyphicon glyphicon-heart"></span></button><br/>
+            <button class="btn btn-default" ng-click="music.likeMusic(song._id)"><span class="glyphicon glyphicon-heart"><b> {{song.likes}}</b></span></button><br/> 
           </div>
         </div>
         </li>
     </ul>
   </div>
+
+
 
 
  
