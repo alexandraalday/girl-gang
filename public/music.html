@@ -13,8 +13,6 @@
       <button class="btn btn-default" type="submit" ng-click="music.toggleNewDisplay()">Add A New Track</button>
       <div ng-if="music.newDisplay">
         <form ng-submit="music.addMusic()">
-          <input type="text" placeholder="name" ng-model="music.name"><br/>
-          <input type="text" placeholder="artist" ng-model="music.artist"><br/>
           <input type="text" placeholder="link" ng-model="music.link"><br/>
           <input type="text" placeholder="tag" ng-model="music.tag"><br/>
           <input type="text" placeholder="author" ng-model="music.author"><br/>
@@ -28,16 +26,21 @@
   <div>
 
 <!--     List of all Tracks with Modal Button for More Info-->
-<div class="row">
+<div class="row" id="display">
     <ul>
       <li ng-repeat="song in music.allMusic" ng-click="music.setCurrentMusic(song._id)">
-        <div class="col-md-4 portfolio-item">
-          <a href="#">Click me!</a><br/>
-          <iframe width="300" height="80" frameborder="0" allowtransparency="true" ng-src="{{song.embed}}"></iframe><br/>
+        <div class="col-md-4" id="music-item">
+          <iframe width="300" height="80" frameborder="0" allowtransparency="true" ng-src="{{song.embed}}"></iframe>
+          <div id="action-icons">
+            <button class="btn btn-default" ng-click="music.toggleModal()"><span class="glyphicon glyphicon-pencil"></span></button>
+            <button class="btn btn-default" ng-click="music.likeMusic(song._id)"><span class="glyphicon glyphicon-heart"><b> {{song.likes}}</b></span></button><br/> 
+          </div>
         </div>
         </li>
     </ul>
   </div>
+
+
 
 
  
@@ -64,8 +67,6 @@
     <!--     Edit Form -->
         <div class="form-group" ng-if="music.editDisplay">
           <form id="musicForm" ng-submit="music.updateMusic(music.currentMusic._id)">
-            <input type="text" placeholder="{{music.currentMusic.name}}" ng-model="music.editedMusic.name"><br/>
-            <input type="text" placeholder="{{music.currentMusic.artist}}" ng-model="music.editedMusic.artist"><br/>
             <input type="text" placeholder="{{music.currentMusic.link}}" ng-model="music.editedMusic.link"><br/>
             <input type="text" placeholder="{{music.currentMusic.tag}}" ng-model="music.editedMusic.tag"><br/>
             <input type="text" placeholder="{{music.currentMusic.author}}" ng-model="music.editedMusic.author"><br/>
