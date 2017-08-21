@@ -31,11 +31,16 @@
 <div class="row">
     <ul>
       <li ng-repeat="song in music.allMusic" ng-click="music.setCurrentMusic(song._id)">
-        <a href="#">Click me!</a><br/>
-        <iframe width="300" height="80" frameborder="0" allowtransparency="true" ng-src="{{song.embed}}"></iframe><br/>
+        <div class="col-md-4 portfolio-item">
+          <a href="#">Click me!</a><br/>
+          <iframe width="300" height="80" frameborder="0" allowtransparency="true" ng-src="{{song.embed}}"></iframe><br/>
+        </div>
         </li>
     </ul>
   </div>
+
+
+ 
 
     <!--    Modal -->
     <div id="modal">
