@@ -239,10 +239,9 @@ app.controller('MusicController', ['$http', function($http){
         method: 'POST',
         url: '/music',
         data: {
-          name: this.name,
-          artist: this.artist,
           link: this.link.split('.com/')[1],
           embed: 'https://open.spotify.com/embed/' + spotifyId,
+          likes: this.likes,
           tag: this.tag,
           author: this.author
         }
@@ -252,14 +251,26 @@ app.controller('MusicController', ['$http', function($http){
         controller.getMusic();
         // reset form
         controller.newDisplay = false;
-        controller.name = '',
-        controller.artist = '',
         controller.link = '',
         controller.tag = '',
         controller.author = ''
       }, function(err){
         console.log(err);
       })
+    }
+
+    this.likeMusic = function(id){
+        $http({
+          method: 'PUT',
+          url: '/music/like/' + id
+        }).then(function(response){
+          console.log(response)
+          // // console.log(response.data[0].likes)
+          // this.likes = response.data.likes++
+          controller.getMusic();
+        }, function(err){
+            console.log(err);
+        })
     }
 
     this.getMusic = function(){
@@ -279,7 +290,6 @@ app.controller('MusicController', ['$http', function($http){
         url: '/music/' + id
       }).then(function(response){
         controller.currentMusic = response.data[0];
-        controller.modal = true;
         console.log(controller.currentMusic);
       }, function(err){
         console.log(err);

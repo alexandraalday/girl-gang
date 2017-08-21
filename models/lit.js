@@ -4,10 +4,10 @@ const mongoose = require('mongoose');
 //schema
 const litSchema = mongoose.Schema({
  	postTitle: String,
-  author: String,
+  	author: String,
  	url: String,
-  comment: String,
-  tag: String
+  	comment: String,
+  	tag: String
 });
 
 const Lit = mongoose.model('Lit', litSchema);
