@@ -3,8 +3,6 @@ const mongoose = require('mongoose');
 
 //schema
 const musicSchema = mongoose.Schema({
- 	name: String, 
- 	artist: String,
 	link: {type: String, required: true},
 	embed: {type: String},
 	tag: String,
