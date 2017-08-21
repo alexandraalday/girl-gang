@@ -1,11 +1,18 @@
 //dependencies
 const express = require('express');
+const port = process.env.PORT || 3000;
 const passport = require('passport');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
+const flash = require('connect-flash');
 const Strategy = require('passport-local').Strategy;
-const router = express.Router()
-const port = process.env.PORT || 3000;
+const router = express.Router();
+
+//require middleware
+const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const session = require('express-session');
+
 
 // Server Configuration:
 //  Passport server config==================================================>>>
@@ -54,7 +61,6 @@ const app = express();
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-//middleware
 // Use application-level middleware for common functionality, including
 // logging, parsing, and session handling.
 app.use(require('morgan')('combined'));
@@ -64,39 +70,17 @@ app.use(require('express-session')({ secret: 'keyboard cat', resave: false, save
 app.use(bodyParser.json({ type: '*/*'}));
 app.use(express.static('public'));
 
+//required for passport
 // Initialize Passport and restore authentication state, if any, from the
 // session.
+app.use(session({ secret: 'readyplayeronegangstagirlswillalwaysmakeittotopofscoreboardandattainoverlordstatus' })); //session secret
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.session()); //persistent login sessions
+app.use(flash()); //use connect-flash for flash messages stored in session (e.g. user is now logged in)
 
-// Define routes.
-app.get('/',
-  function(req, res) {
-    res.render('home', { user: req.user });
-  });
+//ROUTES=================================================================>>>>
+require('./controllers/passport.js')(app, passport); //load our routes and pass in our app a fully configured passport
 
-app.get('/login',
-  function(req, res){
-    res.render('login');
-  });
-
-app.post('/login',
-  passport.authenticate('local', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/');
-  });
-
-app.get('/logout',
-  function(req, res){
-    req.logout();
-    res.redirect('/');
-  });
-
-app.get('/profile',
-  require('connect-ensure-login').ensureLoggedIn(),
-  function(req, res){
-    res.render('profile', { user: req.user });
-  });
 
 //========================================================================>>>>
 

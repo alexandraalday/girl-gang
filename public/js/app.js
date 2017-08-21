@@ -1,4 +1,4 @@
-// const morgan = require('morgan');
+
 
 
 
@@ -298,7 +298,7 @@ app.controller('MusicController', ['$http', '$scope', '$sce', function($http, $s
       }).then(function(response){
         controller.getMusic();
         controller.editDisplay = false;
-        // controller.currentMusic = {}    ....if you keep this it blanks out the modal after edit. i suggest we remove. 
+        // controller.currentMusic = {}    ....if you keep this it blanks out the modal after edit. i suggest we remove.
       }, function(err){
         console.log(err);
       })

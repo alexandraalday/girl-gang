@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://image.spreadshirtmedia.com/image-server/v1/designs/12686956,width%3D178,height%3D178.png" rel="icon" type="image/png" >
+    <title>GIRL GANG</title>
+
+    <!--link to angular and bootstrap css -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" charset="utf-8"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js" charset="utf-8"></script>
+    <!--link to app.js -->
+    <script src="./js/app.js" charset="utf-8"></script>
+    <!--link to external fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Yesteryear" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--link to local css -->
+    <link rel="stylesheet" href="./css/main.css">
+  </head>
+  <body>
+
+    <div class="container">
+
+    <div class="jumbotron text-center">
+        <h1><span class="fa fa-lock"></span> Node Authentication</h1>
+
+        <p>Login or Register with:</p>
+
+        <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Local Login</a>
+        <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Local Signup</a>
+    </div>
+
+    </div>
+
+
+          <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+          <!-- Include all compiled plugins (below), or include individual files as needed -->
+            <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
+
+
+
+
+
+<%# // <% if (!user) { %>
+<%# //   <p>Welcome! Please <a href="/login">log in</a>.</p>%>
+<%# // <% } else { %>
+
+  <%# //if user IS logged in will this ng-include reroute them to our index.html ("landing page")...or should it be listed as a path to click on going back to... we talked about preferring being rerouted automatically - this would then just be a res.redirect from controller%>
+
+  <%# <section id="logInHome" ng-include="'../index.html'"></section>%>
+
+  <%# // perhaps there is a option on nav or button somewhere offering choice for user to see their own profile page & use this:
+  <%# // <p>Hello, <%= user.username %>
+  <%# . View your <a href="/profile">profile</a>.</p>%>
+ <%# <% } %>
