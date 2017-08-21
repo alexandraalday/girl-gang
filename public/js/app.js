@@ -294,7 +294,7 @@ app.controller('MusicController', ['$http', function($http){
       }).then(function(response){
         controller.getMusic();
         controller.editDisplay = false;
-        // controller.currentMusic = {}    ....if you keep this it blanks out the modal after edit. i suggest we remove. 
+        // controller.currentMusic = {}    ....if you keep this it blanks out the modal after edit. i suggest we remove.
       }, function(err){
         console.log(err);
       })
@@ -332,11 +332,10 @@ app.controller('MusicController', ['$http', function($http){
 
 app.controller('LitController', ['$http', function($http){
     //an empty array so we can can push the lit we make into it to display on the page
-    this.allLit = [];
+    this.allLits = [];
     this.newDisplay = false;
     this.editDisplay = false;
     this.modal = false;
-    this.currentLit = {};
 
     //assigning this to a variable so we can use it in our functions
     const controller = this;
@@ -348,18 +347,18 @@ app.controller('LitController', ['$http', function($http){
     this.addLit = function(){
       $http({
         method: 'POST',
-        url: '/lit',
+        url: '/lits',
         data: {
           postTitle: this.postTitle,
           author: this.author,
           url: this.url,
           comment: this.comment,
-          tag: String
+          tag: this.tag
         }
       }).then(function(response){
         //this will update the lit list with the new lit instantly
         controller.newDisplay = false;
-        controller.getLit();
+        controller.getLits();
         // reset form
         controller.postTitle = '',
         controller.author = '',
@@ -376,22 +375,22 @@ app.controller('LitController', ['$http', function($http){
     this.toggleEdit = function(){
       this.editDisplay = !this.editDisplay;
       // reset form as an experiment for active bug still in Trello (8/20/17)
-      controller.postTitle = '',
-      controller.author = '',
-      controller.url = '',
-      controller.comment = '',
-      controller.tag = ''
+      // controller.postTitle = '',
+      // controller.author = '',
+      // controller.url = '',
+      // controller.comment = '',
+      // controller.tag = ''
     }
     this.toggleModal = function(){
       this.modal = !this.modal;
     }
   //ajax call to display all the lit posts to the page
-    this.getLit = function(){
+    this.getLits = function(){
       $http({
         method: 'GET',
-        url: '/lit'
+        url: '/lits'
       }).then(function(response){
-        controller.allLit = response.data;
+        controller.allLits = response.data;
       }, function(err) {
         console.log('we are women who run with the wolves');
         console.log(err);
@@ -401,7 +400,7 @@ app.controller('LitController', ['$http', function($http){
     this.setCurrentLit = function(id){ //so we can edit it in the next function
       $http({
         method: 'GET',
-        url: '/lit/' + id
+        url: '/lits/' + id
       }).then(function(response){
         controller.currentLit = response.data[0];
         // controller.currentLit.url = response.data[0].url;
@@ -417,30 +416,32 @@ app.controller('LitController', ['$http', function($http){
     this.updateLit = function(id){
       $http({
         method: 'PUT',
-        url: '/lit/' + id,
+        url: '/lits/' + id,
         data: this.editedLit
       }).then(function(response){
-        controller.getLit();
-        controller.currentLit = {}
+        controller.getLits();
         //this is where I should try to reset an empty input form if attempt above doesn't work
+        controller.currentLit = {}
       }, function(err){
         console.log(err);
+        console.log('is there still an error in the edit call');
       })
     }
 
     this.deleteLit = function(lit){
       $http({
         method: 'DELETE',
-        url: '/lit/' + lit,
+        url: '/lits/' + lit,
       }).then(function(response){
-        controller.getLit();
+        controller.getLits();
         controller.modal = false;
       }, function(err) {
+        console.log('error in the delete call');
         console.log(err);
       }
     );
   }
 
 
-    this.getLit();
+    this.getLits();
 }])
