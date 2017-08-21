@@ -93,10 +93,11 @@
 <!-- /.row -->
 
 
-    <h3>users on users</h3>
-    <section ng-controller="UserController as user">
-      <div> <!-- form to add a new user -->
-        <form ng-submit="user.addUser()">
+
+<!--     Hiding User section for now because we aren't going to show it  -->
+<!--     <section ng-controller="UserController as user">
+      <div> --> <!-- form to add a new user -->
+  <!--       <form ng-submit="user.addUser()">
           <input type="text" placeholder="name" ng-model="user.name"><br/>
           <input type="text" placeholder="image url" ng-model="user.image"><br/>
           <input type="text" placeholder="bio" ng-model="user.bio"><br/>
@@ -106,9 +107,9 @@
       <h5>ALL DA USERS</h5>
         <ul>
           <li ng-repeat="people in user.allUsers" ng-click="user.setCurrentUser(people._id)">{{people.name}}</li>
-        </ul>
+        </ul> -->
         <!-- edit form -->
-      <div>
+ <!--      <div>
         <form ng-submit="user.updateUser(user.currentUser._id)">
           <input type="text" placeholder="{{user.currentUser.name}}" ng-model="user.editUser.name">
           <input type="text" placeholder="{{user.currentUser.image}}" ng-model="user.editUser.image">
@@ -117,7 +118,7 @@
         </form>
       </div>
       <button ng-click="user.deleteUser(user.currentUser._id)">Delete</button>
-    </section>
+    </section> -->
 
 
   <!-- adds all the html for the gifs part -->

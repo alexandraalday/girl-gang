@@ -224,7 +224,7 @@ app.config(['$sceDelegateProvider', function($sceDelegateProvider) {
     ]);
 }]);
 
-app.controller('MusicController', ['$http', '$scope', '$sce', function($http, $scope, $sce){
+app.controller('MusicController', ['$http', function($http){
     const controller = this;
     this.allMusic = [];
     this.currentMusic = {};
