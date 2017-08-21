@@ -16,24 +16,30 @@ app.controller('UserController', ['$http', function($http){
   this.currentUser = {};
   //empty object we can later use this variable to edit a certain gif
   this.editUser = {};
+  this.loggedIn = false;
   //ajax call to add a new User
+  //login function
+  this.login = function(){
+    this.loggedIn = true;
+    //if req.body.password 
+  }
   this.addUser = function(){
     $http({
       method: 'POST',
       url: '/users',
       data: {
-        name: this.name,
-        image: this.image,
-        bio: this.bio
+        email: this.email,
+        password: this.password
       }
     }).then(function(response){
       console.log(response.data);
+      //so it will make the page appear
+      controller.login()
       //so it will automagically add this user to the users list
       controller.getUsers();
       //these controllers will reset the new user form
-      controller.name = '',
-      controller.image = '',
-      controller.bio = ''
+      controller.email = '',
+      controller.password = ''
     }, function(err){
       console.log(error);
     })

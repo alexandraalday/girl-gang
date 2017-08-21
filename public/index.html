@@ -13,7 +13,17 @@
     <link rel="stylesheet" href="./css/main.css">
   </head>
   <body>
-<section> <!-- section tag to wrap whole site for login functionality -->
+
+    <!--  creating a form to login -->
+    <section ng-controller="UserController as user">
+      <form ng-submit="addUser()"">
+        <input type="email" ng-model="user.email" placeholder="email"><br/>
+        <input type="password" ng-model="user.password" placeholder="password"><br/>
+        <button type="submit" class="btn btn-default" >Login</button>
+      </form>
+
+
+<section ng-if=user.loggedIn> <!-- section tag to wrap whole site for login functionality -->
 <!--   Navbar Section -->
   <nav class="navbar navbar-inverse navbar-default navbar-fixed-top">
   <div class="container-fluid">
@@ -134,5 +144,6 @@
   <!-- adds all the html for the lit part -->
   <section id="lit" ng-include="'./lit.html'"></section>
 </section> <!-- end section tag for login functionality -->
+</section>
   </body>
 </html>
