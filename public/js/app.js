@@ -1,8 +1,11 @@
 const app = angular.module('girlGang', []);
+  angular.module('app', ['ngSanitize']);
+
 
 ///////////////////////
 // USERS CONTROLLER
 ///////////////////////
+
 
 app.controller('UserController', ['$http', function($http){
   //an empty array so we can push the gifs we make into it to display on the page
@@ -213,6 +216,14 @@ app.controller('GifController', ['$http', function($http){
 // MUSIC CONTROLLER
 ///////////////////////
 
+
+app.config(['$sceDelegateProvider', function($sceDelegateProvider) {
+    $sceDelegateProvider.resourceUrlWhitelist([
+        'self',
+        'https://open.spotify.com/embed/**'
+    ]);
+}]);
+
 app.controller('MusicController', ['$http', function($http){
     const controller = this;
     this.allMusic = [];
@@ -220,20 +231,23 @@ app.controller('MusicController', ['$http', function($http){
     this.editMusic = {};
     this.editDisplay = false
     this.newDisplay = false;
-    this.newSong = {};
 
 
     this.addMusic = function(){
+      const spotifyId = this.link.split('.com/')[1]
       $http({
         method: 'POST',
         url: '/music',
-        data: controller.newSong
+        data: {
+          name: this.name,
+          artist: this.artist,
+          link: this.link.split('.com/')[1],
+          embed: 'https://open.spotify.com/embed/' + spotifyId,
+          tag: this.tag,
+          author: this.author
+        }
       }).then(function(response){
-        console.log(response);
-        console.log(response.data.link.split('.com/')[1]);
-        console.log(response.data.embed);
-        response.data.link = response.data.link.split('.com/')[1];
-        response.data.embed = '<iframe src="https://open.spotify.com/embed/' + response.data.link + '"width="300" height="380" frameborder="0" allowtransparency="true"></iframe>'
+        console.log(response.data.link);
         // call all songs
         controller.getMusic();
         // reset form
@@ -265,6 +279,7 @@ app.controller('MusicController', ['$http', function($http){
         url: '/music/' + id
       }).then(function(response){
         controller.currentMusic = response.data[0];
+        controller.modal = true;
         console.log(controller.currentMusic);
       }, function(err){
         console.log(err);
@@ -279,7 +294,7 @@ app.controller('MusicController', ['$http', function($http){
       }).then(function(response){
         controller.getMusic();
         controller.editDisplay = false;
-        controller.currentMusic = {}
+        // controller.currentMusic = {}    ....if you keep this it blanks out the modal after edit. i suggest we remove.
       }, function(err){
         console.log(err);
       })
@@ -291,6 +306,7 @@ app.controller('MusicController', ['$http', function($http){
         url: '/music/' + music,
       }).then(function(response){
         controller.getMusic();
+        controller.modal = false;
       }, function(err) {
         console.log(err);
       })
@@ -298,11 +314,13 @@ app.controller('MusicController', ['$http', function($http){
 
     this.toggleEdit = function(){
     	this.editDisplay = !this.editDisplay;
-	};
-	this.toggleNewDisplay = function(){
-	    this.newDisplay = !this.newDisplay;
-	}
-
+	  };
+  	this.toggleNewDisplay = function(){
+  	  this.newDisplay = !this.newDisplay;
+  	}
+    this.toggleModal = function(){
+      this.modal = !this.modal;
+    }
 
     this.getMusic()
 }])
@@ -313,38 +331,68 @@ app.controller('MusicController', ['$http', function($http){
 ///////////////////////
 
 app.controller('LitController', ['$http', function($http){
-    const controller = this;
-    this.allLit = [];
-    this.currentLit = {};
-    this.editLit = {};
+    //an empty array so we can can push the lit we make into it to display on the page
+    this.allLits = [];
+    this.newDisplay = false;
+    this.editDisplay = false;
+    this.modal = false;
 
+    //assigning this to a variable so we can use it in our functions
+    const controller = this;
+    //empty object so we can later use this variable to select a certain gif
+    this.currentLit = {};
+    //empty object we can later use this variable to edit a certain gif
+    this.editLit = {};
+    //ajax function to add a gif
     this.addLit = function(){
       $http({
         method: 'POST',
-        url: '/lit',
+        url: '/lits',
         data: {
-          postAuthor: this.postAuthor,
+          postTitle: this.postTitle,
+          author: this.author,
           url: this.url,
-          comment: this.comment
+          comment: this.comment,
+          tag: this.tag
         }
       }).then(function(response){
-        controller.getLit();
+        //this will update the lit list with the new lit instantly
+        controller.newDisplay = false;
+        controller.getLits();
         // reset form
-        controller.postAuthor = '',
+        controller.postTitle = '',
+        controller.author = '',
         controller.url = '',
-        controller.comment = ''
+        controller.comment = '',
+        controller.tag = ''
       }, function(err){
         console.log(err);
       })
     }
-
-    this.getLit = function(){
+    this.toggleNew = function(){
+      this.newDisplay = !this.newDisplay;
+    }
+    this.toggleEdit = function(){
+      this.editDisplay = !this.editDisplay;
+      // reset form as an experiment for active bug still in Trello (8/20/17)
+      // controller.postTitle = '',
+      // controller.author = '',
+      // controller.url = '',
+      // controller.comment = '',
+      // controller.tag = ''
+    }
+    this.toggleModal = function(){
+      this.modal = !this.modal;
+    }
+  //ajax call to display all the lit posts to the page
+    this.getLits = function(){
       $http({
         method: 'GET',
-        url: '/lit'
+        url: '/lits'
       }).then(function(response){
-        controller.allLit = response.data;
+        controller.allLits = response.data;
       }, function(err) {
+        console.log('we are women who run with the wolves');
         console.log(err);
       })
     }
@@ -356,36 +404,44 @@ app.controller('LitController', ['$http', function($http){
       }).then(function(response){
         controller.currentLit = response.data[0];
         // controller.currentLit.url = response.data[0].url;
+
+        controller.modal = true;
+        controller.currentLit.url = response.data[0].url;
         console.log(controller.currentLit);
       }, function(err){
         console.log(err);
       })
     }
-
+    //ajax call to update lit
     this.updateLit = function(id){
       $http({
         method: 'PUT',
-        url: '/lit/' + id,
+        url: '/lits/' + id,
         data: this.editedLit
       }).then(function(response){
-        controller.getLit();
+        controller.getLits();
+        //this is where I should try to reset an empty input form if attempt above doesn't work
         controller.currentLit = {}
       }, function(err){
         console.log(err);
+        console.log('is there still an error in the edit call');
       })
     }
 
     this.deleteLit = function(lit){
       $http({
         method: 'DELETE',
-        url: '/lit/' + lit,
+        url: '/lits/' + lit,
       }).then(function(response){
-        controller.getLit();
+        controller.getLits();
+        controller.modal = false;
       }, function(err) {
+        console.log('error in the delete call');
         console.log(err);
-      })
-    }
+      }
+    );
+  }
 
 
-    this.getLit()
+    this.getLits();
 }])

@@ -4,13 +4,13 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT || 3000;
-const Passport = require('passport');
-const jwt = require('express-jwt');
+
+
 //middleware
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 app.use(express.static('public'));
-app.use(Passport.initialize());
+
 
 //controllers
 const user = require('./controllers/users.js')
@@ -23,17 +23,7 @@ const music = require('./controllers/music.js')
 app.use('/music', music)
 
 const lit = require('./controllers/lit.js')
-app.use('/lit', lit)
-
-const session = require('./controllers/session.js')
-app.use('/session', session)
-
-const passport = require('./config/passport.js')
-
-const auth = jwt({
-	secret: 'our_secret',
-	userProperty: 'payload'
-});
+app.use('/lits', lit)
 
 
 //index route
