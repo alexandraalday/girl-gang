@@ -23,7 +23,7 @@ const music = require('./controllers/music.js')
 app.use('/music', music)
 
 const lit = require('./controllers/lit.js')
-app.use('/lit', lit)
+app.use('/lits', lit)
 
 
 //index route
