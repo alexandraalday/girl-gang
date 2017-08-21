@@ -339,9 +339,9 @@ app.controller('LitController', ['$http', function($http){
 
     //assigning this to a variable so we can use it in our functions
     const controller = this;
-    //empty object so we can later use this variable to select a certain gif
+    //empty object so we can later use this variable to select a certain lit post
     this.currentLit = {};
-    //empty object we can later use this variable to edit a certain gif
+    //empty object we can later use this variable to edit a certain lit post
     this.editLit = {};
     //ajax function to add a gif
     this.addLit = function(){
@@ -383,6 +383,7 @@ app.controller('LitController', ['$http', function($http){
     }
     this.toggleModal = function(){
       this.modal = !this.modal;
+      console.log('trying to get one lit post accessed through this');
     }
   //ajax call to display all the lit posts to the page
     this.getLits = function(){
@@ -406,7 +407,9 @@ app.controller('LitController', ['$http', function($http){
         // controller.currentLit.url = response.data[0].url;
 
         controller.modal = true;
-        controller.currentLit.url = response.data[0].url;
+        // controller.currentLit.url = response.data[0].url;
+
+        console.log('one lit post is accessed here');
         console.log(controller.currentLit);
       }, function(err){
         console.log(err);
