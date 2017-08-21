@@ -23,6 +23,13 @@ router.post('/', (req, res)=> {
   })
 })
 
+//like route
+router.put('/like/:id', (req, res)=>{
+  Music.findByIdAndUpdate(req.params.id, {$inc: {likes: 1}} ,(err, foundSong) => {
+    res.json(foundSong)
+  })
+})
+
 //edit route
 router.put('/:id', (req, res)=> {
   Music.findByIdAndUpdate(req.params.id, req.body, { new : true }, (err, updatedMusic)=>{
@@ -36,5 +43,7 @@ router.delete('/:id', (req, res)=> {
     res.json(deletedMusic)
   })
 })
+
+
 
 module.exports = router;
