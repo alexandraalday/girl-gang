@@ -202,10 +202,11 @@ a {
 #music-container {
 	width: 100%;
 	padding-bottom: 5%;
-}
+} 
 
 #music-jumbotron  {
-	background-color: #ffffff;
+	background-color: white;
+    background: linear-gradient(to right, #06BEE0, #C704F6);
 	width: 100%;
 	text-align: center;
 	padding: 8%;
@@ -214,27 +215,10 @@ a {
 #music-jumbotron h1 {
 	font-family: 'A-Dripping-Marker';
 	font-size: 7em;
-	display: inline-block;
+	color: #fff;
 }
 
-#music-jumbotron button {  
-    border: 3px solid transparent;
-    border-image: linear-gradient(to right, #06BEE0 0%, #C704F6 100%);
-    border-image-slice: 1;
-    background: #fff;
-    color: #000;
-    font-size: 1em;
- /*   padding: 10px 40px;*/
-    text-decoration: none;
-    font-weight: bold;
-    text-transform: uppercase;
-}
 
-#music-jumbotron button:hover{
-    background-color: white;
-    background: linear-gradient(to right, #06BEE0, #C704F6);
-    color: #fff;
-}
 
 /***********************
 /* lit section styles
