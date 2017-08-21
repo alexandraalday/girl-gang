@@ -21,13 +21,10 @@
   </div>
 </div><!--end of col-lg-10 -->
 </div><!-- end of jumbotron -->
-<div class="row">
-    <ul>
-      <li ng-repeat="lit in lit.allLits" ng-click="lit.setCurrentLit(lit._id)">
 
   <div class="row">
     <ul>
-      <li ng-repeat="lit in lit.allContent" ng-click="lit.setCurrentLit(lit._id)">
+      <li ng-repeat="lit in lit.allLits" ng-click="lit.setCurrentLit(lit._id)">
         <div class="col-md-4 portfolio-item">
           <a href="{{lit.url}}"/>{{lit.postTitle}}</a><br/>
       </li>

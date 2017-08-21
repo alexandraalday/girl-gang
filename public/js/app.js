@@ -400,7 +400,7 @@ app.controller('LitController', ['$http', function($http){
     this.setCurrentLit = function(id){ //so we can edit it in the next function
       $http({
         method: 'GET',
-        url: '/lits/' + id
+        url: '/lit/' + id
       }).then(function(response){
         controller.currentLit = response.data[0];
         // controller.currentLit.url = response.data[0].url;
