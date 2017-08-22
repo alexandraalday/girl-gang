@@ -418,11 +418,10 @@ app.controller('LitController', ['$http', function($http){
 
         controller.modal = true;
         // controller.currentLit.url = response.data[0].url;
-
-        console.log('one lit post is accessed here');
         console.log(controller.currentLit);
       }, function(err){
         console.log(err);
+        console.log('is one lit post showing yet');
       })
     }
     //ajax call to update lit
