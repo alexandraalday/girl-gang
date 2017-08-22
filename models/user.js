@@ -6,7 +6,7 @@ const userSchema = mongoose.Schema({
  	name: String, 
  	image: String,
 	bio: String,
-	author: []
+	author: Array
 });
 
 const User = mongoose.model('User', userSchema);

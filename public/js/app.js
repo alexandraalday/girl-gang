@@ -147,6 +147,19 @@ app.controller('GifController', ['$http', function($http){
     this.toggleModal = function(){
       this.modal = !this.modal;
     }
+    
+    this.likeGif = function(id){
+      $http({
+        method: 'PUT',
+        url: '/gifs/like/' + id
+      }).then(function(response){
+        console.log(response)
+        controller.getGifs();
+      }, function(err){
+          console.log(err);
+      })
+    }
+
     //ajax call to display all the gifs to the page
     this.getGifs = function(){
       $http({
@@ -155,7 +168,6 @@ app.controller('GifController', ['$http', function($http){
       }).then(function(response){
         controller.allGifs = response.data;
       }, function(err) {
-        console.log('WTF HAPPENED');
         console.log(err);
       })
     }
@@ -169,7 +181,6 @@ app.controller('GifController', ['$http', function($http){
         controller.currentGif = response.data[0];
         //controller.displayGif = true;
         //sets the url, not sure why this is the only one we did this with.
-        controller.modal = true;
         controller.currentGif.url = response.data[0].url;
         console.log(controller.currentGif);
       }, function(err){
@@ -232,7 +243,6 @@ app.controller('MusicController', ['$http', function($http){
     this.editDisplay = false
     this.newDisplay = false;
 
-
     this.addMusic = function(){
       const spotifyId = this.link.split('.com/')[1]
       $http({
@@ -265,8 +275,6 @@ app.controller('MusicController', ['$http', function($http){
           url: '/music/like/' + id
         }).then(function(response){
           console.log(response)
-          // // console.log(response.data[0].likes)
-          // this.likes = response.data.likes++
           controller.getMusic();
         }, function(err){
             console.log(err);
@@ -304,7 +312,6 @@ app.controller('MusicController', ['$http', function($http){
       }).then(function(response){
         controller.getMusic();
         controller.editDisplay = false;
-        // controller.currentMusic = {}    ....if you keep this it blanks out the modal after edit. i suggest we remove.
       }, function(err){
         console.log(err);
       })
@@ -325,7 +332,7 @@ app.controller('MusicController', ['$http', function($http){
     this.toggleEdit = function(){
     	this.editDisplay = !this.editDisplay;
 	  };
-  	this.toggleNewDisplay = function(){
+  	this.toggleNew = function(){
   	  this.newDisplay = !this.newDisplay;
   	}
     this.toggleModal = function(){
