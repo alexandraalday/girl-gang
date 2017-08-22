@@ -19,7 +19,7 @@ app.controller('UserController', ['$http', function($http){
   this.loggedIn = false;
 
   //login function
-  this.login = function(){
+  this.log = function(){
     this.loggedIn = true;
     //if req.body.password
   }
@@ -36,7 +36,7 @@ app.controller('UserController', ['$http', function($http){
     }).then(function(response){
       console.log(response.data);
       //so it will make the page appear
-      controller.login()
+      controller.log()
       //so it will automagically add this user to the users list
       //controller.getUsers();
       //these controllers will reset the new user form
@@ -156,7 +156,7 @@ app.controller('GifController', ['$http', function($http){
     this.toggleModal = function(){
       this.modal = !this.modal;
     }
-    
+
     this.likeGif = function(id){
       $http({
         method: 'PUT',
