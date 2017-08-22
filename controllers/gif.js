@@ -24,6 +24,13 @@ router.post('/', (req, res)=> {
   })
 })
 
+//like route
+router.put('/like/:id', (req, res)=>{
+  Gif.findByIdAndUpdate(req.params.id, {$inc: {likes: 1}} ,(err, foundGif) => {
+    res.json(foundGif)
+  })
+})
+
 //edit route
 router.put('/:id', (req, res)=> {
   Gif.findByIdAndUpdate(req.params.id, req.body, { new : true }, (err, updatedGif)=>{

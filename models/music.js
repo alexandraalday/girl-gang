@@ -3,16 +3,17 @@ const mongoose = require('mongoose');
 
 //schema
 const musicSchema = mongoose.Schema({
- 	name: String, 
- 	artist: String,
 	link: {type: String, required: true},
 	embed: {type: String},
 	tag: String,
-	author: String
+	likes: {type: Number, default:0},
+	author: String,
+	commentCount: {type: Number, default:0},
+	comments: Array
 });
 
-const User = mongoose.model('Music', musicSchema);
+const Music = mongoose.model('Music', musicSchema);
 
 
 //export
-module.exports = User;
+module.exports = Music;

@@ -1,83 +1,98 @@
-
 <div ng-controller="MusicController as music">
 
 <div class="container" id="music-container">
   <div class="row">
 
-  <div class="jumbotron" id="music-jumbotron">
-    <h1>Music</h1>
-    <h4>Badass Songs for Badass Babes</h4>
+    <div class="jumbotron" id="music-jumbotron">
+      <h1>Music</h1>
+      <h4>Badass Songs for Badass Babes</h4>
 
-<!--     Add New Track Section -->
-    <div class="col-lg-10">
-      <button class="btn btn-default" type="submit" ng-click="music.toggleNewDisplay()">Add A New Track</button>
-      <div ng-if="music.newDisplay">
-        <form ng-submit="music.addMusic()">
-          <input type="text" placeholder="name" ng-model="music.name"><br/>
-          <input type="text" placeholder="artist" ng-model="music.artist"><br/>
-          <input type="text" placeholder="link" ng-model="music.link"><br/>
-          <input type="text" placeholder="tag" ng-model="music.tag"><br/>
-          <input type="text" placeholder="author" ng-model="music.author"><br/>
-          <input class="ng-hide" type="text" placeholder="embed" ng-model="music.embed" value=''><br/>
-          <button class="btn btn-default" type="submit">Add Song</button>
-        </form>
-      </div>
-    </div>
+    <!-------- Add New Track Button ------>
+    <div class="col-lg-12">
+      <button class="btn btn-default" type="submit" ng-click="music.toggleNew()">Add A New Track</button>
     </div>
 
-  <div>
+    <!-------- Add New Music Form ------>    
+    <div ng-if="music.newDisplay">
+      <form ng-submit="music.addMusic()">
+        <fieldset>
+          <div class="form-group">
+            <input class="form-control" id="link" placeholder="Song URL" type="text" ng-model="music.link">
+          </div>
+          <div class="form-group">
+            <input class="form-control" id="tag" placeholder="Tag your song" type="text" ng-model="music.tag">
+          </div>
+          <div class="form-group">
+            <input class="form-control" id="author" placeholder="Enter your name" type="text" ng-model="music.author">
+          </div>    
+          <div class="form-group">
+            <input class="ng-hide" type="text" placeholder="embed" ng-model="music.embed" value=''>
+          </div>
+          <div class="form-group">
+              <button type="reset" class="btn btn-default">Reset</button>
+              <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </fieldset>
+      </form>
+    </div><!--  end new-display -->
+    </div><!--  end jumbotron -->
 
-<!--     List of all Tracks with Modal Button for More Info-->
-<div class="row">
-    <ul>
-      <li ng-repeat="song in music.allMusic" ng-click="music.setCurrentMusic(song._id)">
-        <div class="col-md-4 portfolio-item">
-          <a href="#">Click me!</a><br/>
-          <iframe width="300" height="80" frameborder="0" allowtransparency="true" ng-src="{{song.embed}}"></iframe><br/>
-        </div>
-        </li>
-    </ul>
-  </div>
-
-
- 
-
-    <!--    Modal -->
+     <!-------- Music Modal ------>   
     <div ng-if="music.modal" id="musicmodal">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
+          <!---- Close Button ---->
             <span id="closebutton" class="text-top"><button class="btn btn-default" ng-click="music.toggleModal()">X</button></span>
           </div>
           <div class="modal-body">
-    
-           <iframe width="300" height="380" frameborder="0" allowtransparency="true" ng-src="{{music.currentMusic.embed}}"></iframe><br/>
+            <iframe width="300" height="380" frameborder="0" allowtransparency="true" ng-src="{{music.currentMusic.embed}}"></iframe><br/>
             <p> Tag: {{music.currentMusic.tag}}</p>
             <p> Author: {{music.currentMusic.author}}</p>
-
-            <!-- button to show the edit form -->
+            <!---- Edit Button ---->
             <button class="btn btn-primary" ng-click="music.toggleEdit()">Edit</button>
-
-      <!--   Delete Button -->
-          <button class="btn btn-default" ng-click="music.deleteMusic(music.currentMusic._id)">Delete</button>
-
-    <!--     Edit Form -->
-        <div class="form-group" ng-if="music.editDisplay">
-          <form id="musicForm" ng-submit="music.updateMusic(music.currentMusic._id)">
-            <input type="text" placeholder="{{music.currentMusic.name}}" ng-model="music.editedMusic.name"><br/>
-            <input type="text" placeholder="{{music.currentMusic.artist}}" ng-model="music.editedMusic.artist"><br/>
-            <input type="text" placeholder="{{music.currentMusic.link}}" ng-model="music.editedMusic.link"><br/>
-            <input type="text" placeholder="{{music.currentMusic.tag}}" ng-model="music.editedMusic.tag"><br/>
-            <input type="text" placeholder="{{music.currentMusic.author}}" ng-model="music.editedMusic.author"><br/>
-            <button type="submit" ng-click="music.updateMusic(music.currentMusic._id)">Confirm</button>
-            <button class="" ng-click="music.currentMusic.name = null">Cancel</button>
-          </form>
+            <!---- Delete Button ---->
+            <button class="btn btn-default" ng-click="music.deleteMusic(music.currentMusic._id)">Delete</button>
+            <!---- Edit Form ---->
+            <div ng-if="music.editDisplay">
+              <form id="musicForm" ng-submit="music.updateMusic(music.currentMusic._id)">
+              <fieldset>
+                <div class="form-group">
+                  <input class="form-control" id="link" type="text" placeholder="{{music.currentMusic.link}}" ng-model="music.editedMusic.link">
+                </div>
+                <div class="form-group">
+                  <input class="form-control" type="text" placeholder="{{music.currentMusic.tag}}" ng-model="music.editedMusic.tag">
+                </div>
+                <div class="form-group">
+                  <input class="form-control" type="text" placeholder="{{music.currentMusic.author}}" ng-model="music.editedMusic.author">
+                </div>
+                <div class="form-group">
+                  <button ng-click="music.currentMusic.name = null">Cancel</button>
+                  <button type="submit" ng-click="music.updateMusic(music.currentMusic._id)">Confirm</button>
+                </div>
+              </fieldset>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-      </div>
-    </div>
-</div>
+    </div
+
+  <!----  All Music ---->
+  <div class="row" id="display">
+    <ul id="music list">
+      <li ng-repeat="song in music.allMusic" ng-click="music.setCurrentMusic(song._id)">
+        <div class="col-md-4" id="music-item">
+          <iframe width="300" height="80" frameborder="0" allowtransparency="true" ng-src="{{song.embed}}"></iframe>
+          <div id="action-icons">
+            <button class="btn btn-default" ng-click="music.toggleModal()"><span class="glyphicon glyphicon-pencil"></span></button>
+            <button class="btn btn-default" ng-click="music.likeMusic(song._id)"><span class="glyphicon glyphicon-heart"><b> {{song.likes}}</b></span></button>
+            <button class="btn btn-default" ng-click="music.commentMusic(song._id)"><span class="glyphicon glyphicon-comment"><b>  {{song.commentCount}}</b></span></button><br/> 
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
 
 </div><!-- end row -->
 </div><!-- end container -->

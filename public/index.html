@@ -3,11 +3,14 @@
 <html ng-app="girlGang">
   <head>
     <meta charset="utf-8">
-    <link href="https://image.spreadshirtmedia.com/image-server/v1/designs/12686956,width%3D178,height%3D178.png" rel="icon" type="image/png" >
     <title>GIRL GANG</title>
+    <!---- Favicon ---->
+    <link href="https://image.spreadshirtmedia.com/image-server/v1/designs/12686956,width%3D178,height%3D178.png" rel="icon" type="image/png" >
+   <!---- Scripts ---->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" charset="utf-8"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js" charset="utf-8"></script>
     <script src="./js/app.js" charset="utf-8"></script>
+    <!---- Styles ---->
     <link href="https://fonts.googleapis.com/css?family=Yesteryear" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/main.css">
@@ -50,11 +53,11 @@
           <li><a href="#" style="color: #f759c2;">REGISTER</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
-      </div>
+    </div>
   </div><!-- /.container-fluid -->
 </nav>
 
-<!--   Header Section -->
+  <!---- Header Section ---->
   <header>
     <div class="jumbotron text-center" id="heading">
       <div class="container intro-text">
@@ -64,8 +67,7 @@
     </div>
   </header>
 
-
-<!--   Description Section  -->
+      <!---- Description Section  ---->
       <div id="about" class="row">
         <div class="col-lg-4 col-sm-6 portfolio-item">
           <div class="card h-100">
@@ -103,8 +105,6 @@
       </div>
 <!-- /.row -->
 
-
-
 <!--     Hiding User section for now because we aren't going to show it  -->
 <!--     <section ng-controller="UserController as user">
       <div> --> <!-- form to add a new user -->
@@ -131,14 +131,11 @@
       <button ng-click="user.deleteUser(user.currentUser._id)">Delete</button>
     </section> -->
 
+    <!---- Gif Section ---->
+    <section id="gifs" ng-include="'./gif.html'"></section>
 
-  <!-- adds all the html for the gifs part -->
-  <section id="gifs" ng-include="'./gif.html'"></section>
-
-
-  <!-- adds all the html for the gifs part -->
-  <section id="music" ng-include="'./music.html'"></section>
-
+    <!---- Music Section ---->
+    <section id="music" ng-include="'./music.html'"></section>
 
   <!-- adds all the html for the lit part -->
   <section id="lit" ng-include="'./lit.html'"></section>
