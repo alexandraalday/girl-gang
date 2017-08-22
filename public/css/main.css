@@ -274,3 +274,13 @@ div #music-item {
 	font-size: 7em;
 	color: #fff;
 }
+
+div #lit-item {
+  margin-top: 4%;
+  margin-bottom: 1%;
+}
+
+#lit-list {
+  margin-left: 5%;
+}
+
