@@ -147,7 +147,10 @@ app.controller('GifController', ['$http', function($http){
     this.toggleModal = function(){
       this.modal = !this.modal;
     }
-    
+    this.reset = function() {
+      this.addForm.reset();
+    }
+
     this.likeGif = function(id){
       $http({
         method: 'PUT',
