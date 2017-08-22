@@ -13,17 +13,16 @@
     <link rel="stylesheet" href="./css/main.css">
   </head>
   <body>
-
-    <!--  creating a form to login -->
+    <!--  creating a form to register -->
     <section ng-controller="UserController as user">
-      <form ng-submit="user.addUser()"">
-        <input type="email" ng-model="user.email" placeholder="email"><br/>
-        <input type="password" ng-model="user.password" placeholder="password"><br/>
+      <h1>this is the register form</h1>
+      <form ng-submit="user.register();">
+        <input type="text" ng-model="user.registeredEmail" placeholder="email"><br/>
+        <input type="text" ng-model="user.registeredPassword" placeholder="password"><br/>
         <button type="submit" class="btn btn-default" >Login</button>
       </form>
 
-
-<section ng-if=user.loggedIn> <!-- section tag to wrap whole site for login functionality -->
+<section ng-if=user.loggedIn>
 <!--   Navbar Section -->
   <nav class="navbar navbar-inverse navbar-default navbar-fixed-top">
   <div class="container-fluid">

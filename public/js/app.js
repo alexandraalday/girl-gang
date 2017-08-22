@@ -9,7 +9,7 @@ const app = angular.module('girlGang', []);
 
 app.controller('UserController', ['$http', function($http){
   //an empty array so we can push the gifs we make into it to display on the page
-  this.allUsers = [];
+  // this.allUsers = [];
   //assigning this to a variable so we can use it in our functions
   const controller = this;
   //empty object so we can later use this variable to select a certain gif
@@ -17,31 +17,34 @@ app.controller('UserController', ['$http', function($http){
   //empty object we can later use this variable to edit a certain gif
   this.editUser = {};
   this.loggedIn = false;
-  //ajax call to add a new User
+
   //login function
   this.login = function(){
     this.loggedIn = true;
-    //if req.body.password 
+    //if req.body.password
   }
-  this.addUser = function(){
+
+  //ajax call to add a new User
+  this.register = function(email, password){
     $http({
       method: 'POST',
-      url: '/users',
+      url: '/users/register',
       data: {
-        email: this.email,
-        password: this.password
+        email: this.registeredEmail,
+        password: this.registeredPassword
       }
     }).then(function(response){
       console.log(response.data);
       //so it will make the page appear
       controller.login()
       //so it will automagically add this user to the users list
-      controller.getUsers();
+      //controller.getUsers();
       //these controllers will reset the new user form
-      controller.email = '',
-      controller.password = ''
+      // controller.email = '',
+      // controller.password = ''
     }, function(err){
-      console.log(error);
+      console.log(err);
+      console.log('wtf are you doing?');
     })
   }
   //ajax call to show all  the users
