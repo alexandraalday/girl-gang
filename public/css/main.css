@@ -284,3 +284,10 @@ div #lit-item {
   margin-left: 5%;
 }
 
+#lit-button {
+  background-color: #f759c2; 
+}
+
+#lit-button a {
+  color: #ffffff; 
+}

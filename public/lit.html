@@ -94,14 +94,12 @@
   </div>
 </div
 
-
-
-  <!----  All Music ---->
+  <!----  All Lit ---->
   <div class="row" id="display">
     <ul id="lit-list">
       <li ng-repeat="allLit in lit.allLits" ng-click="lit.setCurrentLit(allLit._id)">
         <div class="col-md-4" id="lit-item">
-          <button class="btn btn-default"><a href="{{allLit.url}}">{{allLit.postTitle}}</a></button>
+          <button class="btn btn-default" id="lit-button"><a href="{{allLit.url}}">{{allLit.postTitle}}</a></button>
           <div id="action-icons">
             <button class="btn btn-default" ng-click="lit.toggleModal()"><span class="glyphicon glyphicon-pencil"></span></button>
             <button class="btn btn-default" ng-click="lit.likeLit(allLit._id)"><span class="glyphicon glyphicon-heart"><b> {{allLit.likes}}</b></span></button>
