@@ -3,7 +3,6 @@
   src: url('../assets/adrip1.ttf') format('opentype');
 }
 
-
 li {
 	list-style: none;
   top: 0;
@@ -11,6 +10,11 @@ li {
 
 a {
 	color: #f759c2;
+}
+
+fieldset {
+  width: 50%;
+  margin: 0 auto;
 }
 
 /***********************
@@ -22,7 +26,6 @@ a {
   text-align: center;
   width: 100%;
   z-index: 100;
-
 }
 
 .modal-header {
@@ -46,9 +49,6 @@ a {
   bottom: 0;
   left: 0;
 }
-
-
-
 
 
 
@@ -208,8 +208,13 @@ a {
 }
 
 #gif-container img {
-	height: 300px;
-	width: 400px;
+	height: 20em;
+	width: 30em;
+}
+
+div #gif-item {
+  margin-top: 4%;
+  margin-bottom: 1%;
 }
 
 /***********************
@@ -237,8 +242,12 @@ a {
 }
 
 div #music-item {
-  margin-top: 5%;
-  margin-bottom: 5%;
+  margin-top: 4%;
+  margin-bottom: 1%;
+}
+
+#music-list {
+  margin-left: 5%;
 }
 
 
