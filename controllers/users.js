@@ -61,7 +61,13 @@ router.post('/login', (req, res)=> {
   })
 })
 
-
+//Route to logout
+router.get('/logout', (req, res)=> {
+  req.session.destroy(function(err){
+    console.log('succesfully logged out');
+    res.redirect('/')
+  })
+})
 
 
 //show route
