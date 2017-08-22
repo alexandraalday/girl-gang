@@ -348,19 +348,14 @@ app.controller('MusicController', ['$http', function($http){
 ///////////////////////
 
 app.controller('LitController', ['$http', function($http){
-    //an empty array so we can can push the lit we make into it to display on the page
+    const controller = this;
     this.allLits = [];
+    this.currentLit = {};
+    this.editLit = {};
     this.newDisplay = false;
     this.editDisplay = false;
     this.modal = false;
 
-    //assigning this to a variable so we can use it in our functions
-    const controller = this;
-    //empty object so we can later use this variable to select a certain gif
-    this.currentLit = {};
-    //empty object we can later use this variable to edit a certain gif
-    this.editLit = {};
-    //ajax function to add a gif
     this.addLit = function(){
       $http({
         method: 'POST',
@@ -374,9 +369,10 @@ app.controller('LitController', ['$http', function($http){
         }
       }).then(function(response){
         //this will update the lit list with the new lit instantly
-        controller.newDisplay = false;
+        // console.log(response.data);
         controller.getLits();
         // reset form
+        controller.newDisplay = false;
         controller.postTitle = '',
         controller.author = '',
         controller.url = '',
@@ -400,6 +396,7 @@ app.controller('LitController', ['$http', function($http){
     }
     this.toggleModal = function(){
       this.modal = !this.modal;
+      console.log('trying to get one lit post accessed through this');
     }
   //ajax call to display all the lit posts to the page
     this.getLits = function(){
@@ -417,16 +414,17 @@ app.controller('LitController', ['$http', function($http){
     this.setCurrentLit = function(id){ //so we can edit it in the next function
       $http({
         method: 'GET',
-        url: '/lit/' + id
+        url: '/lits/' + id
       }).then(function(response){
         controller.currentLit = response.data[0];
         // controller.currentLit.url = response.data[0].url;
-
-        controller.modal = true;
-        controller.currentLit.url = response.data[0].url;
         console.log(controller.currentLit);
+        // controller.modal = true;
+        // controller.currentLit.url = response.data[0].url;
+
       }, function(err){
         console.log(err);
+        console.log('is one lit post showing yet');
       })
     }
     //ajax call to update lit
@@ -438,7 +436,7 @@ app.controller('LitController', ['$http', function($http){
       }).then(function(response){
         controller.getLits();
         //this is where I should try to reset an empty input form if attempt above doesn't work
-        controller.currentLit = {}
+        controller.editDisplay = false;
       }, function(err){
         console.log(err);
         console.log('is there still an error in the edit call');
@@ -455,8 +453,7 @@ app.controller('LitController', ['$http', function($http){
       }, function(err) {
         console.log('error in the delete call');
         console.log(err);
-      }
-    );
+      });
   }
 
 
