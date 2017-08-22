@@ -33,7 +33,7 @@ router.put('/:id', (req, res)=> {
 //delete route
 router.delete('/:id', (req, res)=> {
   Lit.findByIdAndRemove(req.params.id, (err, deleteLit)=>{
-    res.json(deletedLit)
+    res.json(deleteLit)
   })
 })
 
