@@ -400,6 +400,18 @@ app.controller('LitController', ['$http', function($http){
     }
 
 
+    this.likeLit = function(id){
+      $http({
+        method: 'PUT',
+        url: '/lits/like/' + id
+      }).then(function(response){
+          console.log(response)
+        controller.getLits();
+      }, function(err){
+          console.log(err);
+      })
+    }
+
   //ajax call to display all the lit posts to the page
     this.getLits = function(){
       $http({
