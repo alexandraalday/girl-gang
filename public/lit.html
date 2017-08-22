@@ -64,26 +64,24 @@
         </ul>
       </div>
 
-
-
-
         <!-- button to show the edit form -->
         <button class="btn btn-primary" ng-click="lit.toggleEdit()">Edit {{lit.postTitle}}</button>
 
 
         <!-- button to delete the lit link -->
-        <button class="btn btn-default" ng-click="lit.deleteLit(lit.currentLit._id)">Delete</button>
+        <button class="btn btn-default" ng-click="lit.deleteLit(lit.currentLit._id)">Delete</button><br/>
 
       <!-- edit form display-->
+
       <div ng-if="lit.editDisplay">
-        <form ng-submit="lit.updateLit(lit.currentLit._id)">
+        <form name="add-form" ng-submit="lit.updateLit(lit.currentLit._id)" ng-click="addForm.reset()">
 
           <input type="text" placeholder="{{lit.currentLit.postTitle}}" ng-model="lit.editedLit.postTitle"><br/>
           <input type="text" placeholder="{{lit.currentLit.author}}" ng-model="lit.editedLit.author"><br/>
           <input type="text" placeholder="{{lit.currentLit.url}}" ng-model="lit.editedLit.url"><br/>
           <input type="text" placeholder="{{lit.currentLit.comment}}" ng-model="lit.editedLit.comment"><br/>
           <input type="text" placeholder="{{lit.currentLit.tag}}" ng-model="lit.editedLit.tag"><br/>
-          <button type="submit" ng-click="lit.updateLit(lit.currentLit._id)" ng-click="lit.currentLit = {}">Edit {{lit.currentLit.postTitle}}</button>
+          <button type="submit" ng-click="lit.updateLit(lit.currentLit._id)" ng-click="lit.currentLit = {}">Edit</button>
         </form>
         </div>
       </div>

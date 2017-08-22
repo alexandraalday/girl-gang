@@ -54,6 +54,7 @@ a {
 
 
 
+
 /***********************
 /* navigation styles
 ***********************/
@@ -218,7 +219,7 @@ a {
 #music-container {
 	width: 100%;
 	padding-bottom: 5%;
-} 
+}
 
 #music-jumbotron  {
 	background-color: white;
@@ -249,7 +250,7 @@ div #music-item {
 #lit-container {
 	width: 100%;
 	padding-bottom: 5%;
-} 
+}
 
 #lit-jumbotron  {
 	background-color: white;

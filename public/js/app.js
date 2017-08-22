@@ -348,6 +348,8 @@ app.controller('LitController', ['$http', function($http){
     this.newDisplay = false;
     this.editDisplay = false;
     this.modal = false;
+    //take this out if reset form works, placeholder for next attempt to clear edit form:
+    this.newEntry = {};
 
     this.addLit = function(){
       $http({
@@ -380,17 +382,17 @@ app.controller('LitController', ['$http', function($http){
     }
     this.toggleEdit = function(){
       this.editDisplay = !this.editDisplay;
-      // reset form as an experiment for active bug still in Trello (8/20/17)
-      // controller.postTitle = '',
-      // controller.author = '',
-      // controller.url = '',
-      // controller.comment = '',
-      // controller.tag = ''
     }
     this.toggleModal = function(){
       this.modal = !this.modal;
       console.log('trying to get one lit post accessed through this');
     }
+
+    this.reset = function() {
+      this.addForm.reset();
+    }
+
+
   //ajax call to display all the lit posts to the page
     this.getLits = function(){
       $http({
@@ -428,8 +430,9 @@ app.controller('LitController', ['$http', function($http){
         data: this.editedLit
       }).then(function(response){
         controller.getLits();
-        //this is where I should try to reset an empty input form if attempt above doesn't work
         controller.editDisplay = false;
+        //take this out if reset form works, placeholder for next attempt to clear edit form:
+        this.newEntry = {};
       }, function(err){
         console.log(err);
         console.log('is there still an error in the edit call');
