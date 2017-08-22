@@ -9,33 +9,42 @@ const app = angular.module('girlGang', []);
 
 app.controller('UserController', ['$http', function($http){
   //an empty array so we can push the gifs we make into it to display on the page
-  this.allUsers = [];
+  // this.allUsers = [];
   //assigning this to a variable so we can use it in our functions
   const controller = this;
   //empty object so we can later use this variable to select a certain gif
   this.currentUser = {};
   //empty object we can later use this variable to edit a certain gif
   this.editUser = {};
+  this.loggedIn = false;
+
+  //login function
+  this.login = function(){
+    this.loggedIn = true;
+    //if req.body.password
+  }
+
   //ajax call to add a new User
-  this.addUser = function(){
+  this.register = function(email, password){
     $http({
       method: 'POST',
-      url: '/users',
+      url: '/users/register',
       data: {
-        name: this.name,
-        image: this.image,
-        bio: this.bio
+        email: this.registeredEmail,
+        password: this.registeredPassword
       }
     }).then(function(response){
       console.log(response.data);
+      //so it will make the page appear
+      controller.login()
       //so it will automagically add this user to the users list
-      controller.getUsers();
+      //controller.getUsers();
       //these controllers will reset the new user form
-      controller.name = '',
-      controller.image = '',
-      controller.bio = ''
+      // controller.email = '',
+      // controller.password = ''
     }, function(err){
-      console.log(error);
+      console.log(err);
+      console.log('wtf are you doing?');
     })
   }
   //ajax call to show all  the users
@@ -147,6 +156,19 @@ app.controller('GifController', ['$http', function($http){
     this.toggleModal = function(){
       this.modal = !this.modal;
     }
+    
+    this.likeGif = function(id){
+      $http({
+        method: 'PUT',
+        url: '/gifs/like/' + id
+      }).then(function(response){
+        console.log(response)
+        controller.getGifs();
+      }, function(err){
+          console.log(err);
+      })
+    }
+
     //ajax call to display all the gifs to the page
     this.getGifs = function(){
       $http({
@@ -155,7 +177,6 @@ app.controller('GifController', ['$http', function($http){
       }).then(function(response){
         controller.allGifs = response.data;
       }, function(err) {
-        console.log('WTF HAPPENED');
         console.log(err);
       })
     }
@@ -169,7 +190,6 @@ app.controller('GifController', ['$http', function($http){
         controller.currentGif = response.data[0];
         //controller.displayGif = true;
         //sets the url, not sure why this is the only one we did this with.
-        controller.modal = true;
         controller.currentGif.url = response.data[0].url;
         console.log(controller.currentGif);
       }, function(err){
@@ -232,7 +252,6 @@ app.controller('MusicController', ['$http', function($http){
     this.editDisplay = false
     this.newDisplay = false;
 
-
     this.addMusic = function(){
       const spotifyId = this.link.split('.com/')[1]
       $http({
@@ -265,8 +284,6 @@ app.controller('MusicController', ['$http', function($http){
           url: '/music/like/' + id
         }).then(function(response){
           console.log(response)
-          // // console.log(response.data[0].likes)
-          // this.likes = response.data.likes++
           controller.getMusic();
         }, function(err){
             console.log(err);
@@ -304,7 +321,6 @@ app.controller('MusicController', ['$http', function($http){
       }).then(function(response){
         controller.getMusic();
         controller.editDisplay = false;
-        // controller.currentMusic = {}    ....if you keep this it blanks out the modal after edit. i suggest we remove.
       }, function(err){
         console.log(err);
       })
@@ -325,7 +341,7 @@ app.controller('MusicController', ['$http', function($http){
     this.toggleEdit = function(){
     	this.editDisplay = !this.editDisplay;
 	  };
-  	this.toggleNewDisplay = function(){
+  	this.toggleNew = function(){
   	  this.newDisplay = !this.newDisplay;
   	}
     this.toggleModal = function(){
@@ -341,19 +357,16 @@ app.controller('MusicController', ['$http', function($http){
 ///////////////////////
 
 app.controller('LitController', ['$http', function($http){
-    //an empty array so we can can push the lit we make into it to display on the page
+    const controller = this;
     this.allLits = [];
+    this.currentLit = {};
+    this.editLit = {};
     this.newDisplay = false;
     this.editDisplay = false;
     this.modal = false;
+    //take this out if reset form works, placeholder for next attempt to clear edit form:
+    this.newEntry = {};
 
-    //assigning this to a variable so we can use it in our functions
-    const controller = this;
-    //empty object so we can later use this variable to select a certain gif
-    this.currentLit = {};
-    //empty object we can later use this variable to edit a certain gif
-    this.editLit = {};
-    //ajax function to add a gif
     this.addLit = function(){
       $http({
         method: 'POST',
@@ -367,9 +380,10 @@ app.controller('LitController', ['$http', function($http){
         }
       }).then(function(response){
         //this will update the lit list with the new lit instantly
-        controller.newDisplay = false;
+        // console.log(response.data);
         controller.getLits();
         // reset form
+        controller.newDisplay = false;
         controller.postTitle = '',
         controller.author = '',
         controller.url = '',
@@ -384,16 +398,29 @@ app.controller('LitController', ['$http', function($http){
     }
     this.toggleEdit = function(){
       this.editDisplay = !this.editDisplay;
-      // reset form as an experiment for active bug still in Trello (8/20/17)
-      // controller.postTitle = '',
-      // controller.author = '',
-      // controller.url = '',
-      // controller.comment = '',
-      // controller.tag = ''
     }
     this.toggleModal = function(){
       this.modal = !this.modal;
+      console.log('trying to get one lit post accessed through this');
     }
+
+    this.reset = function() {
+      this.addForm.reset();
+    }
+
+
+    this.likeLit = function(id){
+      $http({
+        method: 'PUT',
+        url: '/lits/like/' + id
+      }).then(function(response){
+          console.log(response)
+        controller.getLits();
+      }, function(err){
+          console.log(err);
+      })
+    }
+
   //ajax call to display all the lit posts to the page
     this.getLits = function(){
       $http({
@@ -410,16 +437,17 @@ app.controller('LitController', ['$http', function($http){
     this.setCurrentLit = function(id){ //so we can edit it in the next function
       $http({
         method: 'GET',
-        url: '/lit/' + id
+        url: '/lits/' + id
       }).then(function(response){
         controller.currentLit = response.data[0];
         // controller.currentLit.url = response.data[0].url;
-
-        controller.modal = true;
-        controller.currentLit.url = response.data[0].url;
         console.log(controller.currentLit);
+        // controller.modal = true;
+        // controller.currentLit.url = response.data[0].url;
+
       }, function(err){
         console.log(err);
+        console.log('is one lit post showing yet');
       })
     }
     //ajax call to update lit
@@ -430,8 +458,9 @@ app.controller('LitController', ['$http', function($http){
         data: this.editedLit
       }).then(function(response){
         controller.getLits();
-        //this is where I should try to reset an empty input form if attempt above doesn't work
-        controller.currentLit = {}
+        controller.editDisplay = false;
+        //take this out if reset form works, placeholder for next attempt to clear edit form:
+        this.newEntry = {};
       }, function(err){
         console.log(err);
         console.log('is there still an error in the edit call');
@@ -448,8 +477,7 @@ app.controller('LitController', ['$http', function($http){
       }, function(err) {
         console.log('error in the delete call');
         console.log(err);
-      }
-    );
+      });
   }
 
 

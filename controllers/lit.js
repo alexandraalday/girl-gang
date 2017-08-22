@@ -23,17 +23,25 @@ router.post('/', (req, res)=> {
   })
 })
 
+//like route
+router.put('/like/:id', (req, res)=>{
+  Lit.findByIdAndUpdate(req.params.id, {$inc: {likes: 1}} ,(err, foundLit) => {
+    res.json(foundLit)
+  })
+})
+
 //edit route
 router.put('/:id', (req, res)=> {
   Lit.findByIdAndUpdate(req.params.id, req.body, { new : true }, (err, updatedLit)=>{
     res.json(updatedLit)
+
   })
 })
 
 //delete route
 router.delete('/:id', (req, res)=> {
   Lit.findByIdAndRemove(req.params.id, (err, deleteLit)=>{
-    res.json(deletedLit)
+    res.json(deleteLit)
   })
 })
 

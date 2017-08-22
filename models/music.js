@@ -7,11 +7,13 @@ const musicSchema = mongoose.Schema({
 	embed: {type: String},
 	tag: String,
 	likes: {type: Number, default:0},
-	author: String
+	author: String,
+	commentCount: {type: Number, default:0},
+	comments: Array
 });
 
-const User = mongoose.model('Music', musicSchema);
+const Music = mongoose.model('Music', musicSchema);
 
 
 //export
-module.exports = User;
+module.exports = Music;

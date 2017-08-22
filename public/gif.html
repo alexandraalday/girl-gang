@@ -1,91 +1,96 @@
  <div ng-controller="GifController as gif">
+
 <div class="container" id="gif-container">
   <div class="row">
 
   <div class="jumbotron" id="gif-jumbotron">
-  <h1> Gifs </h1>
-  <h4> Get Your Giggle On, Feminista </h4>
-  <!-- Add New Gif Section -->
-  <div class="col-lg-10">
-  <button class="btn btn-default" ng-click="gif.toggleNew()">Add a New Gif</button>
+    <h1> Gifs </h1>
+    <h4> Get Your Giggle On, Feminista </h4>
+
+   <!-------- Add New Gif Button ------>
+  <div class="col-lg-12">
+    <button class="btn btn-default" ype="submit" ng-click="gif.toggleNew()">Add New Gif</button>
+  </div>
+
+   <!-------- Add New Gif Form ------>
   <div ng-if="gif.newDisplay">
     <form ng-submit="gif.addGif()">
-      <input type="text" placeholder="gif name" ng-model="gif.name"><br/>
-      <input type="URL" placeholder="gif url" ng-model="gif.url"><br/>
-      <input type="text" placeholder="gif tag" ng-model="gif.tag"><br/>
-      <button type="submit" class="btn btn-default" ng-click="gif.currentGif.name =null">Create Gif</button>
-    </form>
-  </div>
-</div><!--end of col-lg-10 -->
-</div><!-- end of jumbotron -->
+      <fieldset>
+            <div class="form-group">
+              <input class="form-control" id="gif-name" placeholder="Gif name" type="text" ng-model="gif.name">
+            </div>
+            <div class="form-group">
+              <input class="form-control" id="gif-url" placeholder="Gif URL" type="text" ng-model="gif.url">
+            </div>
+            <div class="form-group">
+              <input class="form-control" id="gif-tag" placeholder="Tag your gif" type="text" ng-model="gif.tag">
+            </div>
+            <div class="form-group">
+                <button type="reset" class="btn btn-default">Reset</button>
+                <button type="submit" class="btn btn-primary" ng-click="gif.currentGif.name =null">Submit</button>
+            </div>
+          </fieldset>
+        </form>
+  </div><!--end new display -->
+  </div><!-- end jumbotron -->
 
-  <div>
 
-    <ul> <!-- this is what's triggering the modal in the setcurrent gif function -->
-    <div class="row">
-      <ul>
-        <li ng-repeat="giphy in gif.allGifs" ng-click="gif.setCurrentGif(giphy._id)">
-          <div class="col-md-4 portfolio-item">
-           <a href="#">{{giphy.name}}</a><br/>
-            <img ng-src="{{giphy.url}}"/><br/>
+
+     <!-------- Gif Modal ------>
+    <div ng-if="gif.modal" id="gifmodal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <!---- Close Button ---->
+            <span id="closebutton" class="text-top"><button class="btn btn-default" ng-click="gif.toggleModal()">X</button></span>
           </div>
-        </li>
-      </ul>
-    </div>
-  </div>
-<!-- gif show modal -->
-<div ng-if="gif.modal" id="gifmodal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <!-- close modal button -->
-        <span id="closebutton" class="text-top"><button class="btn btn-default" ng-click="gif.toggleModal()">X</button></span>
-      </div>
-      <div class="modal-body">
-        <h1 id="exampleModalLabel">{{gif.currentGif.name}}</h1>
-        <img ng-src="{{gif.currentGif.url}}"/><br/>
-        <!-- button to show the edit form -->
-        <button class="btn btn-primary" ng-click="gif.toggleEdit()">Edit {{giphy.name}}</button>
-        <!-- button to delete the gif -->
-        <button class="btn btn-default" ng-click="gif.deleteGif(gif.currentGif._id)">Delete</button>
-        <!-- edit form display -->
-        <div ng-if="gif.editDisplay">
-          <form ng-submit="gif.updateGif(gif.currentGif._id)">
-            <input type="text" placeholder="gif name" value="gif name" ng-model="gif.editedGif.name"><br/>
-            <input type="text" placeholder="gif url" value="gif url" ng-model="gif.editedGif.url"><br/>
-            <input type="text" placeholder="gif tag" value="gif tag" ng-model="gif.editedGif.tag"><br/>
-            <button type="submit" ng-click="gif.updateGif(gif.currentGif._id)" ng-click="gif.currentGif = {}">Edit {{gif.currentGif.name}}</button>
-          </form>
+          <div class="modal-body">
+            <h1 id="exampleModalLabel">{{gif.currentGif.name}}</h1>
+            <img ng-src="{{gif.currentGif.url}}"/><br/>
+            <!---- Edit Button ---->
+            <button class="btn btn-primary" ng-click="gif.toggleEdit()">Edit</button>
+            <!---- Delete Button ---->
+            <button class="btn btn-default" ng-click="gif.deleteGif(gif.currentGif._id)">Delete</button>
+            <!-- Edit Form -->
+            <div ng-if="gif.editDisplay">
+              <form id="gifForm" ng-submit="gif.updateGif(gif.currentGif._id)">
+              <fieldset>
+                <div class="form-group">
+                  <input class="form-control" type="text" placeholder="{{gif.currentGif.name}}" ng-model="gif.editedGif.name">
+                </div>
+                <div class="form-group">
+                  <input class="form-control" type="text" placeholder="{{gif.currentGif.url}}" ng-model="gif.editedGif.url">
+                </div>
+                <div class="form-group">
+                  <input class="form-control" type="text" placeholder="{{gif.currentGif.tag}}" ng-model="gif.editedGif.tag">
+                </div>
+                <div class="form-group">
+                  <button ng-if="music.editDisplay" ng-click="gif.currentGif.name = null">Cancel</button>
+                  <button type="submit" ng-click="gif.updateGif(gif.currentGif._id)">Confirm</button>
+                </div>
+                </fieldset>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
+  <!----  All Gifs ---->
+  <div class="row" id="display">
+    <ul id="gif-list">
+      <li ng-repeat="giphy in gif.allGifs" ng-click="gif.setCurrentGif(giphy._id)">
+        <div class="col-md-4" id="gif-item">
+         <a href="#"><img ng-src="{{giphy.url}}"/></a>
+         <div id="action-icons">
+            <button class="btn btn-default" ng-click="gif.toggleModal()"><span class="glyphicon glyphicon-pencil"></span></button>
+            <button class="btn btn-default" ng-click="gif.likeGif(giphy._id)"><span class="glyphicon glyphicon-heart"><b> {{giphy.likes}}</b></span></button>
+            <button class="btn btn-default" ng-click="gif.commentGif(giphy._id)"><span class="glyphicon glyphicon-comment"><b> {{giphy.commentCount}}</b></span></button><br/>
+          </div>
+        </div>
+      </li>
+    </ul>
   </div>
-</div>
-
-          <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div> -->
-
-
-
-
-
-
-
-
-
-
 
 </div><!-- end row -->
 </div><!-- end container -->

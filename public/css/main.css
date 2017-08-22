@@ -3,7 +3,6 @@
   src: url('../assets/adrip1.ttf') format('opentype');
 }
 
-
 li {
 	list-style: none;
   top: 0;
@@ -13,12 +12,24 @@ a {
 	color: #f759c2;
 }
 
+fieldset {
+  width: 50%;
+  margin: 0 auto;
+}
+
 /***********************
 /* modal styles
 ***********************/
 
-#modal.modal-header {
-	background: #06BEE0;
+#gifmodal, #musicmodal, #litmodal {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  z-index: 100;
+}
+
+.modal-header {
+	background: linear-gradient(to right, #06BEE0, #C704F6);
 	color: #06BEE0;
 }
 
@@ -30,14 +41,15 @@ a {
 	float:right;
 }
 
-#gifmodal {
-  position: absolute;
-  z-index: 10;
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
-#gifmodal, #musicmodal, #litmodal {
-	text-align: center;
-}
 
 
 
@@ -183,7 +195,7 @@ a {
 
 #gif-jumbotron  {
 	background-color: white;
-    background: linear-gradient(to right, #06BEE0, #C704F6);
+  background: linear-gradient(to right, #06BEE0, #C704F6);
 	width: 100%;
 	text-align: center;
 	padding: 8%;
@@ -196,8 +208,13 @@ a {
 }
 
 #gif-container img {
-	height: 300px;
-	width: 400px;
+	height: 20em;
+	width: 30em;
+}
+
+div #gif-item {
+  margin-top: 4%;
+  margin-bottom: 1%;
 }
 
 /***********************
@@ -207,20 +224,30 @@ a {
 #music-container {
 	width: 100%;
 	padding-bottom: 5%;
-} 
+}
 
 #music-jumbotron  {
 	background-color: white;
-    background: linear-gradient(to right, #06BEE0, #C704F6);
+  background: linear-gradient(to right, #06BEE0, #C704F6);
 	width: 100%;
 	text-align: center;
 	padding: 8%;
+  margin-bottom: 0;
 }
 
 #music-jumbotron h1 {
 	font-family: 'A-Dripping-Marker';
 	font-size: 7em;
 	color: #fff;
+}
+
+div #music-item {
+  margin-top: 4%;
+  margin-bottom: 1%;
+}
+
+#music-list {
+  margin-left: 5%;
 }
 
 
@@ -232,11 +259,11 @@ a {
 #lit-container {
 	width: 100%;
 	padding-bottom: 5%;
-} 
+}
 
 #lit-jumbotron  {
 	background-color: white;
-    background: linear-gradient(to right, #06BEE0, #C704F6);
+  background: linear-gradient(to right, #06BEE0, #C704F6);
 	width: 100%;
 	text-align: center;
 	padding: 8%;
@@ -246,4 +273,21 @@ a {
 	font-family: 'A-Dripping-Marker';
 	font-size: 7em;
 	color: #fff;
+}
+
+div #lit-item {
+  margin-top: 4%;
+  margin-bottom: 1%;
+}
+
+#lit-list {
+  margin-left: 5%;
+}
+
+#lit-button {
+  background-color: #f759c2; 
+}
+
+#lit-button a {
+  color: #ffffff; 
 }
