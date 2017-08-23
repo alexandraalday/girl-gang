@@ -31,6 +31,13 @@ router.put('/like/:id', (req, res)=>{
   })
 })
 
+//up vote comment route
+router.put('/comment/up/:id', (req, res)=>{
+  Gif.findByIdAndUpdate(req.params.id, {$inc: {commentCount: 1}}, (err, updatedGif) => {
+    res.json(updatedGif)
+  })
+})
+
 //new comment route
 router.put('/comment/:id', (req, res)=>{
   Gif.findByIdAndUpdate(req.params.id, {$push: {comments: req.body.comments}}, (err, updatedGif) => {

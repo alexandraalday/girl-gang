@@ -229,6 +229,20 @@ app.controller('GifController', ['$http', '$scope', function($http, $scope){
       })
     }
 
+    this.upComment = function(id){
+      $http({
+        method: 'PUT',
+        url: '/gifs/comment/up/' + id,
+      }).then(function(response){
+          console.log(response)
+          controller.commentDisplay = false;
+          controller.getGifs();
+      }, function(err){
+          console.log(err);
+      })
+    }
+
+
     //ajax call to display all the gifs to the page
     this.getGifs = function(){
       $http({
