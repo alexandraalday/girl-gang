@@ -23,7 +23,9 @@ router.post('/', (req, res)=> {
   if(req.session.email){//only logged in users can create a gif
     Gif.create(req.body, (err, createdGif)=>{
       User.findOneAndUpdate(
+        {email: req.session.email},
         {$push: {gifs: createdGif}},
+        {safe: true, upsert: true, new: true},
         (err, model)=>{
           console.log(err);
         })
