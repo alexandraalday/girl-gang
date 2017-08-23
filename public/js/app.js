@@ -309,7 +309,6 @@ app.controller('MusicController', ['$http', function($http){
     }
 
     this.addComment = function(id){
-      console.log(controller.currentMusic.comments)
       $http({
         method: 'PUT',
         url: '/music/comment/' + id,
@@ -410,7 +409,7 @@ app.controller('LitController', ['$http', function($http){
           postTitle: this.postTitle,
           author: this.author,
           url: this.url,
-          comment: this.comment,
+          description: this.description,
           tag: this.tag
         }
       }).then(function(response){
@@ -422,7 +421,7 @@ app.controller('LitController', ['$http', function($http){
         controller.postTitle = '',
         controller.author = '',
         controller.url = '',
-        controller.comment = '',
+        controller.description = '',
         controller.tag = ''
       }, function(err){
         console.log(err);
@@ -438,6 +437,9 @@ app.controller('LitController', ['$http', function($http){
       this.modal = !this.modal;
       console.log('trying to get one lit post accessed through this');
     }
+    this.toggleComment = function(){
+      this.commentDisplay = !this.commentDisplay;
+    };
 
     this.reset = function() {
       this.addForm.reset();
@@ -451,6 +453,19 @@ app.controller('LitController', ['$http', function($http){
       }).then(function(response){
           console.log(response)
         controller.getLits();
+      }, function(err){
+          console.log(err);
+      })
+    }
+
+    this.addComment = function(id){
+      $http({
+        method: 'PUT',
+        url: '/lits/comment/' + id,
+        data: this.currentLit
+      }).then(function(response){
+          console.log(response)
+          controller.commentDisplay = false;
       }, function(err){
           console.log(err);
       })
