@@ -67,11 +67,38 @@
                   <input class="form-control" type="text" placeholder="{{music.currentMusic.author}}" ng-model="music.editedMusic.author">
                 </div>
                 <div class="form-group">
-                  <button ng-click="music.currentMusic.name = null">Cancel</button>
+                  <button ng-click="music.toggleModal(); music.toggleEdit()">Cancel</button>
                   <button type="submit" ng-click="music.updateMusic(music.currentMusic._id)">Confirm</button>
                 </div>
               </fieldset>
               </form>
+            </div><!--  end music display -->
+            <!-- Comment Section -->
+            <!---- Comment Button ---->
+            <button class="btn btn-primary" ng-click="music.toggleComment()">Comment</button>
+            <!--
+            -comment display to show all commented getComment()
+            -iterate comment count upComment()
+            -toggle showing comment section based on which button was clicked ng-show/ng-hide 
+            -->
+          <!---- New Comment Form ---->
+            <div ng-if="music.commentDisplay">
+              <form id="commentForm" ng-submit="music.addComment(music.currentMusic._id)">
+              <fieldset>
+                <div class="form-group">
+                  <input class="form-control" id="comments" type="textarea" placeholder="What's on your mind?" ng-model="music.currentMusic.comments"> 
+                </div>
+                <div class="form-group">
+                  <button ng-click="music.toggleModal(); music.toggleComment()">Cancel</button>
+                  <button type="submit">Confirm</button>
+                </div>
+              </fieldset>
+              </form>
+            </div><!--  end comment display -->
+           <!----  All Comments ---->
+            <div class="row" id="display">
+            Comments: 
+            {{music.currentMusic.comments}}
             </div>
           </div>
         </div>
@@ -85,9 +112,9 @@
         <div class="col-md-4" id="music-item">
           <iframe width="300" height="80" frameborder="0" allowtransparency="true" ng-src="{{song.embed}}"></iframe>
           <div id="action-icons">
-            <button class="btn btn-default" ng-click="music.toggleModal()"><span class="glyphicon glyphicon-pencil"></span></button>
+            <button class="btn btn-default" ng-click="music.toggleModal(); music.toggleEdit()"><span class="glyphicon glyphicon-pencil"></span></button>
             <button class="btn btn-default" ng-click="music.likeMusic(song._id)"><span class="glyphicon glyphicon-heart"><b> {{song.likes}}</b></span></button>
-            <button class="btn btn-default" ng-click="music.commentMusic(song._id)"><span class="glyphicon glyphicon-comment"><b>  {{song.commentCount}}</b></span></button><br/> 
+            <button class="btn btn-default" ng-click="music.toggleModal(); music.toggleComment()"><span class="glyphicon glyphicon-comment"><b>  {{song.commentCount}}</b></span></button><br/> 
           </div>
         </div>
       </li>

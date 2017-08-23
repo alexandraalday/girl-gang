@@ -81,7 +81,7 @@
     <ul id="gif-list">
       <li ng-repeat="giphy in gif.allGifs" ng-click="gif.setCurrentGif(giphy._id)">
         <div class="col-md-4" id="gif-item">
-         <a href="#"><img ng-src="{{giphy.url}}"/></a>
+         <a href="{{giphy.url}}"><img ng-src="{{giphy.url}}"/></a>
          <div id="action-icons">
             <button class="btn btn-default" ng-click="gif.toggleModal()"><span class="glyphicon glyphicon-pencil"></span></button>
             <button class="btn btn-default" ng-click="gif.likeGif(giphy._id)"><span class="glyphicon glyphicon-heart"><b> {{giphy.likes}}</b></span></button>
@@ -91,6 +91,7 @@
       </li>
     </ul>
   </div>
+
 
 </div><!-- end row -->
 </div><!-- end container -->
