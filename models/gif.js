@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 
 //schema
 const gifSchema = mongoose.Schema({
- 	name: String,
  	url: String,
   	tag: String,
   	likes: {type: Number, default:0},

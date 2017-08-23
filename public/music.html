@@ -47,8 +47,8 @@
           </div>
           <div class="modal-body">
             <iframe width="300" height="380" frameborder="0" allowtransparency="true" ng-src="{{music.currentMusic.embed}}"></iframe><br/>
-            <p><strong> Tag: </strong>{{music.currentMusic.tag}}</p>
-            <p><strong> Author: </strong>{{music.currentMusic.author}}</p>
+            <p><strong> Tag(s): </strong>{{music.currentMusic.tag}}</p>
+            <p><strong> Posted by: </strong>{{music.currentMusic.author}}</p>
             <!---- Tabs ---->
             <ul class="nav nav-tabs">
               <li class="nav-item">
@@ -84,7 +84,7 @@
             <!---- Tab 2 Content ---->
               <div class="tab-pane fade" id="2" role="tabpanel">
                 <!---- Edit Form ---->
-                <button class="btn btn-danger" ng-click="music.deleteLit(music.currentMusic._id)">Remove This Song</button>
+                <button class="btn btn-danger" ng-click="music.deleteMusic(music.currentMusic._id)">Remove This Song</button>
                 <h3>Need to Make Changes?</h3>
                   <form id="musicForm" ng-submit="music.updateMusic(music.currentMusic._id)" ng-click="music.addForm.reset()">
                   <fieldset>
@@ -93,9 +93,6 @@
                     </div>
                     <div class="form-group">
                       <input class="form-control" type="text" placeholder="{{music.currentMusic.tag}}" ng-model="music.editedMusic.tag">
-                    </div>
-                    <div class="form-group">
-                      <input class="form-control" type="text" placeholder="{{music.currentMusic.author}}" ng-model="music.editedMusic.author">
                     </div>
                     <div class="form-group">
                       <button ng-click="music.toggleModal()">Cancel</button>
