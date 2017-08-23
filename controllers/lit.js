@@ -19,8 +19,16 @@ router.get('/:id', (req, res)=> {
 
 //new route
 router.post('/', (req, res)=> {
-  Lit.create(req.body, (err, createdLit)=> { //req.body > req.params?
-    res.json(createdLit)
+  req.body.author = req.session.email;
+  Lit.create(req.body, (err, createdLit)=> {
+      User.findOneAndUpdate(
+        {email: req.session.email},
+        {$push: {lit: createdLit}},
+        {safe: true, upsert: true, new: true},
+        (err, model)=> {
+          console.log(err);
+        })
+        res.json(createdLit)
   })
 })
 
@@ -47,16 +55,30 @@ router.put('/comment/:id', (req, res)=>{
 
 //edit route
 router.put('/:id', (req, res)=> {
+  //need to add a conditional that will only let you edit the lit you authored
   Lit.findByIdAndUpdate(req.params.id, req.body, { new : true }, (err, updatedLit)=>{
+    User.findOneAndUpdate(
+      { email: req.session. email},
+      { $set: { lit: updatedLit}},
+      { safe: true, upsert: true, new: true},
+      (err, model)=> {
+        console.log(err);
+      })
     res.json(updatedLit)
-
   })
 })
 
 //delete route
 router.delete('/:id', (req, res)=> {
-  Lit.findByIdAndRemove(req.params.id, (err, deleteLit)=>{
-    res.json(deleteLit)
+  //need to create a conditional to only be able to delete if you authored it
+  Lit.findByIdAndRemove(req.params.id, (err, deletedLit)=>{
+    User.findOne({ email: req.session.email},
+    (err, foundUser)=> {
+      foundUser.lit.id(req.params.id).remove();
+      foundUser.save((err, data)=> {
+        res.json(deletedLit)
+      })
+    })
   })
 })
 
