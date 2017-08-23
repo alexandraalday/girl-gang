@@ -8,13 +8,8 @@ const app = angular.module('girlGang', []);
 
 
 app.controller('UserController', ['$http', function($http){
-  //an empty array so we can push the gifs we make into it to display on the page
-  // this.allUsers = [];
-  //assigning this to a variable so we can use it in our functions
   const controller = this;
-  //empty object so we can later use this variable to select a certain gif
   this.currentUser = {};
-  //empty object we can later use this variable to edit a certain gif
   this.editUser = {};
   this.loggedIn = false;
   this.loginForm = true;

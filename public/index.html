@@ -16,33 +16,7 @@
     <link rel="stylesheet" href="./css/main.css">
   </head>
   <body>
-    <!--  Login Form -->
-    <section ng-controller="UserController as user">
-      <div class="" ng-if=user.loginForm>
-        <h1>Login</h1>
-        <form ng-submit="user.login();">
-          <input type="email" ng-model="user.loginEmail" placeholder="email"><br/>
-          <input type="password" ng-model="user.loginPassword" placeholder="password"><br/>
-          <button type="submit" class="btn btn-default" >login</button>
-          <h5>{{user.message}}</h5>
-        </br>
-        Need to Register?
-        <button ng-click="user.toggleForms()">Register Here</button>
-        </form>
-    </div>
-    <!-- Register Form -->
-      <div class="" ng-if=user.registerForm>
-        <h1>Register</h1>
-        <form ng-submit="user.register();">
-          <input type="text" ng-model="user.registeredEmail" placeholder="email"><br/>
-          <input type="text" ng-model="user.registeredPassword" placeholder="password"><br/>
-          <button type="submit" class="btn btn-default" >register</button>
-        </br>
-        Already Registered?
-        <button ng-click="user.toggleForms()">Login Here</button>
-        </form>
-      </div>
-<section ng-if=user.loggedIn>
+  <section ng-controller="UserController as user">
 <!--   Navbar Section -->
   <nav class="navbar navbar-inverse navbar-default navbar-fixed-top">
   <div class="container-fluid">
@@ -66,8 +40,10 @@
           <li><a href="#gifs" style="color: #f759c2;">GIFS</a></li>
           <li><a href="#music" style="color: #f759c2;">MUSIC</a></li>
           <li><a href="#lit" style="color: #f759c2;">LIT</a></li>
-          <li><a href="#">LOGIN</a></li>
-          <li><a href="#" style="color: #f759c2;">REGISTER</a></li>
+          <li ng-if=!user.loggedIn><a href="#">LOGIN</a></li>
+          <li ng-if=user.loggedIn ng-click="user.logOut()"><a href="#" style="color:#f759c2;">LOGOUT</a></li>
+          <li ng-if=!user.loggedIn><a href="#" style="color: #f759c2;">REGISTER</a></li>
+          <li ng-if=user.loggedIn><a href="#" style="color:#f759c2;">{{user.loginEmail}}</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div>
@@ -84,6 +60,37 @@
     </div>
   </header>
 
+  <!--  Login Form -->
+    <div class="" ng-if=user.loginForm>
+      <h1>Login</h1>
+      <form ng-submit="user.login();">
+        <input type="email" ng-model="user.loginEmail" placeholder="email"><br/>
+        <input type="password" ng-model="user.loginPassword" placeholder="password"><br/>
+        <button type="submit" class="btn btn-default" >login</button>
+        <h5>{{user.message}}</h5>
+      </br>
+      Need to Register?
+      <button ng-click="user.toggleForms()">Register Here</button>
+      </form>
+  </div>
+  <!-- Register Form -->
+    <div class="" ng-if=user.registerForm>
+      <h1>Register</h1>
+      <form ng-submit="user.register();">
+        <input type="text" ng-model="user.registeredEmail" placeholder="email"><br/>
+        <input type="text" ng-model="user.registeredPassword" placeholder="password"><br/>
+        <button type="submit" class="btn btn-default" >register</button>
+      </br>
+      Already Registered?
+      <button ng-click="user.toggleForms()">Login Here</button>
+      </form>
+    </div>
+
+
+
+
+
+<section ng-if=user.loggedIn>
       <!---- Description Section  ---->
       <div id="about" class="row">
         <div class="col-lg-4 col-sm-6 portfolio-item">
@@ -120,33 +127,6 @@
           </div>
         </div>
       </div>
-<!-- /.row -->
-
-<!--     Hiding User section for now because we aren't going to show it  -->
-<!--     <section ng-controller="UserController as user">
-      <div> --> <!-- form to add a new user -->
-  <!--       <form ng-submit="user.addUser()">
-          <input type="text" placeholder="name" ng-model="user.name"><br/>
-          <input type="text" placeholder="image url" ng-model="user.image"><br/>
-          <input type="text" placeholder="bio" ng-model="user.bio"><br/>
-          <button type="submit">Create User</button>
-        </form>
-      </div>
-      <h5>ALL DA USERS</h5>
-        <ul>
-          <li ng-repeat="people in user.allUsers" ng-click="user.setCurrentUser(people._id)">{{people.name}}</li>
-        </ul> -->
-        <!-- edit form -->
- <!--      <div>
-        <form ng-submit="user.updateUser(user.currentUser._id)">
-          <input type="text" placeholder="{{user.currentUser.name}}" ng-model="user.editUser.name">
-          <input type="text" placeholder="{{user.currentUser.image}}" ng-model="user.editUser.image">
-          <input type="text" placeholder="{{user.currentUser.bio}}" ng-model="user.editUser.bio">
-          <button type="submit" ng-click="user.updateUser(user.currentUser._id)">Edit {{user.currentUser.name}}</button>
-        </form>
-      </div>
-      <button ng-click="user.deleteUser(user.currentUser._id)">Delete</button>
-    </section> -->
 
     <!---- Gif Section ---->
     <section id="gifs" ng-include="'./gif.html'"></section>
@@ -157,8 +137,6 @@
   <!-- adds all the html for the lit part -->
   <section id="lit" ng-include="'./lit.html'"></section>
 </section> <!-- end section tag for login functionality -->
-<button ng-click="user.logOut()">Logout</button>
 </section>
-
   </body>
 </html>
