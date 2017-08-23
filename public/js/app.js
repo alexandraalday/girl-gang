@@ -11,10 +11,18 @@ app.controller('UserController', ['$http', function($http){
   const controller = this;
   this.currentUser = {};
   this.editUser = {};
+  this.editDisplay = false;
+  this.modal = false;
   this.loggedIn = false;
   this.loginForm = true;
   this.registerForm = false;
   this.message = '';
+  this.toggleEdit = function(){
+    this.editDisplay = !this.editDisplay;
+  }
+  this.toggleModal = function(){
+    this.modal = !this.modal;
+  }
   //function to switch the forms from login to register
   this.toggleForms = function(){
     this.registerForm = !this.registerForm
@@ -97,12 +105,9 @@ app.controller('UserController', ['$http', function($http){
       url: '/users/' + id
     }).then(function(response){
       controller.currentUser = response.data[0]
-      //dont know what we just do this one
-      controller.currentUser.url = response.data[0].url
-      console.log(controller.currentUser);
+      $scope.input = '';
     }, function(err){
       console.log(err);
-      console.log('error in set current user call');
     })
   }
   //ajax call to update the user
@@ -110,10 +115,11 @@ app.controller('UserController', ['$http', function($http){
     $http({
       method: 'PUT',
       url: '/users/' + id,
-      data: this.editUser
+      data: this.editedUser
     }).then(function(response){
       controller.getUsers();
       controller.currentUser = {};
+      controller.editedUser = {};
     }, function(error){
       console.log(error);
       console.log('error in update route');
@@ -126,6 +132,7 @@ app.controller('UserController', ['$http', function($http){
       url: '/users/' + user,
     }).then(function(response){
       controller.getUsers()
+      controller.modal = false;
       controller.logOut()
     }, function(err){
       console.log('err in delete route');
@@ -135,7 +142,6 @@ app.controller('UserController', ['$http', function($http){
 
   //call the function so all the users render automagically
   this.getUsers()
-  console.log(this.loggedIn);
 }])
 
 
