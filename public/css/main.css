@@ -26,6 +26,7 @@ fieldset {
   text-align: center;
   width: 100%;
   z-index: 100;
+  overflow: scroll;
 }
 
 .modal-header {
@@ -50,6 +51,9 @@ fieldset {
   left: 0;
 }
 
+#comment-item {
+  text-align: left;
+}
 
 
 
