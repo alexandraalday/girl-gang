@@ -9,7 +9,7 @@
 
    <!-------- Add New Gif Button ------>
   <div class="col-lg-12">
-    <button class="btn btn-default" ype="submit" ng-click="gif.toggleNew()">Add New Gif</button>
+    <button class="btn btn-default" type="submit" ng-click="gif.toggleNew()">Add New Gif</button>
   </div>
 
    <!-------- Add New Gif Form ------>
@@ -27,7 +27,7 @@
             </div>
             <div class="form-group">
                 <button type="reset" class="btn btn-default">Reset</button>
-                <button type="submit" class="btn btn-primary" ng-click="gif.currentGif.name =null">Submit</button>
+                <button type="submit" class="btn btn-primary" ng-click="gif.currentGif.name=null">Submit</button>
             </div>
           </fieldset>
         </form>
@@ -47,6 +47,7 @@
           <div class="modal-body">
             <h1 id="exampleModalLabel">{{gif.currentGif.name}}</h1>
             <img ng-src="{{gif.currentGif.url}}"/><br/>
+
             <!---- Edit Button ---->
             <button class="btn btn-primary" ng-click="gif.toggleEdit()">Edit</button>
             <!---- Delete Button ---->
@@ -55,23 +56,24 @@
             <div ng-if="gif.editDisplay">
               <form id="gifForm" ng-submit="gif.updateGif(gif.currentGif._id)">
               <fieldset>
-                <div class="form-group">
-                  <input class="form-control" type="text" placeholder="{{gif.currentGif.name}}" ng-model="gif.editedGif.name">
-                </div>
-
 
                 <div class="form-group">
-                  <input class="form-control" type="text" placeholder="{{gif.currentGif.url}}" ng-model="gif.editedGif.url">
+                  <input class="form-control" type="text" placeholder="Giphy Name" ng-model="gif.editedGif.name">
                 </div>
 
                 <div class="form-group">
-                  <input class="form-control" type="text" placeholder="{{gif.currentGif.tag}}" ng-model="gif.editedGif.tag">
+                  <input class="form-control" type="text" placeholder="Giphy URL" ng-model="gif.editedGif.url">
                 </div>
 
                 <div class="form-group">
-                  <button ng-if="music.editDisplay" ng-click="gif.currentGif.name = null">Cancel</button>
+                  <input class="form-control" type="text" placeholder="Giphy Tag" ng-model="gif.editedGif.tag">
+                </div>
 
-                  <button type="submit"  ng-click="gif.updateGif(gif.currentGif._id)">Confirm</button>
+                <div class="form-group">
+                  <button ng-if="gif.editDisplay" ng-click="gif.currentGif.name = null">Cancel</button>
+                  <!-- add reset to all edit modals -->
+                  <button type="reset" class="btn btn-default">Reset</button>
+                  <button type="submit" ng-click="gif.updateGif(gif.currentGif._id)">Confirm</button>
                 </div>
                 </fieldset>
               </form>
@@ -94,20 +96,6 @@
           </div>
         </div>
       </li>
-
-
-
-<!-- to reset edit form fields
-
-      <div class="form-field"> <label>Duration test</label>
-        <input ng-reflect-form="[objectObject]" class="ng-pristine ng-invalid ng-touched">
-      </div> -->
-
-
-
-
-
-
     </ul>
   </div>
 
