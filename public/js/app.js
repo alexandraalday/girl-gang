@@ -280,6 +280,7 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
     this.editDisplay = false;
     this.newDisplay = false;
     this.commentDisplay = false;
+    this.modal = false;
 
     this.addMusic = function(){
       const spotifyId = this.link.split('.com/')[1]
@@ -387,12 +388,15 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
       })
     }
 
+    this.toggleNew = function(){
+      this.newDisplay = !this.newDisplay;
+      this.reset = function() {
+        this.addForm.reset();
+      }
+    }
     this.toggleEdit = function(){
     	this.editDisplay = !this.editDisplay;
-	  };
-  	this.toggleNew = function(){
-  	  this.newDisplay = !this.newDisplay;
-  	}
+    }
     this.toggleModal = function(){
       this.modal = !this.modal;
     }
