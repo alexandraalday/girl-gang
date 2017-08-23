@@ -8,22 +8,26 @@ const app = angular.module('girlGang', []);
 
 
 app.controller('UserController', ['$http', function($http){
-  //an empty array so we can push the gifs we make into it to display on the page
-  // this.allUsers = [];
-  //assigning this to a variable so we can use it in our functions
   const controller = this;
-  //empty object so we can later use this variable to select a certain gif
   this.currentUser = {};
-  //empty object we can later use this variable to edit a certain gif
   this.editUser = {};
+  this.editDisplay = false;
+  this.modal = false;
   this.loggedIn = false;
-
-  //login function
-  this.login = function(){
-    this.loggedIn = true;
-    //if req.body.password
+  this.loginForm = true;
+  this.registerForm = false;
+  this.message = '';
+  this.toggleEdit = function(){
+    this.editDisplay = !this.editDisplay;
   }
-
+  this.toggleModal = function(){
+    this.modal = !this.modal;
+  }
+  //function to switch the forms from login to register
+  this.toggleForms = function(){
+    this.registerForm = !this.registerForm
+    this.loginForm = !this.loginForm
+  }
   //ajax call to add a new User
   this.register = function(email, password){
     $http({
@@ -34,17 +38,52 @@ app.controller('UserController', ['$http', function($http){
         password: this.registeredPassword
       }
     }).then(function(response){
-      console.log(response.data);
-      //so it will make the page appear
-      controller.login()
-      //so it will automagically add this user to the users list
-      //controller.getUsers();
-      //these controllers will reset the new user form
-      // controller.email = '',
-      // controller.password = ''
+      //console.log(response.data);
+      controller.loggedIn = response.data;
+      controller.registerForm = false;
     }, function(err){
       console.log(err);
-      console.log('wtf are you doing?');
+    })
+  }
+  this.goToRegister = function(){
+    this.registerForm = true;
+    this.loginForm = false;
+  }
+  this.goToLogin = function(){
+    this.loginForm = true;
+    this.registerForm = false;
+  }
+  //ajax call to login
+  this.login = function(email, password){
+    $http({
+      method: 'POST',
+      url: '/users/login',
+      data: {
+        email: this.loginEmail,
+        password: this.loginPassword
+      }
+    }).then(function(response){
+      console.log(response);
+      if(response.data === true){
+      controller.loginForm = false;
+      controller.loggedIn = response.data;
+      console.log('succesful login');
+
+    } else {
+      controller.message = response.data
+    }
+    }, function(err){
+      console.log(err);
+    })
+  }
+  //ajax call to logout a session
+  this.logOut = function(){
+    $http({
+      method: 'GET',
+      url: '/users/logout'
+    }).then(function(response){
+      controller.loggedIn = response.data
+      controller.loginForm = true;
     })
   }
   //ajax call to show all  the users
@@ -66,12 +105,9 @@ app.controller('UserController', ['$http', function($http){
       url: '/users/' + id
     }).then(function(response){
       controller.currentUser = response.data[0]
-      //dont know what we just do this one
-      controller.currentUser.url = response.data[0].url
-      console.log(controller.currentUser);
+      $scope.input = '';
     }, function(err){
       console.log(err);
-      console.log('error in set current user call');
     })
   }
   //ajax call to update the user
@@ -79,10 +115,11 @@ app.controller('UserController', ['$http', function($http){
     $http({
       method: 'PUT',
       url: '/users/' + id,
-      data: this.editUser
+      data: this.editedUser
     }).then(function(response){
       controller.getUsers();
       controller.currentUser = {};
+      controller.editedUser = {};
     }, function(error){
       console.log(error);
       console.log('error in update route');
@@ -95,6 +132,8 @@ app.controller('UserController', ['$http', function($http){
       url: '/users/' + user,
     }).then(function(response){
       controller.getUsers()
+      controller.modal = false;
+      controller.logOut()
     }, function(err){
       console.log('err in delete route');
       console.log(err);
@@ -103,7 +142,6 @@ app.controller('UserController', ['$http', function($http){
 
   //call the function so all the users render automagically
   this.getUsers()
-
 }])
 
 
@@ -277,9 +315,10 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
     this.allMusic = [];
     this.currentMusic = {};
     this.editMusic = {};
-    this.editDisplay = false
+    this.editDisplay = false;
     this.newDisplay = false;
     this.commentDisplay = false;
+    this.modal = false;
 
     this.addMusic = function(){
       const spotifyId = this.link.split('.com/')[1]
@@ -401,12 +440,15 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
       })
     }
 
+    this.toggleNew = function(){
+      this.newDisplay = !this.newDisplay;
+      this.reset = function() {
+        this.addForm.reset();
+      }
+    }
     this.toggleEdit = function(){
     	this.editDisplay = !this.editDisplay;
-	  };
-  	this.toggleNew = function(){
-  	  this.newDisplay = !this.newDisplay;
-  	}
+    }
     this.toggleModal = function(){
       this.modal = !this.modal;
     }
