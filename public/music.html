@@ -12,7 +12,7 @@
       <button class="btn btn-default" type="submit" ng-click="music.toggleNew()">Add A New Track</button>
     </div>
 
-    <!-------- Add New Music Form ------>    
+    <!-------- Add New Music Form ------>
     <div ng-if="music.newDisplay">
       <form ng-submit="music.addMusic()">
         <fieldset>
@@ -24,7 +24,7 @@
           </div>
           <div class="form-group">
             <input class="form-control" id="author" placeholder="Enter your name" type="text" ng-model="music.author">
-          </div>    
+          </div>
           <div class="form-group">
             <input class="ng-hide" type="text" placeholder="embed" ng-model="music.embed" value=''>
           </div>
@@ -37,7 +37,7 @@
     </div><!--  end new-display -->
     </div><!--  end jumbotron -->
 
-     <!-------- Music Modal ------>   
+     <!-------- Music Modal ------>
     <div ng-if="music.modal" id="musicmodal">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -79,14 +79,14 @@
             <!--
             -comment display to show all commented getComment()
             -iterate comment count upComment()
-            -toggle showing comment section based on which button was clicked ng-show/ng-hide 
+            -toggle showing comment section based on which button was clicked ng-show/ng-hide
             -->
           <!---- New Comment Form ---->
             <div ng-if="music.commentDisplay">
               <form id="commentForm" ng-submit="music.addComment(music.currentMusic._id)">
               <fieldset>
                 <div class="form-group">
-                  <input class="form-control" id="comments" type="textarea" placeholder="What's on your mind?" ng-model="music.currentMusic.comments"> 
+                  <input class="form-control" id="comments" type="textarea" placeholder="What's on your mind?" ng-model="music.currentMusic.comments">
                 </div>
                 <div class="form-group">
                   <button ng-click="music.toggleModal(); music.toggleComment()">Cancel</button>
@@ -97,7 +97,7 @@
             </div><!--  end comment display -->
            <!----  All Comments ---->
             <div class="row" id="display">
-            Comments: 
+            Comments:
             {{music.currentMusic.comments}}
             </div>
           </div>
@@ -114,7 +114,7 @@
           <div id="action-icons">
             <button class="btn btn-default" ng-click="music.toggleModal(); music.toggleEdit()"><span class="glyphicon glyphicon-pencil"></span></button>
             <button class="btn btn-default" ng-click="music.likeMusic(song._id)"><span class="glyphicon glyphicon-heart"><b> {{song.likes}}</b></span></button>
-            <button class="btn btn-default" ng-click="music.toggleModal(); music.toggleComment()"><span class="glyphicon glyphicon-comment"><b>  {{song.commentCount}}</b></span></button><br/> 
+            <button class="btn btn-default" ng-click="music.toggleModal(); music.toggleComment()"><span class="glyphicon glyphicon-comment"><b>  {{song.commentCount}}</b></span></button><br/>
           </div>
         </div>
       </li>

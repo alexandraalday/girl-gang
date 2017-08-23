@@ -16,16 +16,7 @@
     <link rel="stylesheet" href="./css/main.css">
   </head>
   <body>
-    <!--  creating a form to register -->
-    <section ng-controller="UserController as user">
-      <h1>this is the register form</h1>
-      <form ng-submit="user.register();">
-        <input type="text" ng-model="user.registeredEmail" placeholder="email"><br/>
-        <input type="text" ng-model="user.registeredPassword" placeholder="password"><br/>
-        <button type="submit" class="btn btn-default" >Login</button>
-      </form>
-
-<section ng-if=user.loggedIn>
+  <section ng-controller="UserController as user">
 <!--   Navbar Section -->
   <nav class="navbar navbar-inverse navbar-default navbar-fixed-top">
   <div class="container-fluid">
@@ -49,8 +40,10 @@
           <li><a href="#gifs" style="color: #f759c2;">GIFS</a></li>
           <li><a href="#music" style="color: #f759c2;">MUSIC</a></li>
           <li><a href="#lit" style="color: #f759c2;">LIT</a></li>
-          <li><a href="#">LOGIN</a></li>
-          <li><a href="#" style="color: #f759c2;">REGISTER</a></li>
+          <li ng-if=!user.loggedIn ng-click="user.goToLogin()"><a href="#">LOGIN</a></li>
+          <li ng-if=user.loggedIn ng-click="user.logOut()"><a href="#" style="color:#f759c2;">LOGOUT</a></li>
+          <li ng-if=!user.loggedIn ng-click="user.goToRegister()"><a href="#" style="color: #f759c2;">REGISTER</a></li>
+          <li ng-if=user.loggedIn ng-click="user.toggleModal()"><a href="#" style="color:#f759c2;">{{user.loginEmail}}</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div>
@@ -67,6 +60,13 @@
     </div>
   </header>
 
+
+
+<section id="forms" ng-include="'./forms.html'"></section>
+
+
+
+<section ng-if=user.loggedIn>
       <!---- Description Section  ---->
       <div id="about" class="row">
         <div class="col-lg-4 col-sm-6 portfolio-item">
@@ -103,33 +103,50 @@
           </div>
         </div>
       </div>
-<!-- /.row -->
 
-<!--     Hiding User section for now because we aren't going to show it  -->
-<!--     <section ng-controller="UserController as user">
-      <div> --> <!-- form to add a new user -->
-  <!--       <form ng-submit="user.addUser()">
-          <input type="text" placeholder="name" ng-model="user.name"><br/>
-          <input type="text" placeholder="image url" ng-model="user.image"><br/>
-          <input type="text" placeholder="bio" ng-model="user.bio"><br/>
-          <button type="submit">Create User</button>
-        </form>
-      </div>
-      <h5>ALL DA USERS</h5>
-        <ul>
-          <li ng-repeat="people in user.allUsers" ng-click="user.setCurrentUser(people._id)">{{people.name}}</li>
-        </ul> -->
-        <!-- edit form -->
- <!--      <div>
-        <form ng-submit="user.updateUser(user.currentUser._id)">
-          <input type="text" placeholder="{{user.currentUser.name}}" ng-model="user.editUser.name">
-          <input type="text" placeholder="{{user.currentUser.image}}" ng-model="user.editUser.image">
-          <input type="text" placeholder="{{user.currentUser.bio}}" ng-model="user.editUser.bio">
-          <button type="submit" ng-click="user.updateUser(user.currentUser._id)">Edit {{user.currentUser.name}}</button>
-        </form>
-      </div>
-      <button ng-click="user.deleteUser(user.currentUser._id)">Delete</button>
-    </section> -->
+    <!-- User Section   -->
+   <div ng-if="user.modal" id="usermodal">
+     <div class="modal-dialog" role="document">
+       <div class="modal-content">
+         <div class="modal-header">
+         <!---- Close Button ---->
+           <span id="closebutton" class="text-top"><button class="btn btn-default" ng-click="user.toggleModal()">X</button></span>
+         </div>
+         <div class="modal-body">
+           <h1 id="exampleModalLabel">{{user.currentUser.name}}</h1>
+           <img ng-src="{{user.currentGif.image}}"/><br/>
+           <!---- Edit Button ---->
+           <button class="btn btn-primary" ng-click="user.toggleEdit()">Edit</button>
+           <!---- Delete Button ---->
+           <button class="btn btn-default" ng-click="user.deleteUser(user.currentUser._id)">Delete</button>
+           <!---- Edit Form ---->
+           <div ng-if="user.editDisplay">
+             <form id="userForm" ng-submit="user.updateUser(user.currentUser._id)">
+             <fieldset>
+               <div class="form-group">
+                 Name
+                 <input class="form-control" type="text" placeholder="{{music.currentUser.name}}" ng-model="user.editedUser.name">
+               </div>
+               <div class="form-group">
+                 Image Link
+                 <input class="form-control" type="text" placeholder="{{user.currentUser.image}}" ng-model="user.editedUser.image">
+               </div>
+                BIO
+               <div class="form-group">
+                 <input class="form-control" type="textarea" placeholder="{{user.currentUser.bio}}" ng-model="user.editedUser.bio">
+               </div>
+               <div class="form-group">
+                 <button ng-click="user.currentUser.name = null">Cancel</button>
+                 <button type="submit" ng-click="user.updateUser(user.currentUser._id)">Confirm</button>
+               </div>
+             </fieldset>
+             </form>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+
 
     <!---- Gif Section ---->
     <section id="gifs" ng-include="'./gif.html'"></section>
