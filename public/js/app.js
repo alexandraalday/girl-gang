@@ -7,7 +7,7 @@ const app = angular.module('girlGang', []);
 ///////////////////////
 
 
-app.controller('UserController', ['$http', function($http){
+app.controller('UserController', ['$http', '$scope', function($http, $scope){
   const controller = this;
   this.currentUser = {};
   this.editUser = {};
@@ -17,6 +17,9 @@ app.controller('UserController', ['$http', function($http){
   this.loginForm = true;
   this.registerForm = false;
   this.message = '';
+  //in case we want to have some type of "show" functionality for members to see all members later
+  this.allUsers = [];
+
   this.toggleEdit = function(){
     this.editDisplay = !this.editDisplay;
   }
@@ -35,7 +38,9 @@ app.controller('UserController', ['$http', function($http){
       url: '/users/register',
       data: {
         email: this.registeredEmail,
-        password: this.registeredPassword
+        password: this.registeredPassword,
+        image: this.registeredImage,
+        bio: this.registeredBio
       }
     }).then(function(response){
       //console.log(response.data);
@@ -67,7 +72,7 @@ app.controller('UserController', ['$http', function($http){
       if(response.data === true){
       controller.loginForm = false;
       controller.loggedIn = response.data;
-      console.log('succesful login');
+      console.log('successful login');
 
     } else {
       controller.message = response.data
@@ -119,6 +124,7 @@ app.controller('UserController', ['$http', function($http){
     }).then(function(response){
       controller.getUsers();
       controller.currentUser = {};
+      controller.user = {};
       controller.editedUser = {};
     }, function(error){
       console.log(error);

@@ -84,7 +84,7 @@ router.get('/:id', (req, res)=> {
 // })
 //edit route
 router.put('/:id', (req, res)=> {
-  User.findByIdAndUpdate(req.params.id, {name: req.params.name, image: req.params.image, bio: req.params.bio}, { new : true }, (err, updatedUser)=>{
+  User.findByIdAndUpdate(req.params.id, {name: req.params.body, image: req.params.body, bio: req.params.body}, { new : true }, (err, updatedUser)=>{
     res.json(updatedUser)
   })
 })
