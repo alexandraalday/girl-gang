@@ -58,13 +58,13 @@
               <form id="musicForm" ng-submit="music.updateMusic(music.currentMusic._id)">
               <fieldset>
                 <div class="form-group">
-                  <input class="form-control" id="link" type="text" placeholder="{{music.currentMusic.link}}" ng-model="music.editedMusic.link">
+                  <input class="form-control" id="link" type="text" placeholder="Song URL" ng-model="music.editedMusic.link">
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" placeholder="{{music.currentMusic.tag}}" ng-model="music.editedMusic.tag">
+                  <input class="form-control" type="text" placeholder="Tag your song" ng-model="music.editedMusic.tag">
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" placeholder="{{music.currentMusic.author}}" ng-model="music.editedMusic.author">
+                  <input class="form-control" type="text" placeholder="Enter your name" ng-model="music.editedMusic.author">
                 </div>
                 <div class="form-group">
                   <button ng-click="music.toggleModal(); music.toggleEdit()">Cancel</button>
