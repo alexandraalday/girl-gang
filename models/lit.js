@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 //schema
 const litSchema = mongoose.Schema({
  	postTitle: String,
-  	author: String,
- 	url: String,
+  	author: {type:String, default: ''},
+ 	  url: String,
   	tag: String,
   	description: String,
   	likes: {type: Number, default:0},
