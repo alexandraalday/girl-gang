@@ -20,8 +20,8 @@ router.get('/:id', (req, res)=> {
 
 //new route
 router.post('/', (req, res)=> {
-  if(req.session.email){//only logged in users can create a gif
-    Gif.create(req.body, (err, createdGif)=>{
+  req.body.author = req.session.email;
+  Gif.create(req.body, (err, createdGif)=>{
       User.findOneAndUpdate(
         {email: req.session.email},
         {$push: {gifs: createdGif}},
@@ -31,7 +31,6 @@ router.post('/', (req, res)=> {
         })
         res.json(createdGif)
     })
-  }
 })
 
 //like route
@@ -58,8 +57,17 @@ router.put('/comment/:id', (req, res)=>{
 
 //edit route
 router.put('/:id', (req, res)=> {
-  Gif.findByIdAndUpdate(req.params.id, req.body, { new : true }, (err, updatedGif)=>{
-    res.json(updatedGif)
+  //need to wrap this all in an if statement to check if they are the user that created this gif
+  //if(req.body.author === req.session.email)
+  Gif.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedGif)=> {
+    User.findOneAndUpdate(
+      { email: req.session.email},
+      { $set: { gifs: updatedGif}},
+      { safe: true, upsert: true, new: true },
+      (err, model)=> {
+        console.log(err);
+      })
+      res.json(updatedGif)
   })
 })
 

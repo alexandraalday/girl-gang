@@ -171,7 +171,8 @@ app.controller('GifController', ['$http', '$scope', function($http, $scope){
         data: {
           name: this.name,
           url: this.url,
-          tag: this.tag
+          tag: this.tag,
+          author: this.author
         }
       }).then(function(response){
         //this will update the gifs list with the new gif instantly
