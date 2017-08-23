@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Gif = require('../models/gif.js')
+const User = require('../models/user.js')
 
 //index route
 router.get('/', (req, res)=> {
