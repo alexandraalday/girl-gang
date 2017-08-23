@@ -277,7 +277,7 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
     this.allMusic = [];
     this.currentMusic = {};
     this.editMusic = {};
-    this.editDisplay = false
+    this.editDisplay = false;
     this.newDisplay = false;
     this.commentDisplay = false;
 
