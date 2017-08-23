@@ -553,10 +553,12 @@ app.controller('LitController', ['$http', function($http){
       $http({
         method: 'PUT',
         url: '/lits/comment/' + id,
-        data: this.currentLit
+        data: this.commentedLit
       }).then(function(response){
           console.log(response)
           controller.commentDisplay = false;
+          controller.commentedLit = {};
+          controller.getLits();
       }, function(err){
           console.log(err);
       })
