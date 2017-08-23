@@ -1,7 +1,7 @@
 
 //dependencies
 const mongoose = require('mongoose');
-
+const Gif = require('./gif.js');
 //schema
 const userSchema = mongoose.Schema({
   name: String,
@@ -9,7 +9,7 @@ const userSchema = mongoose.Schema({
   password: { type: String, required: true },
  	image: String,
 	bio: String,
-	author: Array
+	gifs: [ Gif.schema ]
 });
 
 const User = mongoose.model('User', userSchema);
