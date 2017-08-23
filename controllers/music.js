@@ -23,8 +23,6 @@ router.post('/', (req, res)=> {
   })
 })
 
-
-
 //like route
 router.put('/like/:id', (req, res)=>{
   Music.findByIdAndUpdate(req.params.id, {$inc: {likes: 1}} ,(err, foundSong) => {

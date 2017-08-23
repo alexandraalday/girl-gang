@@ -26,7 +26,7 @@
             <input class="form-control" id="link" placeholder="Lit URL" type="URL" ng-model="lit.url">
           </div>    
           <div class="form-group">
-            <input class="form-control" id="comment" type="text" placeholder="Leave a comment..." ng-model="lit.comment">
+            <input class="form-control" id="description" type="text" placeholder="Give a brief description of this item" ng-model="lit.description">
           </div>
           <div class="form-group">
             <input class="form-control" id="tag" type="text" placeholder="Tag(s)" ng-model="lit.tag">
@@ -55,7 +55,7 @@
             <li><strong>Post Author:</strong><span>{{lit.currentLit.author}}</span></li><br/>
             <li><strong>Post URL:</strong><span>
               <a href="{{lit.currentLit.url}}">Content Link</a></span></li><br/>
-            <li><strong>Post Comment:</strong><span>{{lit.currentLit.comment}}</span></li><br/>
+            <li><strong>Post Description:</strong><span>{{lit.currentLit.description}}</span></li><br/>
             <li><strong>Post Tag(s):</strong><span>{{lit.currentLit.tag}}</span></li><br/>
           </ul>
         </div>
@@ -88,11 +88,39 @@
             </div>
           </fieldset>
           </form>
+        </div><!--  end music display -->
+        <!-- Comment Section -->
+        <!---- Comment Button ---->
+          <button class="btn btn-primary" ng-click="lit.toggleComment()">Comment</button>
+          <!--
+          -comment display to show all commented getComment()
+          -iterate comment count upComment()
+          -toggle showing comment section based on which button was clicked ng-show/ng-hide 
+          -->
+        <!---- New Comment Form ---->
+          <div ng-if="lit.commentDisplay">
+            <form id="commentForm" ng-submit="lit.addComment(lit.currentLit._id)">
+            <fieldset>
+              <div class="form-group">
+                <input class="form-control" id="comments" type="textarea" placeholder="What's on your mind?" ng-model="lit.currentLit.comments"> 
+              </div>
+              <div class="form-group">
+                <button ng-click="lit.toggleModal(); lit.toggleComment()">Cancel</button>
+                <button type="submit">Confirm</button>
+              </div>
+            </fieldset>
+            </form>
+        </div><!--  end comment display -->
+         <!----  All Comments ---->
+          <div class="row" id="display">
+          Comments: 
+          {{lit.currentLit.comments}}
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div
+  </div
+
 
   <!----  All Lit ---->
   <div class="row" id="display">
@@ -101,9 +129,9 @@
         <div class="col-md-4" id="lit-item">
           <button class="btn btn-default" id="lit-button"><a href="{{allLit.url}}">{{allLit.postTitle}}</a></button>
           <div id="action-icons">
-            <button class="btn btn-default" ng-click="lit.toggleModal()"><span class="glyphicon glyphicon-pencil"></span></button>
+            <button class="btn btn-default" ng-click="lit.toggleModal(); lit.toggleEdit()"><span class="glyphicon glyphicon-pencil"></span></button>
             <button class="btn btn-default" ng-click="lit.likeLit(allLit._id)"><span class="glyphicon glyphicon-heart"><b> {{allLit.likes}}</b></span></button>
-            <button class="btn btn-default" ng-click="lit.commentLit(allLit._id)"><span class="glyphicon glyphicon-comment"><b>  {{allLit.commentCount}}</b></span></button><br/> 
+            <button class="btn btn-default" ng-click="lit.toggleModal(); lit.toggleComment()"><span class="glyphicon glyphicon-comment"><b>  {{allLit.commentCount}}</b></span></button><br/> 
           </div>
         </div>
       </li>
