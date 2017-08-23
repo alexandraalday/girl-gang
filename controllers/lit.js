@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Lit = require('../models/lit.js')
+const User = require('../models/user.js')
 
 //index route for Lit = literature content
 router.get('/', (req, res)=> {
