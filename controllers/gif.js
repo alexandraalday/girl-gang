@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Gif = require('../models/gif.js')
+const User = require('../models/user.js')
 
 //index route
 router.get('/', (req, res)=> {
@@ -19,9 +20,18 @@ router.get('/:id', (req, res)=> {
 
 //new route
 router.post('/', (req, res)=> {
-  Gif.create(req.body, (err, createdGif)=> { //req.body > req.params?
-    res.json(createdGif)
-  })
+  if(req.session.email){//only logged in users can create a gif
+    Gif.create(req.body, (err, createdGif)=>{
+      User.findOneAndUpdate(
+        {email: req.session.email},
+        {$push: {gifs: createdGif}},
+        {safe: true, upsert: true, new: true},
+        (err, model)=>{
+          console.log(err);
+        })
+        res.json(createdGif)
+    })
+  }
 })
 
 //like route
