@@ -66,14 +66,14 @@
                   <form id="commentForm" ng-submit="music.addComment(music.currentMusic._id); music.upComment(music.currentMusic._id)">
                   <fieldset>
                     <div class="form-group">
-                      <textarea class="form-control" id="comments" ng-model="music.currentMusic.comments">What's on your mind?</textarea>
+                      <textarea class="form-control" type="text" id="comments" ng-model="music.commentedMusic.comments">What's on your mind?</textarea>
                       <button class="btn btn-primary" type="submit">Confirm</button>
                     </div>
                   </fieldset>
                   </form>
                 <!----  All Comments ---->
                 <ul id="comment-list">
-                  <li ng-repeat="comment in music.currentMusic.comments" ng-click="music.currentMusic(song._id)">
+                  <li ng-repeat="comment in music.currentMusic.comments track by $index">
                     <div class="col-md-4" id="comment-item">
                       <p>{{comment}}<p>
                       <hr></hr>

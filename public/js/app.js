@@ -379,10 +379,12 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
       $http({
         method: 'PUT',
         url: '/music/comment/' + id,
-        data: this.currentMusic
+        data: this.commentedMusic
       }).then(function(response){
           console.log(response)
           controller.commentDisplay = false;
+          controller.commentedMusic = {};
+          controller.getMusic();
       }, function(err){
           console.log(err);
       })
