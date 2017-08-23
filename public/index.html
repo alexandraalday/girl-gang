@@ -43,7 +43,7 @@
           <li ng-if=!user.loggedIn ng-click="user.goToLogin()"><a href="#">LOGIN</a></li>
           <li ng-if=user.loggedIn ng-click="user.logOut()"><a href="#" style="color:#f759c2;">LOGOUT</a></li>
           <li ng-if=!user.loggedIn ng-click="user.goToRegister()"><a href="#" style="color: #f759c2;">REGISTER</a></li>
-          <li ng-if=user.loggedIn><a href="#" style="color:#f759c2;">{{user.loginEmail}}</a></li>
+          <li ng-if=user.loggedIn ng-click="user.toggleModal()"><a href="#" style="color:#f759c2;">{{user.loginEmail}}</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div>
@@ -110,32 +110,33 @@
        <div class="modal-content">
          <div class="modal-header">
          <!---- Close Button ---->
-           <span id="closebutton" class="text-top"><button class="btn btn-default" ng-click="music.toggleModal()">X</button></span>
+           <span id="closebutton" class="text-top"><button class="btn btn-default" ng-click="user.toggleModal()">X</button></span>
          </div>
          <div class="modal-body">
-           <iframe width="300" height="380" frameborder="0" allowtransparency="true" ng-src="{{music.currentMusic.embed}}"></iframe><br/>
-           <p> Tag: {{music.currentMusic.tag}}</p>
-           <p> Author: {{music.currentMusic.author}}</p>
+           <h1 id="exampleModalLabel">{{user.currentUser.name}}</h1>
+           <img ng-src="{{user.currentGif.image}}"/><br/>
            <!---- Edit Button ---->
-           <button class="btn btn-primary" ng-click="music.toggleEdit()">Edit</button>
+           <button class="btn btn-primary" ng-click="user.toggleEdit()">Edit</button>
            <!---- Delete Button ---->
-           <button class="btn btn-default" ng-click="music.deleteMusic(music.currentMusic._id)">Delete</button>
+           <button class="btn btn-default" ng-click="user.deleteUser(user.currentUser._id)">Delete</button>
            <!---- Edit Form ---->
-           <div ng-if="music.editDisplay">
-             <form id="musicForm" ng-submit="music.updateMusic(music.currentMusic._id)">
+           <div ng-if="user.editDisplay">
+             <form id="userForm" ng-submit="user.updateUser(user.currentUser._id)">
              <fieldset>
                <div class="form-group">
-                 <input class="form-control" id="link" type="text" placeholder="{{music.currentMusic.link}}" ng-model="music.editedMusic.link">
+                 Name
+                 <input class="form-control" type="text" placeholder="{{music.currentUser.name}}" ng-model="user.editedUser.name">
                </div>
                <div class="form-group">
-                 <input class="form-control" type="text" placeholder="{{music.currentMusic.tag}}" ng-model="music.editedMusic.tag">
+                 Image Link
+                 <input class="form-control" type="text" placeholder="{{user.currentUser.image}}" ng-model="user.editedUser.image">
                </div>
                <div class="form-group">
-                 <input class="form-control" type="text" placeholder="{{music.currentMusic.author}}" ng-model="music.editedMusic.author">
+                 <input class="form-control" type="textarea" placeholder="{{user.currentUser.bio}}" ng-model="user.editedUser.bio">
                </div>
                <div class="form-group">
-                 <button ng-click="music.currentMusic.name = null">Cancel</button>
-                 <button type="submit" ng-click="music.updateMusic(music.currentMusic._id)">Confirm</button>
+                 <button ng-click="user.currentUser.name = null">Cancel</button>
+                 <button type="submit" ng-click="user.updateUser(user.currentUser._id)">Confirm</button>
                </div>
              </fieldset>
              </form>
