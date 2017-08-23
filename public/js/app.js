@@ -251,6 +251,7 @@ app.controller('MusicController', ['$http', function($http){
     this.editMusic = {};
     this.editDisplay = false
     this.newDisplay = false;
+    this.commentDisplay = false;
 
     this.addMusic = function(){
       const spotifyId = this.link.split('.com/')[1]
@@ -262,7 +263,8 @@ app.controller('MusicController', ['$http', function($http){
           embed: 'https://open.spotify.com/embed/' + spotifyId,
           likes: this.likes,
           tag: this.tag,
-          author: this.author
+          author: this.author,
+          comments: this.comments
         }
       }).then(function(response){
         console.log(response.data.link);
@@ -288,6 +290,20 @@ app.controller('MusicController', ['$http', function($http){
         }, function(err){
             console.log(err);
         })
+    }
+
+    this.addComment = function(id){
+      console.log(controller.currentMusic.comments)
+      $http({
+        method: 'PUT',
+        url: '/music/comment/' + id,
+        data: this.currentMusic
+      }).then(function(response){
+          console.log(response)
+          controller.commentDisplay = false;
+      }, function(err){
+          console.log(err);
+      })
     }
 
     this.getMusic = function(){
@@ -347,6 +363,9 @@ app.controller('MusicController', ['$http', function($http){
     this.toggleModal = function(){
       this.modal = !this.modal;
     }
+    this.toggleComment = function(){
+      this.commentDisplay = !this.commentDisplay;
+    };
 
     this.getMusic()
 }])

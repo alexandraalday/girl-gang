@@ -23,10 +23,19 @@ router.post('/', (req, res)=> {
   })
 })
 
+
+
 //like route
 router.put('/like/:id', (req, res)=>{
   Music.findByIdAndUpdate(req.params.id, {$inc: {likes: 1}} ,(err, foundSong) => {
     res.json(foundSong)
+  })
+})
+
+//new comment route
+router.put('/comment/:id', (req, res)=>{
+  Music.findByIdAndUpdate(req.params.id, {$push: {comments: req.body.comments}}, (err, updatedSong) => {
+    res.json(updatedSong)
   })
 })
 
