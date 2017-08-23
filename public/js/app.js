@@ -559,6 +559,19 @@ app.controller('LitController', ['$http', function($http){
       })
     }
 
+     this.upComment = function(id){
+      $http({
+        method: 'PUT',
+        url: '/lits/comment/up/' + id,
+      }).then(function(response){
+          console.log(response)
+          controller.commentDisplay = false;
+          controller.getLits();
+      }, function(err){
+          console.log(err);
+      })
+    }
+
   //ajax call to display all the lit posts to the page
     this.getLits = function(){
       $http({

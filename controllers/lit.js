@@ -30,6 +30,13 @@ router.put('/like/:id', (req, res)=>{
   })
 })
 
+//up vote comment route
+router.put('/comment/up/:id', (req, res)=>{
+  Lit.findByIdAndUpdate(req.params.id, {$inc: {commentCount: 1}}, (err, updatedLit) => {
+    res.json(updatedLit)
+  })
+})
+
 //new comment route
 router.put('/comment/:id', (req, res)=>{
   Lit.findByIdAndUpdate(req.params.id, {$push: {comments: req.body.comments}}, (err, updatedLit) => {
