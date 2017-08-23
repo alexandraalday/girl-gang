@@ -17,13 +17,14 @@ app.controller('UserController', ['$http', function($http){
   //empty object we can later use this variable to edit a certain gif
   this.editUser = {};
   this.loggedIn = false;
-
-  //login function
-  this.log = function(){
-    this.loggedIn = true;
-    //if req.body.password
+  this.loginForm = true;
+  this.registerForm = false;
+  this.message = '';
+  //function to switch the forms from login to register
+  this.toggleForms = function(){
+    this.registerForm = !this.registerForm
+    this.loginForm = !this.loginForm
   }
-
   //ajax call to add a new User
   this.register = function(email, password){
     $http({
@@ -34,17 +35,44 @@ app.controller('UserController', ['$http', function($http){
         password: this.registeredPassword
       }
     }).then(function(response){
-      console.log(response.data);
-      //so it will make the page appear
-      controller.log()
-      //so it will automagically add this user to the users list
-      //controller.getUsers();
-      //these controllers will reset the new user form
-      // controller.email = '',
-      // controller.password = ''
+      //console.log(response.data);
+      controller.loggedIn = response.data;
+      controller.registerForm = false;
     }, function(err){
       console.log(err);
-      console.log('wtf are you doing?');
+    })
+  }
+  //ajax call to login
+  this.login = function(email, password){
+    $http({
+      method: 'POST',
+      url: '/users/login',
+      data: {
+        email: this.loginEmail,
+        password: this.loginPassword
+      }
+    }).then(function(response){
+      console.log(response);
+      if(response.data === true){
+      controller.loginForm = false;
+      controller.loggedIn = response.data;
+      console.log('succesful login');
+
+    } else {
+      controller.message = response.data
+    }
+    }, function(err){
+      console.log(err);
+    })
+  }
+  //ajax call to logout a session
+  this.logOut = function(){
+    $http({
+      method: 'GET',
+      url: '/users/logout'
+    }).then(function(response){
+      controller.loggedIn = response.data
+      controller.loginForm = true;
     })
   }
   //ajax call to show all  the users
@@ -95,6 +123,7 @@ app.controller('UserController', ['$http', function($http){
       url: '/users/' + user,
     }).then(function(response){
       controller.getUsers()
+      controller.logOut()
     }, function(err){
       console.log('err in delete route');
       console.log(err);
@@ -103,7 +132,7 @@ app.controller('UserController', ['$http', function($http){
 
   //call the function so all the users render automagically
   this.getUsers()
-
+  console.log(this.loggedIn);
 }])
 
 

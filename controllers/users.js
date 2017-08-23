@@ -29,7 +29,7 @@ router.post('/register', (req, res)=> {
     req.session.email = user.email;
     req.session.logged = true;
     //instead of res.redirect send the user via json
-    res.json(user)
+    res.json(req.session.logged)
   })
 })
 
@@ -43,16 +43,17 @@ router.post('/login', (req, res)=> {
         req.session.email = req.body.email
         req.session.logged = true
 
-        res.send(req.session.username)
+        // res.send(req.session.logged)
+        res.json(req.session.logged)
       } else {
         req.session.message = "email or password are incorrect"
         //dont know if this line is right/necessary
-        res.redirect('/')
+        res.json(req.session.message)
       }
     } else {
       req.session.message = "email or password are incorrect"
       //dont know if this line is right/necessary
-      res.redirect('/')
+      res.json(req.session.message)
     }
   })
 })
@@ -60,8 +61,9 @@ router.post('/login', (req, res)=> {
 //Route to logout
 router.get('/logout', (req, res)=> {
   req.session.destroy(function(err){
+    req.session = false;
     console.log('succesfully logged out');
-    res.redirect('/')
+    res.json(req.session)
   })
 })
 
