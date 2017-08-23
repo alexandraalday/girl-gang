@@ -156,6 +156,9 @@ app.controller('GifController', ['$http', function($http){
     this.toggleModal = function(){
       this.modal = !this.modal;
     }
+    this.toggleComment = function(){
+      this.commentDisplay = !this.commentDisplay;
+    };
     
     this.likeGif = function(id){
       $http({
@@ -164,6 +167,19 @@ app.controller('GifController', ['$http', function($http){
       }).then(function(response){
         console.log(response)
         controller.getGifs();
+      }, function(err){
+          console.log(err);
+      })
+    }
+
+    this.addComment = function(id){
+      $http({
+        method: 'PUT',
+        url: '/gifs/comment/' + id,
+        data: this.currentGif
+      }).then(function(response){
+          console.log(response)
+          controller.commentDisplay = false;
       }, function(err){
           console.log(err);
       })

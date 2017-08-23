@@ -9,7 +9,7 @@ const gifSchema = mongoose.Schema({
   	likes: {type: Number, default:0},
   	author: String,
   	commentCount: {type: Number, default:0},
-  	comments: Array
+  	comments: [{type: String}]
 });
 
 const Gif = mongoose.model('Gif', gifSchema);
