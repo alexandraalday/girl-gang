@@ -6,13 +6,13 @@
   <div class="jumbotron" id="gif-jumbotron">
     <h1> Gifs </h1>
     <h4> Get Your Giggle On, Feminista </h4>
-  
+
    <!-------- Add New Gif Button ------>
   <div class="col-lg-12">
-    <button class="btn btn-default" ype="submit" ng-click="gif.toggleNew()">Add New Gif</button>
+    <button class="btn btn-default" type="submit" ng-click="gif.toggleNew()">Add New Gif</button>
   </div>
-  
-   <!-------- Add New Gif Form ------>    
+
+   <!-------- Add New Gif Form ------>
   <div ng-if="gif.newDisplay">
     <form ng-submit="gif.addGif()">
       <fieldset>
@@ -24,19 +24,19 @@
             </div>
             <div class="form-group">
               <input class="form-control" id="gif-tag" placeholder="Tag your gif" type="text" ng-model="gif.tag">
-            </div>    
+            </div>
             <div class="form-group">
                 <button type="reset" class="btn btn-default">Reset</button>
-                <button type="submit" class="btn btn-primary" ng-click="gif.currentGif.name =null">Submit</button>
+                <button type="submit" class="btn btn-primary" ng-click="gif.currentGif.name=null">Submit</button>
             </div>
           </fieldset>
         </form>
   </div><!--end new display -->
   </div><!-- end jumbotron -->
 
-  
 
-     <!-------- Gif Modal ------>  
+
+     <!-------- Gif Modal ------>
     <div ng-if="gif.modal" id="gifmodal">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -47,6 +47,7 @@
           <div class="modal-body">
             <h1 id="exampleModalLabel">{{gif.currentGif.name}}</h1>
             <img ng-src="{{gif.currentGif.url}}"/><br/>
+
             <!---- Edit Button ---->
             <button class="btn btn-primary" ng-click="gif.toggleEdit()">Edit</button>
             <!---- Delete Button ---->
@@ -55,17 +56,27 @@
             <div ng-if="gif.editDisplay">
               <form id="gifForm" ng-submit="gif.updateGif(gif.currentGif._id)">
               <fieldset>
+
                 <div class="form-group">
-                  <input class="form-control" type="text" placeholder="{{gif.currentGif.name}}" ng-model="gif.editedGif.name">
+                  <input class="form-control" type="text" placeholder="Giphy Name" ng-model="gif.editedGif.name">
                 </div>
+
                 <div class="form-group">
-                  <input class="form-control" type="text" placeholder="{{gif.currentGif.url}}" ng-model="gif.editedGif.url">
+                  <input class="form-control" type="text" placeholder="Giphy URL" ng-model="gif.editedGif.url">
                 </div>
+
                 <div class="form-group">
-                  <input class="form-control" type="text" placeholder="{{gif.currentGif.tag}}" ng-model="gif.editedGif.tag">
+                  <input class="form-control" type="text" placeholder="Giphy Tag" ng-model="gif.editedGif.tag">
                 </div>
+
                 <div class="form-group">
+
+                  <button ng-if="gif.editDisplay" ng-click="gif.currentGif.name = null">Cancel</button>
+                  <!-- add reset to all edit modals -->
+                  <button type="reset" class="btn btn-default">Reset</button>
+
                   <button ng-click="music.toggleModal(); music.toggleEdit()">Cancel</button>
+
                   <button type="submit" ng-click="gif.updateGif(gif.currentGif._id)">Confirm</button>
                 </div>
                 </fieldset>
@@ -77,14 +88,14 @@
             <!--
             -comment display to show all commented getComment()
             -iterate comment count upComment()
-            -toggle showing comment section based on which button was clicked ng-show/ng-hide 
+            -toggle showing comment section based on which button was clicked ng-show/ng-hide
             -->
           <!---- New Comment Form ---->
             <div ng-if="gif.commentDisplay">
               <form id="commentForm" ng-submit="gif.addComment(gif.currentGif._id)">
               <fieldset>
                 <div class="form-group">
-                  <input class="form-control" id="comments" type="textarea" placeholder="What's on your mind?" ng-model="gif.currentGif.comments"> 
+                  <input class="form-control" id="comments" type="textarea" placeholder="What's on your mind?" ng-model="gif.currentGif.comments">
                 </div>
                 <div class="form-group">
                   <button ng-click="gif.toggleModal(); gif.toggleComment()">Cancel</button>
@@ -95,7 +106,7 @@
             </div><!--  end comment display -->
            <!----  All Comments ---->
             <div class="row" id="display">
-            Comments: 
+            Comments:
             {{gif.currentGif.comments}}
             </div>
           </div>
@@ -112,7 +123,7 @@
          <div id="action-icons">
             <button class="btn btn-default" ng-click="gif.toggleModal(); gif.toggleEdit()"><span class="glyphicon glyphicon-pencil"></span></button>
             <button class="btn btn-default" ng-click="gif.likeGif(giphy._id)"><span class="glyphicon glyphicon-heart"><b> {{giphy.likes}}</b></span></button>
-            <button class="btn btn-default" ng-click="gif.toggleModal(); gif.toggleComment()"><span class="glyphicon glyphicon-comment"><b> {{giphy.commentCount}}</b></span></button><br/> 
+            <button class="btn btn-default" ng-click="gif.toggleModal(); gif.toggleComment()"><span class="glyphicon glyphicon-comment"><b> {{giphy.commentCount}}</b></span></button><br/>
           </div>
         </div>
       </li>
