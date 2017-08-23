@@ -9,7 +9,7 @@ const musicSchema = mongoose.Schema({
 	likes: {type: Number, default:0},
 	author: String,
 	commentCount: {type: Number, default:0},
-	comments: Array
+	comments: [{type: String}]
 });
 
 const Music = mongoose.model('Music', musicSchema);
