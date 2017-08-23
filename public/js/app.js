@@ -331,6 +331,7 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
           likes: this.likes,
           tag: this.tag,
           author: this.author,
+          commentCount: this.commentCount,
           comments: this.comments
         }
       }).then(function(response){
@@ -367,6 +368,19 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
       }).then(function(response){
           console.log(response)
           controller.commentDisplay = false;
+      }, function(err){
+          console.log(err);
+      })
+    }
+
+    this.upComment = function(id){
+      $http({
+        method: 'PUT',
+        url: '/music/comment/up/' + id,
+      }).then(function(response){
+          console.log(response)
+          controller.commentDisplay = false;
+          controller.getMusic();
       }, function(err){
           console.log(err);
       })
