@@ -125,7 +125,9 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
       controller.getUsers();
       controller.currentUser = {};
       controller.user = {};
+      // adding this to see if I can grab user modal input
       controller.editedUser = {};
+      // controller.editedUser._id = {};
     }, function(error){
       console.log(error);
       console.log('error in update route');
@@ -139,6 +141,7 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
     }).then(function(response){
       controller.getUsers()
       controller.modal = false;
+      //delete user needs LOGOUT FUNCTION?  SEEMS LOGICAL
       controller.logOut()
     }, function(err){
       console.log('err in delete route');

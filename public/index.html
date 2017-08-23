@@ -144,6 +144,11 @@
                  <button ng-if="user.editDisplay" ng-click="user.currentUser.name = null">Cancel</button>
                  <button type="reset" class="btn btn-default">Reset</button>
                  <button type="submit">Confirm</button>
+
+                 {{user.editedUser._id}}
+                 {{user.editedUser.name}}
+                 <img ng-src="{{user.editedUser.image}}"/><br/>
+                 {{user.editedUser.bio}}
                </div>
              </fieldset>
              </form>
