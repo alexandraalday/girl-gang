@@ -68,6 +68,7 @@ app.controller('UserController', ['$http', function($http){
       controller.loginForm = false;
       controller.loggedIn = response.data;
       console.log('succesful login');
+      controller.checkLogin()
 
     } else {
       controller.message = response.data
@@ -96,6 +97,18 @@ app.controller('UserController', ['$http', function($http){
     }, function(err){
       console.log(err);
       console.log('broke in show user call');
+    })
+  }
+  this.checkLogin = function(){
+    $http({
+      method: 'GET',
+      url: '/users/checkLogin'
+    }).then(function(response){
+      console.log(response.data);
+      controller.checkPlz = response.data;
+    }, function(err){
+      console.log(err);
+      console.log('error in checkLogin route');
     })
   }
   //ajax call to identify a certain user by id
