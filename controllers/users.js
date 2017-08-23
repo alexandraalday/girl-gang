@@ -14,7 +14,6 @@ router.get('/', (req, res)=> {
 
 //Post route to register a new user
 router.post('/register', (req, res)=> {
-  console.log('hiiiiiiiiiiii');
   //hash the password
   const password = req.body.password
   const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(10))
@@ -23,17 +22,14 @@ router.post('/register', (req, res)=> {
   const userDbEntry = {};
   userDbEntry.email = req.body.email;
   userDbEntry.password = passwordHash;
-  console.log('are you working, helloooo?');
   //put password into db
   User.create(userDbEntry, (err, user)=> {
     //set up session here so we can use same we did for the login
-    console.log(user);
-    console.log('this is before db.create');
     req.session.message = '';
     req.session.email = user.email;
     req.session.logged = true;
     //instead of res.redirect send the user via json
-    res.json(user)
+    res.json(req.session.logged)
   })
 })
 
@@ -47,16 +43,17 @@ router.post('/login', (req, res)=> {
         req.session.email = req.body.email
         req.session.logged = true
 
-        res.send(req.session.username)
+        // res.send(req.session.logged)
+        res.json(req.session.logged)
       } else {
         req.session.message = "email or password are incorrect"
         //dont know if this line is right/necessary
-        res.redirect('/')
+        res.json(req.session.message)
       }
     } else {
       req.session.message = "email or password are incorrect"
       //dont know if this line is right/necessary
-      res.redirect('/')
+      res.json(req.session.message)
     }
   })
 })
@@ -64,8 +61,9 @@ router.post('/login', (req, res)=> {
 //Route to logout
 router.get('/logout', (req, res)=> {
   req.session.destroy(function(err){
+    req.session = false;
     console.log('succesfully logged out');
-    res.redirect('/')
+    res.json(req.session)
   })
 })
 
