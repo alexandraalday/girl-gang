@@ -145,7 +145,7 @@ app.controller('UserController', ['$http', function($http){
 ///////////////////////
 
 //controller for gifs
-app.controller('GifController', ['$http', function($http){
+app.controller('GifController', ['$http', '$scope', function($http, $scope){
     //an empty array so we can push the gifs we make into it to display on the page
     this.allGifs = [];
     this.newDisplay = false;
@@ -179,15 +179,24 @@ app.controller('GifController', ['$http', function($http){
         console.log(err);
       })
     }
+
     this.toggleNew = function(){
       this.newDisplay = !this.newDisplay;
+      this.reset = function() {
+        this.addForm.reset();
+      }
     }
     this.toggleEdit = function(){
       this.editDisplay = !this.editDisplay;
+      //when edit button is pushed form will dropdown and be empty
     }
     this.toggleModal = function(){
       this.modal = !this.modal;
+      //when edit button is pushed form will dropdown and be empty
     }
+    this.toggleComment = function(){
+      this.commentDisplay = !this.commentDisplay;
+    };
 
     this.likeGif = function(id){
       $http({
@@ -196,6 +205,19 @@ app.controller('GifController', ['$http', function($http){
       }).then(function(response){
         console.log(response)
         controller.getGifs();
+      }, function(err){
+          console.log(err);
+      })
+    }
+
+    this.addComment = function(id){
+      $http({
+        method: 'PUT',
+        url: '/gifs/comment/' + id,
+        data: this.currentGif
+      }).then(function(response){
+          console.log(response)
+          controller.commentDisplay = false;
       }, function(err){
           console.log(err);
       })
@@ -224,6 +246,8 @@ app.controller('GifController', ['$http', function($http){
         //sets the url, not sure why this is the only one we did this with.
         controller.currentGif.url = response.data[0].url;
         console.log(controller.currentGif);
+        //may take this out:
+        $scope.input = '';
       }, function(err){
         console.log(err);
       })
@@ -240,7 +264,11 @@ app.controller('GifController', ['$http', function($http){
         //controller.editDisplay = false;
         //controller.displayGif = false;
         //to unselect the current gif object
-        controller.currentGif = {}
+        controller.currentGif = {};
+        //to empty the model if needed to then empty the form
+        controller.gif = {};
+        //this resets the form after the gif has been edited UPDATE TO OTHER MODELS
+        controller.editedGif = {};
       }, function(err){
         console.log(err);
         console.log('error in the edit call');
@@ -276,13 +304,14 @@ app.config(['$sceDelegateProvider', function($sceDelegateProvider) {
     ]);
 }]);
 
-app.controller('MusicController', ['$http', function($http){
+app.controller('MusicController', ['$http', '$scope', function($http, $scope){
     const controller = this;
     this.allMusic = [];
     this.currentMusic = {};
     this.editMusic = {};
     this.editDisplay = false
     this.newDisplay = false;
+    this.commentDisplay = false;
 
     this.addMusic = function(){
       const spotifyId = this.link.split('.com/')[1]
@@ -294,7 +323,8 @@ app.controller('MusicController', ['$http', function($http){
           embed: 'https://open.spotify.com/embed/' + spotifyId,
           likes: this.likes,
           tag: this.tag,
-          author: this.author
+          author: this.author,
+          comments: this.comments
         }
       }).then(function(response){
         console.log(response.data.link);
@@ -322,6 +352,20 @@ app.controller('MusicController', ['$http', function($http){
         })
     }
 
+    this.addComment = function(id){
+      console.log(controller.currentMusic.comments)
+      $http({
+        method: 'PUT',
+        url: '/music/comment/' + id,
+        data: this.currentMusic
+      }).then(function(response){
+          console.log(response)
+          controller.commentDisplay = false;
+      }, function(err){
+          console.log(err);
+      })
+    }
+
     this.getMusic = function(){
       $http({
         method: 'GET',
@@ -340,6 +384,8 @@ app.controller('MusicController', ['$http', function($http){
       }).then(function(response){
         controller.currentMusic = response.data[0];
         console.log(controller.currentMusic);
+        //may take this out:
+        $scope.input = '';
       }, function(err){
         console.log(err);
       })
@@ -352,7 +398,11 @@ app.controller('MusicController', ['$http', function($http){
         data: this.editedMusic
       }).then(function(response){
         controller.getMusic();
+        controller.currentMusic = {};
+        controller.music = {};
+        controller.editedMusic = {};
         controller.editDisplay = false;
+
       }, function(err){
         console.log(err);
       })
@@ -379,6 +429,9 @@ app.controller('MusicController', ['$http', function($http){
     this.toggleModal = function(){
       this.modal = !this.modal;
     }
+    this.toggleComment = function(){
+      this.commentDisplay = !this.commentDisplay;
+    };
 
     this.getMusic()
 }])
@@ -491,8 +544,7 @@ app.controller('LitController', ['$http', function($http){
       }).then(function(response){
         controller.getLits();
         controller.editDisplay = false;
-        //take this out if reset form works, placeholder for next attempt to clear edit form:
-        this.newEntry = {};
+        controller.editedLit = {};
       }, function(err){
         console.log(err);
         console.log('is there still an error in the edit call');
