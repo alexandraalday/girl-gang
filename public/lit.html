@@ -94,8 +94,7 @@
           <button class="btn btn-primary" ng-click="lit.toggleComment()">Comment</button>
           <!--
           -comment display to show all commented getComment()
-          -toggle showing comment section based on which button was clicked ng-show/ng-hide
-          -->
+          -toggle showing comment section based on which button was clicked ng-show/ng-hide -->
         <!---- New Comment Form ---->
           <div ng-if="lit.commentDisplay">
             <form id="commentForm" ng-submit="lit.addComment(lit.currentLit._id); lit.upComment(lit.currentLit._id)">
