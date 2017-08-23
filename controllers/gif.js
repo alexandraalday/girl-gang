@@ -74,7 +74,12 @@ router.put('/:id', (req, res)=> {
 //delete route'
 router.delete('/:id', (req, res)=> {
   Gif.findByIdAndRemove(req.params.id, (err, deletedGif)=>{
-    res.json(deletedGif)
+    User.findOne({ email: req.session.email}, (err, foundUser)=> {
+      foundUser.gifs.id(req.params.id).remove();
+      foundUser.save((err, data)=> {
+        res.json(deletedGif)
+      })
+    })
   })
 })
 
