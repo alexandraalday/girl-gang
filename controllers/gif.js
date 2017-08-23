@@ -31,6 +31,14 @@ router.put('/like/:id', (req, res)=>{
   })
 })
 
+//new comment route
+router.put('/comment/:id', (req, res)=>{
+  Gif.findByIdAndUpdate(req.params.id, {$push: {comments: req.body.comments}}, (err, updatedGif) => {
+    res.json(updatedGif)
+  })
+})
+
+
 //edit route
 router.put('/:id', (req, res)=> {
   Gif.findByIdAndUpdate(req.params.id, req.body, { new : true }, (err, updatedGif)=>{

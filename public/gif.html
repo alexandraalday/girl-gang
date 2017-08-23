@@ -65,16 +65,43 @@
                   <input class="form-control" type="text" placeholder="{{gif.currentGif.tag}}" ng-model="gif.editedGif.tag">
                 </div>
                 <div class="form-group">
-                  <button ng-if="music.editDisplay" ng-click="gif.currentGif.name = null">Cancel</button>
+                  <button ng-click="music.toggleModal(); music.toggleEdit()">Cancel</button>
                   <button type="submit" ng-click="gif.updateGif(gif.currentGif._id)">Confirm</button>
                 </div>
                 </fieldset>
               </form>
+            </div><!-- end gif display -->
+            <!-- Comment Section -->
+            <!---- Comment Button ---->
+            <button class="btn btn-primary" ng-click="gif.toggleComment()">Comment</button>
+            <!--
+            -comment display to show all commented getComment()
+            -iterate comment count upComment()
+            -toggle showing comment section based on which button was clicked ng-show/ng-hide 
+            -->
+          <!---- New Comment Form ---->
+            <div ng-if="gif.commentDisplay">
+              <form id="commentForm" ng-submit="gif.addComment(gif.currentGif._id)">
+              <fieldset>
+                <div class="form-group">
+                  <input class="form-control" id="comments" type="textarea" placeholder="What's on your mind?" ng-model="gif.currentGif.comments"> 
+                </div>
+                <div class="form-group">
+                  <button ng-click="gif.toggleModal(); gif.toggleComment()">Cancel</button>
+                  <button type="submit">Confirm</button>
+                </div>
+              </fieldset>
+              </form>
+            </div><!--  end comment display -->
+           <!----  All Comments ---->
+            <div class="row" id="display">
+            Comments: 
+            {{gif.currentGif.comments}}
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </div
 
   <!----  All Gifs ---->
   <div class="row" id="display">
@@ -83,9 +110,9 @@
         <div class="col-md-4" id="gif-item">
          <a href="{{giphy.url}}"><img ng-src="{{giphy.url}}"/></a>
          <div id="action-icons">
-            <button class="btn btn-default" ng-click="gif.toggleModal()"><span class="glyphicon glyphicon-pencil"></span></button>
+            <button class="btn btn-default" ng-click="gif.toggleModal(); gif.toggleEdit()"><span class="glyphicon glyphicon-pencil"></span></button>
             <button class="btn btn-default" ng-click="gif.likeGif(giphy._id)"><span class="glyphicon glyphicon-heart"><b> {{giphy.likes}}</b></span></button>
-            <button class="btn btn-default" ng-click="gif.commentGif(giphy._id)"><span class="glyphicon glyphicon-comment"><b> {{giphy.commentCount}}</b></span></button><br/> 
+            <button class="btn btn-default" ng-click="gif.toggleModal(); gif.toggleComment()"><span class="glyphicon glyphicon-comment"><b> {{giphy.commentCount}}</b></span></button><br/> 
           </div>
         </div>
       </li>
