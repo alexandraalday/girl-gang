@@ -169,7 +169,6 @@ app.controller('GifController', ['$http', '$scope', function($http, $scope){
         method: 'POST',
         url: '/gifs',
         data: {
-          name: this.name,
           url: this.url,
           tag: this.tag,
           author: this.author
@@ -179,7 +178,6 @@ app.controller('GifController', ['$http', '$scope', function($http, $scope){
         controller.newDisplay = false;
         controller.getGifs();
         //this resets the add new gif form text boxes
-        controller.name = '',
         controller.url = '',
         controller.tag = ''
       }, function(err){
@@ -221,10 +219,12 @@ app.controller('GifController', ['$http', '$scope', function($http, $scope){
       $http({
         method: 'PUT',
         url: '/gifs/comment/' + id,
-        data: this.currentGif
+        data: this.commentedGif
       }).then(function(response){
           console.log(response)
           controller.commentDisplay = false;
+          controller.commentedMusic = {};
+          controller.getGifs();
       }, function(err){
           console.log(err);
       })
@@ -379,10 +379,12 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
       $http({
         method: 'PUT',
         url: '/music/comment/' + id,
-        data: this.currentMusic
+        data: this.commentedMusic
       }).then(function(response){
           console.log(response)
           controller.commentDisplay = false;
+          controller.commentedMusic = {};
+          controller.getMusic();
       }, function(err){
           console.log(err);
       })
