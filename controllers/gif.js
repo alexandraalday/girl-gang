@@ -20,9 +20,16 @@ router.get('/:id', (req, res)=> {
 
 //new route
 router.post('/', (req, res)=> {
-  Gif.create(req.body, (err, createdGif)=> { //req.body > req.params?
-    res.json(createdGif)
-  })
+  if(req.session.email){//only logged in users can create a gif
+    Gif.create(req.body, (err, createdGif)=>{
+      User.findOneAndUpdate(
+        {$push: {gifs: createdGif}},
+        (err, model)=>{
+          console.log(err);
+        })
+        res.json(createdGif)
+    })
+  }
 })
 
 //like route
