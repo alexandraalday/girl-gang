@@ -37,6 +37,14 @@ app.controller('UserController', ['$http', function($http){
       console.log(err);
     })
   }
+  this.goToRegister = function(){
+    this.registerForm = true;
+    this.loginForm = false;
+  }
+  this.goToLogin = function(){
+    this.loginForm = true;
+    this.registerForm = false;
+  }
   //ajax call to login
   this.login = function(email, password){
     $http({

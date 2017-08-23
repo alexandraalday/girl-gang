@@ -40,9 +40,9 @@
           <li><a href="#gifs" style="color: #f759c2;">GIFS</a></li>
           <li><a href="#music" style="color: #f759c2;">MUSIC</a></li>
           <li><a href="#lit" style="color: #f759c2;">LIT</a></li>
-          <li ng-if=!user.loggedIn><a href="#">LOGIN</a></li>
+          <li ng-if=!user.loggedIn ng-click="user.goToLogin()"><a href="#">LOGIN</a></li>
           <li ng-if=user.loggedIn ng-click="user.logOut()"><a href="#" style="color:#f759c2;">LOGOUT</a></li>
-          <li ng-if=!user.loggedIn><a href="#" style="color: #f759c2;">REGISTER</a></li>
+          <li ng-if=!user.loggedIn ng-click="user.goToRegister()"><a href="#" style="color: #f759c2;">REGISTER</a></li>
           <li ng-if=user.loggedIn><a href="#" style="color:#f759c2;">{{user.loginEmail}}</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
@@ -60,33 +60,9 @@
     </div>
   </header>
 
-  <!--  Login Form -->
-    <div class="" ng-if=user.loginForm>
-      <h1>Login</h1>
-      <form ng-submit="user.login();">
-        <input type="email" ng-model="user.loginEmail" placeholder="email"><br/>
-        <input type="password" ng-model="user.loginPassword" placeholder="password"><br/>
-        <button type="submit" class="btn btn-default" >login</button>
-        <h5>{{user.message}}</h5>
-      </br>
-      Need to Register?
-      <button ng-click="user.toggleForms()">Register Here</button>
-      </form>
-  </div>
-  <!-- Register Form -->
-    <div class="" ng-if=user.registerForm>
-      <h1>Register</h1>
-      <form ng-submit="user.register();">
-        <input type="text" ng-model="user.registeredEmail" placeholder="email"><br/>
-        <input type="text" ng-model="user.registeredPassword" placeholder="password"><br/>
-        <button type="submit" class="btn btn-default" >register</button>
-      </br>
-      Already Registered?
-      <button ng-click="user.toggleForms()">Login Here</button>
-      </form>
-    </div>
 
 
+<section id="forms" ng-include="'./forms.html'"></section>
 
 
 
