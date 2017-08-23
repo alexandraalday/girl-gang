@@ -38,9 +38,9 @@ app.controller('UserController', ['$http', function($http){
         password: this.registeredPassword
       }
     }).then(function(response){
-      //console.log(response.data);
       controller.loggedIn = response.data;
       controller.registerForm = false;
+      console.log(response.data);
     }, function(err){
       console.log(err);
     })
@@ -63,7 +63,7 @@ app.controller('UserController', ['$http', function($http){
         password: this.loginPassword
       }
     }).then(function(response){
-      console.log(response);
+      console.log(response.data);
       if(response.data === true){
       controller.loginForm = false;
       controller.loggedIn = response.data;

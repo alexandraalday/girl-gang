@@ -33,6 +33,17 @@ router.post('/register', (req, res)=> {
   })
 })
 
+//route to check to see if logged in
+router.get('/checkLogin', (req, res)=> {
+  if(req.session.logged){
+    User.findOne({email: req.body.email}, (err, user)=>{
+      res.json(user)
+    })
+  } else {
+    console.log('yo bitch ass aint the right user');
+  }
+})
+
 
 //Post route to login
 router.post('/login', (req, res)=> {
