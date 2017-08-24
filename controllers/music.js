@@ -55,6 +55,13 @@ router.put('/comment/:id', (req, res)=>{
 //edit route
 router.put('/:id', (req, res)=> {
   Music.findByIdAndUpdate(req.params.id, req.body, { new : true }, (err, updatedMusic)=>{
+    User.findOneAndUpdate(
+      {email: req.session.email},
+      {$set: { music: updatedMusic}},
+      { safe: true, upsert: true, new: true},
+      (err, model)=> {
+        console.log(err);
+      })
     res.json(updatedMusic)
   })
 })
