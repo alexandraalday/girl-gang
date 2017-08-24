@@ -1,19 +1,5 @@
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
-
-
-=======
->>>>>>> 365ad6e8551bffbcb50ad4dbc45378f75334a411
 const app = angular.module('girlGang', []);
   angular.module('app', ['ngSanitize']);
-
 
 
 ///////////////////////
@@ -147,8 +133,8 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
     })
   }
   //ajax call to update the user
-  this.updateUser = function(id){
-    console.log(id);
+  this.updateUser = function(user._id){
+    console.log(user._id);
 
     $http({
       method: 'PUT',
