@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user.js')
 const bcrypt = require('bcryptjs')
-//will we need to require other models here also?
-//for ex: const Lit = require('../models/lit.js')
 
 //index route
 router.get('/', (req, res)=> {
@@ -20,29 +18,21 @@ router.get('/checkLogin', (req, res)=> {
     })
   } else {
           req.session.message = "email or password are incorrect"
-      //dont know if this line is right/necessary
       res.json(req.session.message)
   }
 })
 
-
 //Post route to register a new user
 router.post('/register', (req, res)=> {
-  //hash the password
   const password = req.body.password
   const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(10))
-
-  //create an obect for db entry
   const userDbEntry = {};
   userDbEntry.email = req.body.email;
   userDbEntry.password = passwordHash;
-  //put password into db
   User.create(userDbEntry, (err, user)=> {
-    //set up session here so we can use same we did for the login
     req.session.message = '';
     req.session.email = user.email;
     req.session.logged = true;
-    //instead of res.redirect send the user via json
     res.json(req.session.logged)
   })
 })
@@ -56,17 +46,13 @@ router.post('/login', (req, res)=> {
         req.session.message = ''
         req.session.email = req.body.email
         req.session.logged = true
-
-        // res.send(req.session.logged)
         res.json(req.session.logged)
       } else {
         req.session.message = "email or password are incorrect"
-        //dont know if this line is right/necessary
         res.json(req.session.message)
       }
     } else {
       req.session.message = "email or password are incorrect"
-      //dont know if this line is right/necessary
       res.json(req.session.message)
     }
   })
@@ -87,16 +73,6 @@ router.get('/:id', (req, res)=> {
     res.json(foundUser)
   })
 })
-
-//the register route replaces this route
-//new route
-// router.post('/', (req, res)=> {
-//   User.create(req.body, (err, createdUser)=> { //req.body > req.params?
-//     res.json(createdUser)
-//   })
-// })
-
-
 
 //edit route
 router.get('/checkLogin', (req, res)=> {
@@ -121,10 +97,6 @@ router.put('/checkLogin', (req, res)=> {
     console.log('user added profile data info in their modal');
   }
 })
-
-
-
-
 
 //delete route'
 router.delete('/:id', (req, res)=> {
