@@ -42,11 +42,10 @@
           <li><a href="#gifs" style="color: #f759c2;">GIFS</a></li>
           <li><a href="#music" style="color: #f759c2;">MUSIC</a></li>
           <li><a href="#lit" style="color: #f759c2;">LIT</a></li>
-          <li ng-if=!user.loggedIn ng-click="user.goToLogin()"><a href="#">LOGIN</a></li>
+          <li ng-if=!user.loggedIn ng-click="user.goToLogin()" ng-click="user.addForm.reset()"><a href="#">LOGIN</a></li>
           <li ng-if=user.loggedIn ng-click="user.logOut()"><a href="#" style="color:#f759c2;">LOGOUT</a></li>
           <li ng-if=!user.loggedIn ng-click="user.goToRegister()"><a href="#" style="color: #f759c2;">REGISTER</a></li>
-          <li ng-if=user.loggedIn ng-click="user.toggleModal()"
-          ng-click="user.setCurrentUser(user._id)"><a href="#" style="color:#f759c2;">{{user.loginEmail}}</a></li>
+          <li ng-if=user.loggedIn><a href="#" style="color:#f759c2;">{{user.loginEmail}}</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div>
@@ -68,8 +67,6 @@
 <section id="forms" ng-include="'./forms.html'"></section>
 
 
-
-    <section> <!--ng-if=user.loggedIn -->
       <!---- Description Section  ---->
       <div id="about" class="row">
         <div class="col-lg-4 col-sm-6 portfolio-item">
@@ -106,9 +103,9 @@
           </div>
         </div>
       </div>
-
-    <!-- User Modal Section   -->
-   <div ng-if="user.modal" id="usermodal">
+      <section ng-if=user.loggedIn>
+    <!-- User Section   -->
+   <div id="usermodal" ng-hide=true> <!--nf-if="user.modal"-->
      <div class="modal-dialog" role="document">
        <div class="modal-content">
          <div class="modal-header">
@@ -171,4 +168,13 @@
 </section> <!-- end section tag for login functionality -->
 </section>
   </body>
+
+<footer class="footer">
+      <div class="container">
+        <p class="text-muted">Made with <span>&hearts;</span> by Alexandra Alday, Brooke Baxa, and Jen Schumann</p>
+      </div>
+</footer>
+
+
+
 </html>

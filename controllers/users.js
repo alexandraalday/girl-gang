@@ -12,6 +12,21 @@ router.get('/', (req, res)=> {
   })
 })
 
+//route to check to see if logged in
+router.get('/checkLogin', (req, res)=> {
+  if(req.session.logged){
+    User.findOne({email: req.session.email}, (err, user)=>{
+      res.json(user)
+    })
+  } else {
+          req.session.message = "email or password are incorrect"
+      //dont know if this line is right/necessary
+      res.json(req.session.message)
+  }
+})
+
+
+
 //Post route to register a new user
 router.post('/register', (req, res)=> {
   //hash the password

@@ -1,31 +1,34 @@
 <!--  Login Form -->
-  <div class="" ng-if=user.loginForm>
+  <div id="login" class="text-center" ng-if=user.loginForm>
     <h1>Login</h1>
     <form ng-submit="user.login();">
-
-
-      <input type="email" ng-model="user.loginEmail" placeholder="email"><br/>
-      <input type="password" ng-model="user.loginPassword" placeholder="password"><br/>
-
-      <button type="submit" class="btn btn-default" >login</button>
+      <div class="form-group">
+        <input class="form-control" type="email" ng-model="user.loginEmail" placeholder="email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="password" ng-model="user.loginPassword" placeholder="password">
+      </div>
+      <button type="submit" class="btn btn-primary" >Login</button>
+    </form>
       <h5>{{user.message}}</h5>
-    </br>
-    Need to Register?
-    <button ng-click="user.toggleForms()">Register Here</button>
-    </form>
-</div>
+        Don't have an account?
+        <button class="btn btn-default" ng-click="user.toggleForms()">Sign up!</button>
+    </div>
 <!-- Register Form -->
-  <div class="" ng-if=user.registerForm>
-    <h1>Register</h1>
+  <div id="register" class="text-center" ng-if=user.registerForm>
+    <h1>Sign Up Here</h1>
     <form ng-submit="user.register();">
-
-      <input type="text" ng-model="user.registeredEmail" placeholder="email"><br/>
-      <input type="text" ng-model="user.registeredPassword" placeholder="password"><br/>
-      
-
-      <button type="submit" class="btn btn-default" >register</button>
-    </br>
-    Already Registered?
-    <button ng-click="user.toggleForms()">Login Here</button>
+      <div class="form-group">
+        <input class="form-control" type="email" ng-model="user.registeredEmail" placeholder="email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="password" ng-model="user.registeredPassword" placeholder="password">
+      </div>
+      <button type="submit" class="btn btn-primary" >Register</button>
     </form>
-  </div>
+    <br/>
+        Already Registered?
+        <button class="btn btn-default" ng-click="user.toggleForms()">Login</button>
+    </div>
