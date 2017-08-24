@@ -82,7 +82,6 @@ router.get('/logout', (req, res)=> {
   })
 })
 
-
 //show route
 router.get('/:id', (req, res)=> {
   User.find({ _id : req.params.id }, function(err, foundUser) {
@@ -97,12 +96,36 @@ router.get('/:id', (req, res)=> {
 //     res.json(createdUser)
 //   })
 // })
+
+
+
 //edit route
-router.put('/:id', (req, res)=> {
-  User.findByIdAndUpdate(req.params.id, {name: req.params.name, image: req.params.image, bio: req.params.bio}, { new : true }, (err, updatedUser)=>{
+router.get('/checkLogin', (req, res)=> {
+  if(req.session.logged){
+    User.findOne({email: req.session.email}, (err, user)=>{
+      res.json(updatedUser)
+    })
+  } else {
+    console.log('get user modal info');
+  }
+})
+
+router.put('/checkLogin', (req, res)=> {
+  if(req.session.logged){
+  User.findByIdAndUpdate(req.params.id, req.body, { new: true },
+
+    (err, user)=>{
+      console.log('use profile updated');
     res.json(updatedUser)
   })
+  } else {
+    console.log('user added profile data info in their modal');
+  }
 })
+
+
+
+
 
 //delete route'
 router.delete('/:id', (req, res)=> {
