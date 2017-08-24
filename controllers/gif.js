@@ -57,8 +57,6 @@ router.put('/comment/:id', (req, res)=>{
 
 //edit route
 router.put('/:id', (req, res)=> {
-  //need to wrap this all in an if statement to check if they are the user that created this gif
-  //if(req.body.author === req.session.email)
   Gif.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedGif)=> {
     User.findOneAndUpdate(
       { email: req.session.email},
