@@ -45,7 +45,7 @@
           <li ng-if=!user.loggedIn ng-click="user.goToLogin()" ng-click="user.addForm.reset()"><a href="#">LOGIN</a></li>
           <li ng-if=user.loggedIn ng-click="user.logOut()"><a href="#" style="color:#f759c2;">LOGOUT</a></li>
           <li ng-if=!user.loggedIn ng-click="user.goToRegister()"><a href="#" style="color: #f759c2;">REGISTER</a></li>
-          <li ng-if=user.loggedIn ng-click="user.toggleModal()"><a href="#" style="color:#f759c2;">{{user.loginEmail}}</a></li>
+          <li ng-if=user.loggedIn><a href="#" style="color:#f759c2;">{{user.loginEmail}}</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div>
@@ -67,8 +67,6 @@
 <section id="forms" ng-include="'./forms.html'"></section>
 
 
-
-    <section> <!--ng-if=user.loggedIn -->
       <!---- Description Section  ---->
       <div id="about" class="row">
         <div class="col-lg-4 col-sm-6 portfolio-item">
@@ -105,9 +103,9 @@
           </div>
         </div>
       </div>
-
+      <section ng-if=user.loggedIn>
     <!-- User Section   -->
-   <div ng-if="user.modal" id="usermodal">
+   <div id="usermodal" ng-hide=true> <!--nf-if="user.modal"-->
      <div class="modal-dialog" role="document">
        <div class="modal-content">
          <div class="modal-header">
