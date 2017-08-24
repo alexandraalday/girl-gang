@@ -175,6 +175,7 @@ app.controller('GifController', ['$http', '$scope', function($http, $scope){
     this.modal = false;
     this.regina = "I wanna lose five pounds";
     this.currentGif = {};
+    this.commentedGif = {};
     this.editGif = {};
     this.addGif = function(){
       $http({
@@ -228,7 +229,7 @@ app.controller('GifController', ['$http', '$scope', function($http, $scope){
         data: this.commentedGif
       }).then(function(response){
           controller.commentDisplay = false;
-          controller.commentedMusic = {};
+          controller.commentedGif = {};
           controller.getGifs();
       }, function(err){
           console.log(err);
@@ -322,6 +323,7 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
     this.newDisplay = false;
     this.commentDisplay = false;
     this.modal = false;
+    this.commentedMusic = {};
 
     //You GO Glen Coco! 
     this.addMusic = function(){
@@ -488,6 +490,7 @@ app.controller('LitController', ['$http', '$scope', function($http, $scope){
     this.newDisplay = false;
     this.editDisplay = false;
     this.modal = false;
+    this.commentedLit = {};
     //take this out if reset form works, placeholder for next attempt to clear edit form:
     this.newEntry = {};
 
