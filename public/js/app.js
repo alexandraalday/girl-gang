@@ -17,6 +17,8 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
   this.loginForm = true;
   this.registerForm = false;
   this.message = '';
+  //possible empty object to set for undefined error
+  this.profileUpdate = {};
 
 
   this.toggleEdit = function(){
@@ -133,13 +135,13 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
     })
   }
   //ajax call to update the user
-  this.updateUser = function(user._id){
-    console.log(user._id);
+  this.updateUser = function(id){
+    console.log(id);
 
     $http({
       method: 'PUT',
       // + id from line 153
-      url: '/users/',
+      url: '/users/' + id,
       data: this.editedUser
     }).then(function(response){
       console.log(response.data);
@@ -152,7 +154,7 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
       // controller.editedUser._id = {};
     }, function(err){
       console.log(err);
-      console.log('error in update route');
+      // console.log('error in update route');
     })
   }
   //ajax call to delete the user
