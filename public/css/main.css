@@ -26,8 +26,14 @@ fieldset {
   text-align: center;
   width: 100%;
   z-index: 100;
+  overflow: hidden;
+}
+
+#gifmodal.modal .modal-body {
+  max-height: 100%;
   overflow: scroll;
 }
+
 
 .modal-header {
 	background: linear-gradient(to right, #06BEE0, #C704F6);
