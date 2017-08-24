@@ -235,7 +235,6 @@ app.controller('GifController', ['$http', '$scope', function($http, $scope){
         method: 'PUT',
         url: '/gifs/like/' + id
       }).then(function(response){
-        console.log(response)
         controller.getGifs();
       }, function(err){
           console.log(err);
@@ -247,7 +246,6 @@ app.controller('GifController', ['$http', '$scope', function($http, $scope){
         url: '/gifs/comment/' + id,
         data: this.commentedGif
       }).then(function(response){
-          console.log(response)
           controller.commentDisplay = false;
           controller.commentedMusic = {};
           controller.getGifs();
@@ -284,10 +282,7 @@ app.controller('GifController', ['$http', '$scope', function($http, $scope){
       }).then(function(response){
         controller.currentGif = response.data[0];
         controller.currentGif.url = response.data[0].url;
-        console.log(controller.currentGif);
         $scope.input = '';
-        console.log($scope.checkPlz.email)
-        console.log(controller.currentGif.author)
           if($scope.checkPlz.email !== controller.currentGif.author) {
            document.getElementById("gifedit").style.visibility = "hidden";
          }
@@ -307,7 +302,6 @@ app.controller('GifController', ['$http', '$scope', function($http, $scope){
         controller.editedGif = {};
       }, function(err){
         console.log(err);
-        console.log('error in the edit call');
       })
     }
     this.deleteGif = function(gif){
@@ -318,7 +312,6 @@ app.controller('GifController', ['$http', '$scope', function($http, $scope){
         controller.getGifs();
         controller.modal = false;
       }, function(err) {
-        console.log('error in the delete call');
         console.log(err);
             }
         );
