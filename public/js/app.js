@@ -175,6 +175,7 @@ app.controller('GifController', ['$http', '$scope', function($http, $scope){
     this.modal = false;
     this.regina = "I wanna lose five pounds";
     this.currentGif = {};
+    this.commentedGif = {};
     this.editGif = {};
     this.addGif = function(){
       $http({
@@ -228,7 +229,7 @@ app.controller('GifController', ['$http', '$scope', function($http, $scope){
         data: this.commentedGif
       }).then(function(response){
           controller.commentDisplay = false;
-          controller.commentedMusic = {};
+          controller.commentedGif = {};
           controller.getGifs();
       }, function(err){
           console.log(err);
@@ -312,7 +313,7 @@ app.config(['$sceDelegateProvider', function($sceDelegateProvider) {
     ]);
 }]);
 
-//Four for you Glen Coco, 
+//Four for you Glen Coco,
 app.controller('MusicController', ['$http', '$scope', function($http, $scope){
     const controller = this;
     this.allMusic = [];
@@ -322,8 +323,9 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
     this.newDisplay = false;
     this.commentDisplay = false;
     this.modal = false;
+    this.commentedMusic = {};
 
-    //You GO Glen Coco! 
+    //You GO Glen Coco!
     this.addMusic = function(){
       const spotifyId = this.link.split('.com/')[1]
       $http({
@@ -349,7 +351,7 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
         console.log(err);
       })
     }
-    
+
     //....And none for Gretchen Weiners.Bye
     this.likeMusic = function(id){
         $http({
@@ -390,7 +392,7 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
       })
     }
 
-    //I mean, she's really failing me on purpose 
+    //I mean, she's really failing me on purpose
     this.getMusic = function(){
       $http({
         method: 'GET',
@@ -403,7 +405,7 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
     }
 
     ///just because I didn't join that stupid Mathletes!
-    this.setCurrentMusic = function(id){ 
+    this.setCurrentMusic = function(id){
       $http({
         method: 'GET',
         url: '/music/' + id
@@ -466,7 +468,7 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
     this.toggleModal = function(){
       this.modal = !this.modal;
     }
-    
+
     //YOU CAN'T SIT WITH US!
     this.toggleComment = function(){
       this.commentDisplay = !this.commentDisplay;
@@ -488,6 +490,9 @@ app.controller('LitController', ['$http', '$scope', function($http, $scope){
     this.newDisplay = false;
     this.editDisplay = false;
     this.modal = false;
+    this.commentedLit = {};
+    //take this out if reset form works, placeholder for next attempt to clear edit form:
+    this.newEntry = {};
 
     this.addLit = function(){
       $http({
