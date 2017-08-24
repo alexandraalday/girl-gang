@@ -51,7 +51,7 @@
             <ul ng-click="lit.toggleModal()">
               <li><strong>Description:</strong><span> {{lit.currentLit.description}}</span></li><br/>
               <li><span>
-                <a href="{{lit.currentLit.url}}">Read Me Here</a></span></li><br/>
+                <a href="{{lit.currentLit.url}}" target="_blank">Read Me Here</a></span></li><br/>
               <li><strong>Tag(s):</strong><span> {{lit.currentLit.tag}}</span></li><br/>
               <p><strong> Posted by: </strong>{{lit.currentLit.author}}</p>
             </ul>
@@ -126,7 +126,7 @@
     <ul id="lit-list">
       <li ng-repeat="allLit in lit.allLits" ng-click="lit.setCurrentLit(allLit._id)">
         <div class="col-md-4" id="lit-item">
-          <button class="btn btn-default" id="lit-button"><a href="{{allLit.url}}" target="_blank">{{allLit.postTitle}}</a></button>
+          <button class="btn btn-default" id="lit-button"><a href="{{allLit.url}}" target="_blank" >{{allLit.postTitle}}</a></button>
           <div id="action-icons">
             <button class="btn btn-default" ng-click="lit.toggleModal()"><span class="glyphicon glyphicon-pencil"></span></button>
             <button class="btn btn-default" ng-click="lit.likeLit(allLit._id)"><span class="glyphicon glyphicon-heart"><b> {{allLit.likes}}</b></span></button>
