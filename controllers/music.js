@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Music = require('../models/music.js')
 const User = require('../models/user.js')
+
 //index route
 router.get('/', (req, res)=> {
   Music.find({}, (err, foundMusic)=> {
