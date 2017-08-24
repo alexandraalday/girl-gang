@@ -50,6 +50,7 @@ fieldset {
 #gifmodal .modal-body {
   max-height: 100%;
   overflow: auto;
+
 }
 
 #musicmodal .modal-body {
@@ -77,6 +78,7 @@ fieldset {
 
 #comment-item {
   text-align: left;
+
 }
 
 #article-info {
@@ -260,6 +262,12 @@ fieldset {
 	color: #fff;
 }
 
+#gif-container {
+  margin-left: 2%;
+  margin-right: 2%;
+
+}
+
 #gif-container img {
 	height: 20em;
 	width: 30em;
@@ -268,6 +276,7 @@ fieldset {
 div #gif-item {
   margin-top: 4%;
   margin-bottom: 1%;
+
 }
 
 
@@ -338,11 +347,11 @@ div #lit-item {
 }
 
 #lit-button {
-  background-color: #f759c2; 
+  background-color: #f759c2;
 }
 
 #lit-button a {
-  color: #ffffff; 
+  color: #ffffff;
 }
 
 
@@ -356,7 +365,7 @@ footer {
   height: 60px;
   background-color: #000000;
   color: #ffffff;
-  font-weight: bold; 
+  font-weight: bold;
   text-align: center;
   margin-top: 20%;
   padding: 2%;
