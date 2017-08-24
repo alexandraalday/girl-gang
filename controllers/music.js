@@ -18,7 +18,15 @@ router.get('/:id', (req, res)=> {
 
 //new route
 router.post('/', (req, res)=> {
+  req.body.author = req.session.email;
   Music.create(req.body, (err, createdMusic)=> {
+    User.findOneAndUpdate(
+      {email: req.session.email},
+      {$push: {music: createdMusic}},
+      {safe: true, upsert: true, new: true},
+      (err, model)=> {
+        console.log(err);
+      })
     res.json(createdMusic)
   })
 })
