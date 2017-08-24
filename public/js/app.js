@@ -1,13 +1,3 @@
-
-  
-
-
-          
-
-
-
-
-
 const app = angular.module('girlGang', []);
   angular.module('app', ['ngSanitize']);
 
