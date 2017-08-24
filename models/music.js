@@ -7,7 +7,7 @@ const musicSchema = mongoose.Schema({
 	embed: {type: String},
 	tag: String,
 	likes: {type: Number, default:0},
-	author: String,
+	author: {type:String, default: ''},
 	commentCount: {type: Number, default:0},
 	comments: [{type: String}]
 });

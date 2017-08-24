@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 
@@ -8,6 +9,8 @@
 
 
 
+=======
+>>>>>>> 365ad6e8551bffbcb50ad4dbc45378f75334a411
 const app = angular.module('girlGang', []);
   angular.module('app', ['ngSanitize']);
 
@@ -470,6 +473,11 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
         console.log(controller.currentMusic);
         //may take this out:
         $scope.input = '';
+        console.log($scope.checkPlz.email)
+        console.log(controller.currentMusic.author)
+          if($scope.checkPlz.email !== controller.currentMusic.author) {
+           document.getElementById("musicedit").style.visibility = "hidden";
+         }
       }, function(err){
         console.log(err);
       })
@@ -528,7 +536,7 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
 // LIT CONTROLLER
 ///////////////////////
 
-app.controller('LitController', ['$http', function($http){
+app.controller('LitController', ['$http', '$scope', function($http, $scope){
     const controller = this;
     this.allLits = [];
     this.currentLit = {};
@@ -646,6 +654,11 @@ app.controller('LitController', ['$http', function($http){
         console.log(controller.currentLit);
         // controller.modal = true;
         // controller.currentLit.url = response.data[0].url;
+        console.log($scope.checkPlz.email)
+        console.log(controller.currentLit.author)
+          if($scope.checkPlz.email !== controller.currentLit.author) {
+           document.getElementById("litedit").style.visibility = "hidden";
+         }
 
       }, function(err){
         console.log(err);

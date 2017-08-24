@@ -49,15 +49,15 @@
             <!---- Tabs ---->
             <ul class="nav nav-tabs">
               <li class="nav-item">
-                <a class="nav-link-active" href="#1" data-toggle="tab" role="tab">Comments</a>
+                <a class="nav-link-active" href="#musiccomment" data-toggle="tab" role="tab">Comments</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#2" data-toggle="tab" role="tab">Edit</a>
+                <a class="nav-link" href="#musicedit" data-toggle="tab" role="tab">Edit</a>
               </li>
             </ul>
             <div class="tab-content">
             <!---- Tab 1 Content ---->
-              <div class="tab-pane fade in show active" id="1" role="tabpanel">
+              <div class="tab-pane fade in show active" id="musiccomment" role="tabpanel">
                <!---- New Comment Form ---->
                <h2>Leave a Comment</h2>
                   <form id="commentForm" ng-submit="music.addComment(music.currentMusic._id); music.upComment(music.currentMusic._id)">
@@ -79,19 +79,8 @@
                 </ul>
               </div>
             <!---- Tab 2 Content ---->
-
-
-          <!--  
-           if (user.currentUser.email === music.currentMusic.author){
-              ng-show
-            } else {
-            ng-hide (or add disabled class)
-            } 
-            -->
-
-              <div class="tab-pane fade" id="2" role="tabpanel">
+              <div class="tab-pane fade" id="musicedit" role="tabpanel">
                 <!---- Edit Form ---->
-
                 <button class="btn btn-danger" ng-click="music.deleteMusic(music.currentMusic._id)">Remove This Song</button>
                 <h3>Need to Make Changes?</h3>
                   <form id="musicForm" ng-submit="music.updateMusic(music.currentMusic._id)" ng-click="music.addForm.reset()">
