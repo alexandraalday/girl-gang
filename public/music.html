@@ -60,7 +60,7 @@
               <div class="tab-pane fade in show active" id="musiccomment" role="tabpanel">
                <!---- New Comment Form ---->
                <h2>Leave a Comment</h2>
-                  <form id="commentForm" ng-submit="music.addComment(music.currentMusic._id); music.upComment(music.currentMusic._id)">
+                  <form id="commentForm" ng-submit="music.addComment(music.currentMusic._id); music.upComment(music.currentMusic._id); music.toggleModal()">
                   <fieldset>
                     <div class="form-group">
                       <textarea class="form-control" type="text" id="comments" ng-model="music.commentedMusic.comments">What's on your mind?</textarea>
@@ -71,8 +71,8 @@
                 <!----  All Comments ---->
                 <ul id="comment-list">
                   <li ng-repeat="comment in music.currentMusic.comments track by $index">
-                    <div class="col-md-4" id="comment-item">
-                      <p>{{comment}}<p>
+                    <div class="col-md-8" id="comment-item">
+                      <p>{{comment}}<p><br/>
                       <hr></hr>
                     </div>
                   </li>
