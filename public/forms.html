@@ -11,10 +11,11 @@
       </div>
       <button type="submit" class="btn btn-primary" >Login</button>
     </form>
-      <h5>{{user.message}}</h5>
-        Don't have an account?
-        <button class="btn btn-default" ng-click="user.toggleForms()">Sign up!</button>
-    </div>
+    <h5>{{user.message}}</h5>
+    Don't have an account?
+    <button class="btn btn-default" ng-click="user.toggleForms()">Sign up!</button>
+  </div>
+
 <!-- Register Form -->
   <div id="register" class="text-center" ng-if=user.registerForm>
     <h1>Sign Up Here</h1>
@@ -29,6 +30,6 @@
       <button type="submit" class="btn btn-primary" >Register</button>
     </form>
     <br/>
-        Already Registered?
-        <button class="btn btn-default" ng-click="user.toggleForms()">Login</button>
-    </div>
+    Already Registered?
+    <button class="btn btn-default" ng-click="user.toggleForms()">Login</button>
+  </div>
