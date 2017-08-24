@@ -69,7 +69,13 @@ router.put('/:id', (req, res)=> {
 //delete route'
 router.delete('/:id', (req, res)=> {
   Music.findByIdAndRemove(req.params.id, (err, deletedMusic)=>{
-    res.json(deletedMusic)
+    User.findOne({email: req.session.email},
+    (err, foundUser)=> {
+      foundUser.music.id(req.params.id).remove();
+      foundUser.save((err, data)=> {
+        res.json(deletedMusic)
+      })
+    })
   })
 })
 
