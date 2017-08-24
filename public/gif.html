@@ -8,7 +8,7 @@
     <h4> Get Your Giggle On, Feminista </h4>
 
    <!-------- Add New Gif Button ------>
-  <div class="col-lg-12">
+  <div id="newitem-form" class="col-lg-12">
     <button class="btn btn-default" type="submit" ng-click="gif.toggleNew(); gif.addForm.reset()">Add New Gif</button>
   </div>
 
@@ -71,7 +71,7 @@
                 <!----  All Comments ---->
                 <ul id="comment-list">
                   <li ng-repeat="comment in gif.currentGif.comments track by $index">
-                    <div class="col-md-8" id="comment-item">
+                    <div class="col-md-10" id="comment-item">
                       <p>{{comment}}<p>
                       <hr></hr>
                     </div>
