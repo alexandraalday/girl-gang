@@ -17,27 +17,22 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
   this.loginForm = true;
   this.registerForm = false;
   this.message = '';
-  //possible empty object to set for undefined error
   this.profileUpdate = {};
-
-
   this.toggleEdit = function(){
     this.editDisplay = !this.editDisplay;
     this.reset = function() {
       this.addForm.reset();
+    }
   }
-}
-
   this.toggleModal = function(){
     this.modal = !this.modal;
+    this.reset()
   }
-  //function to switch the forms from login to register
   this.toggleForms = function(){
     this.registerForm = !this.registerForm
     this.loginForm = !this.loginForm
-
+    this.reset()
   }
-  //ajax call to add a new User
   this.register = function(email, password){
     $http({
       method: 'POST',
@@ -51,7 +46,6 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
     }).then(function(response){
       controller.loggedIn = response.data;
       controller.registerForm = false;
-      console.log(response.data);
     }, function(err){
       console.log(err);
     })
@@ -59,12 +53,12 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
   this.goToRegister = function(){
     this.registerForm = true;
     this.loginForm = false;
-    this.addForm.reset();
+    this.reset();
   }
   this.goToLogin = function(){
     this.loginForm = true;
     this.registerForm = false;
-    this.addForm.reset();
+    this.reset();
   }
   //ajax call to login
   this.login = function(email, password){
@@ -76,11 +70,9 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
         password: this.loginPassword
       }
     }).then(function(response){
-      console.log(response.data);
       if(response.data === true){
       controller.loginForm = false;
       controller.loggedIn = response.data;
-      console.log('succesful login');
       controller.checkLogin()
 
 
@@ -110,7 +102,6 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
       controller.allUsers = response.data;
     }, function(err){
       console.log(err);
-      console.log('broke in show user call');
     })
   }
   this.checkLogin = function(){
@@ -118,12 +109,10 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
       method: 'GET',
       url: '/users/checkLogin'
     }).then(function(response){
-      console.log(response.data);
       $scope.checkPlz = response.data; //this is our current users
 
     }, function(err){
       console.log(err);
-      console.log('error in checkLogin route');
     })
   }
   //ajax call to identify a certain user by id
@@ -140,20 +129,16 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
   }
   //ajax call to update the user
   this.updateUser = function(id){
-    console.log(id);
-
     $http({
       method: 'PUT',
       // + id from line 153
       url: '/users/' + id,
       data: this.editedUser
     }).then(function(response){
-      console.log(response.data);
       controller.getUsers();
       controller.currentUser = {};
       controller.user = {};
       // adding this to see if I can grab user modal input
-
       controller.editedUser = {};
       // controller.editedUser._id = {};
     }, function(err){
@@ -176,11 +161,8 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
       console.log(err);
     })
   }
-
-  //call the function so all the users render automagically
   this.getUsers()
 }])
-
 
 
 ///////////////////////
