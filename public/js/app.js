@@ -20,6 +20,9 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
   //possible empty object to set for undefined error
   this.profileUpdate = {};
 
+  this.check = function(u){
+    console.log('works', u.allUsers[4]._id);
+  }
 
   this.toggleEdit = function(){
     this.editDisplay = !this.editDisplay;
@@ -108,6 +111,7 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
       method: 'GET',
       url: '/users'
     }).then(function(response){
+      //test this to see if commenting out  controller.allUsers will stop access of allUser in update user edit route
       controller.allUsers = response.data;
     }, function(err){
       console.log(err);
@@ -141,16 +145,16 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
   }
   //ajax call to update the user
   this.updateUser = function(id){
-    console.log(id);
+    console.log('works', id.allUsers[4]._id);
+    // console.log("this is update user id", id);
 
     $http({
       method: 'PUT',
-      // + id from line 153
-      url: '/users/' + id,
+      url: '/users/' + id.allUsers[4]._id,
       data: this.editedUser
     }).then(function(response){
       console.log(response.data);
-      controller.getUsers();
+
       controller.currentUser = {};
       controller.user = {};
       // adding this to see if I can grab user modal input
