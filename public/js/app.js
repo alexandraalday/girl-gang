@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-=======
-
-
->>>>>>> b17874b4419f851e24a1c0032745666403ad248f
 const app = angular.module('girlGang', []);
   angular.module('app', ['ngSanitize']);
 
