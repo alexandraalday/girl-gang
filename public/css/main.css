@@ -3,6 +3,10 @@
   src: url('../assets/adrip1.ttf') format('opentype');
 }
 
+body {
+  height: 100%;
+}
+
 li {
 	list-style: none;
   top: 0;
@@ -29,11 +33,20 @@ fieldset {
   overflow: hidden;
 }
 
-#gifmodal.modal .modal-body {
+#gifmodal .modal-body {
   max-height: 100%;
-  overflow: scroll;
+  overflow: auto;
 }
 
+#musicmodal .modal-body {
+  max-height: 100%;
+  overflow: auto;
+}
+
+#litmodal .modal-body {
+  max-height: 100%;
+  overflow: auto;
+}
 
 .modal-header {
 	background: linear-gradient(to right, #06BEE0, #C704F6);
@@ -48,14 +61,14 @@ fieldset {
 	float:right;
 }
 
-.modal-backdrop {
+/*.modal-backdrop {
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-}
+}*/
 
 #comment-item {
   text-align: left;
@@ -304,3 +317,26 @@ div #lit-item {
 #lit-button a {
   color: #ffffff; 
 }
+
+
+
+/***********************
+/* footer styles
+***********************/
+
+
+footer {
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #000000;
+    color: #ffffff;
+    font-weight: bold; 
+    text-align: center;
+    margin-top: 20%;
+    padding: 2%;
+  }
+
+  footer span {
+    color: #f759c2;
+  }

@@ -19,7 +19,9 @@ router.get('/checkLogin', (req, res)=> {
       res.json(user)
     })
   } else {
-    console.log('yo bitch ass aint the right user');
+          req.session.message = "email or password are incorrect"
+      //dont know if this line is right/necessary
+      res.json(req.session.message)
   }
 })
 

@@ -71,7 +71,7 @@
               <div class="tab-pane fade in show active" id="litcomment" role="tabpanel">
                <!---- New Comment Form ---->
                <h2>Leave a Comment</h2>
-                  <form id="commentForm" ng-submit="lit.addComment(lit.currentLit._id); lit.upComment(lit.currentLit._id)">
+                  <form id="commentForm" ng-submit="lit.addComment(lit.currentLit._id); lit.upComment(lit.currentLit._id); lit.toggleModal()">
                   <fieldset>
                     <div class="form-group">
                       <textarea class="form-control" type="text" id="comments" ng-model="lit.commentedLit.comments">What's on your mind?</textarea>
