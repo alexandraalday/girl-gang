@@ -51,10 +51,6 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
     }).then(function(response){
       controller.loggedIn = response.data;
       controller.registerForm = false;
-<<<<<<< HEAD
-      controller.addForm.reset();
-=======
->>>>>>> 11a50d0ca9e51d63d5c5f387a469c2ca751dfd5b
       console.log(response.data);
     }, function(err){
       console.log(err);
