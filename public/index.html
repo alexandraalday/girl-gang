@@ -105,7 +105,9 @@
       </div>
       <section ng-if=user.loggedIn>
     <!-- User Section   -->
-   <div id="usermodal" ng-hide=true> <!--nf-if="user.modal"-->
+   <div id="usermodal"  ng-click="user.check(user)"; ng-hide="toggleEdit()">
+   <!--nf-if="user.modal"-->
+     <!-- ng-hide=true> -->
      <div class="modal-dialog" role="document">
        <div class="modal-content">
          <div class="modal-header">
@@ -123,7 +125,7 @@
            <button class="btn btn-default" ng-click="user.deleteUser(user.currentUser._id)">Delete</button>
            <!---- Edit Form ---->
            <div ng-if="user.editDisplay">
-             <form id="userForm" ng-submit="user.updateUser(user.currentUser._id)">
+             <form id="userForm">
              <fieldset>
                <div class="form-group">
                  Name
@@ -141,7 +143,7 @@
 
                  <button ng-if="user.editDisplay" ng-click="user.currentUser.name = null">Cancel</button>
                  <button type="reset" class="btn btn-default">Reset</button>
-                 <button type="submit" ng-click="user.updateUser(user.currentUser._id)">Confirm</button>
+                 <button type="submit" ng-click="user.updateUser(user)">Confirm</button>
 
                  {{user.editedUser._id}}
                  {{user.editedUser.name}}

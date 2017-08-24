@@ -110,7 +110,7 @@ router.get('/checkLogin', (req, res)=> {
   }
 })
 
-router.put('/checkLogin', (req, res)=> {
+router.put('/:id', (req, res)=> {
   if(req.session.logged){
   User.findByIdAndUpdate(req.params.id, req.body, { new: true },
 
@@ -119,8 +119,10 @@ router.put('/checkLogin', (req, res)=> {
     res.json(updatedUser)
   })
   } else {
+    res.send('error')
     console.log('user added profile data info in their modal');
   }
+  res.send('what is this')
 })
 
 
