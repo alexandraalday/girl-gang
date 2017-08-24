@@ -2,7 +2,6 @@ const app = angular.module('girlGang', []);
   angular.module('app', ['ngSanitize']);
 
 
-
 ///////////////////////
 // USERS CONTROLLER
 ///////////////////////
@@ -18,11 +17,17 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
   this.loginForm = true;
   this.registerForm = false;
   this.message = '';
-  $scope.checkPlz = '';
+  //possible empty object to set for undefined error
+  this.profileUpdate = {};
+
 
   this.toggleEdit = function(){
     this.editDisplay = !this.editDisplay;
+    this.reset = function() {
+      this.addForm.reset();
   }
+}
+
   this.toggleModal = function(){
     this.modal = !this.modal;
   }
@@ -39,7 +44,9 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
       url: '/users/register',
       data: {
         email: this.registeredEmail,
-        password: this.registeredPassword
+        password: this.registeredPassword,
+        image: this.registeredImage,
+        bio: this.registeredBio
       }
     }).then(function(response){
       controller.loggedIn = response.data;
@@ -133,17 +140,25 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
   }
   //ajax call to update the user
   this.updateUser = function(id){
+    console.log(id);
+
     $http({
       method: 'PUT',
+      // + id from line 153
       url: '/users/' + id,
       data: this.editedUser
     }).then(function(response){
+      console.log(response.data);
       controller.getUsers();
       controller.currentUser = {};
+      controller.user = {};
+      // adding this to see if I can grab user modal input
+
       controller.editedUser = {};
-    }, function(error){
-      console.log(error);
-      console.log('error in update route');
+      // controller.editedUser._id = {};
+    }, function(err){
+      console.log(err);
+      // console.log('error in update route');
     })
   }
   //ajax call to delete the user
@@ -154,6 +169,7 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
     }).then(function(response){
       controller.getUsers()
       controller.modal = false;
+      //delete user needs LOGOUT FUNCTION?  SEEMS LOGICAL
       controller.logOut()
     }, function(err){
       console.log('err in delete route');

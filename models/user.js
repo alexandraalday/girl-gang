@@ -9,12 +9,15 @@ const userSchema = mongoose.Schema({
   name: String,
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
- 	image: String,
-	bio: String,
+
+  image: {type: String, default: ''},
+  bio: {type: String, default: ''},
+  
 	gifs: [Gif.schema],
   music: [Music.schema],
   lit: [Lit.schema]
 });
+
 
 const User = mongoose.model('User', userSchema);
 
