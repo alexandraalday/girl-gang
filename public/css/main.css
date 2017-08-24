@@ -22,6 +22,16 @@ fieldset {
 }
 
 /***********************
+/* user styles
+***********************/
+
+#login, #register {
+  padding: 0 40%;
+}
+
+
+
+/***********************
 /* modal styles
 ***********************/
 
@@ -60,15 +70,6 @@ fieldset {
 #closebutton {
 	float:right;
 }
-
-/*.modal-backdrop {
-  background-color: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}*/
 
 #comment-item {
   text-align: left;
