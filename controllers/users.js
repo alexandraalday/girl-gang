@@ -84,8 +84,20 @@ router.get('/:id', (req, res)=> {
 
 
 
-
 //edit route
+router.get('/checkLogin', (req, res)=> {
+  if(req.session.logged){
+    User.findOne({email: req.session.email}, (err, user)=>{
+      res.json(user)
+    })
+  } else {
+    console.log('yo bitch ass aint the right user');
+  }
+})
+
+
+
+
 router.put('/:id', (req, res)=> {
   User.findByIdAndUpdate(req.params.id, req.body, { new: true },
 

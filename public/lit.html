@@ -50,75 +50,78 @@
         </div>
         <div class="modal-body">
           <h1>{{lit.currentLit.postTitle}}</h1>
-          <ul ng-click="lit.toggleModal()">
-            <li><strong>Post Title:</strong><span>{{lit.currentLit.postTitle}}</span></li><br/>
-            <li><strong>Post Author:</strong><span>{{lit.currentLit.author}}</span></li><br/>
-            <li><strong>Post URL:</strong><span>
-              <a href="{{lit.currentLit.url}}">Content Link</a></span></li><br/>
-            <li><strong>Post Description:</strong><span>{{lit.currentLit.description}}</span></li><br/>
-            <li><strong>Post Tag(s):</strong><span>{{lit.currentLit.tag}}</span></li><br/>
-          </ul>
-        </div>
-        <!---- Edit Button ---->
-        <button class="btn btn-primary" ng-click="lit.toggleEdit()">Edit</button>
-        <!---- Delete Button ---->
-        <button class="btn btn-default" ng-click="lit.deleteLit(lit.currentLit._id)">Delete</button>
-        <!---- Edit Form ---->
-        <div ng-if="lit.editDisplay">
-          <form id="add-form" ng-submit="lit.updateLit(lit.currentLit._id)" ng-click="addForm.reset()">
-          <fieldset>
-            <div class="form-group">
-              <input class="form-control" id="post-title" type="text" placeholder="Enter the title of your article, books, etc." ng-model="lit.editedLit.postTitle">
-            </div>
-            <div class="form-group">
-              <input class="form-control" id="author" type="text" placeholder="Enter author's name" ng-model="lit.editedLit.author">
-            </div>
-            <div class="form-group">
-              <input class="form-control" id="url" type="url" placeholder="Lit URL" ng-model="lit.editedLit.url">
-            </div>
-             <div class="form-group">
-              <input class="form-control" id="comment" type="text" placeholder="Give a brief description of this item" ng-model="lit.editedLit.comment">
-            </div>
-             <div class="form-group">
-              <input class="form-control" id="tag" type="text" placeholder="Tag(s)" ng-model="lit.editedLit.tag">
-            </div>
-            <div class="form-group">
-              <button ng-click="lit.currentLit.postTitle = null">Cancel</button>
-              <button type="submit" ng-click="lit.updateLit(lit.currentLit._id)">Confirm</button>
-            </div>
-          </fieldset>
-          </form>
-        </div><!--  end music display -->
-        <!-- Comment Section -->
-        <!---- Comment Button ---->
-          <button class="btn btn-primary" ng-click="lit.toggleComment()">Comment</button>
-          <!--
-          -comment display to show all commented getComment()
-          -toggle showing comment section based on which button was clicked ng-show/ng-hide -->
-        <!---- New Comment Form ---->
-          <div ng-if="lit.commentDisplay">
-            <form id="commentForm" ng-submit="lit.addComment(lit.currentLit._id); lit.upComment(lit.currentLit._id)">
-            <fieldset>
-              <div class="form-group">
-                <input class="form-control" id="comments" type="textarea" placeholder="What's on your mind?" ng-model="lit.currentLit.comments">
-              </div>
-              <div class="form-group">
-                <button ng-click="lit.toggleModal(); lit.toggleComment()">Cancel</button>
-                <button type="submit">Confirm</button>
-              </div>
-            </fieldset>
-            </form>
-        </div><!--  end comment display -->
-         <!----  All Comments ---->
-          <div class="row" id="display">
-          Comments:
-          {{lit.currentLit.comments}}
+          <div id="article-info">
+            <ul ng-click="lit.toggleModal()">
+              <li><strong>Description:</strong><span> {{lit.currentLit.description}}</span></li><br/>
+              <li><span>
+                <a href="{{lit.currentLit.url}}">Read Me Here</a></span></li><br/>
+              <li><strong>Tag(s):</strong><span> {{lit.currentLit.tag}}</span></li><br/>
+              <p><strong> Posted by: </strong>{{lit.currentLit.author}}</p>
+            </ul>
           </div>
+        </div>
+        <!---- Tabs ---->
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a class="nav-link-active" href="#1" data-toggle="tab" role="tab">Comments</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#2" data-toggle="tab" role="tab">Edit</a>
+              </li>
+            </ul>
+            <div class="tab-content">
+            <!---- Tab 1 Content ---->
+              <div class="tab-pane fade in show active" id="1" role="tabpanel">
+               <!---- New Comment Form ---->
+               <h2>Leave a Comment</h2>
+                  <form id="commentForm" ng-submit="lit.addComment(lit.currentLit._id); lit.upComment(lit.currentLit._id)">
+                  <fieldset>
+                    <div class="form-group">
+                      <textarea class="form-control" type="text" id="comments" ng-model="lit.commentedLit.comments">What's on your mind?</textarea>
+                      <button class="btn btn-primary" type="submit">Confirm</button>
+                    </div>
+                  </fieldset>
+                  </form>
+                <!----  All Comments ---->
+                <ul id="comment-list">
+                  <li ng-repeat="comment in lit.currentLit.comments track by $index">
+                    <div class="col-md-4" id="comment-item">
+                      <p>{{comment}}<p>
+                      <hr></hr>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            <!---- Tab 2 Content ---->
+              <div class="tab-pane fade" id="2" role="tabpanel">
+                <!---- Edit Form ---->
+                <button class="btn btn-danger" ng-click="lit.deleteLit(lit.currentLit._id)">Remove This Article/Book</button>
+                <h3>Need to Make Changes?</h3>
+                  <form id="litForm" ng-submit="lit.updateLit(lit.currentLit._id)" ng-click="lit.addForm.reset()">
+                  <fieldset>
+                    <div class="form-group">
+                      <input class="form-control" id="description" type="text" placeholder="{{lit.currentLit.description}}" ng-model="lit.editedLit.description">
+                    </div>
+                    <div class="form-group">
+                      <input class="form-control" id="url" type="text" placeholder="{{lit.currentLit.url}}" ng-model="lit.editedLit.url">
+                    </div>
+                    <div class="form-group">
+                      <input class="form-control" type="text" placeholder="{{lit.currentLit.tag}}" ng-model="lit.editedLit.tag">
+                    </div>
+                    <div class="form-group">
+                      <button ng-click="lit.toggleModal()">Cancel</button>
+                      <button type="submit" ng-click="lit.updateLit(lit.currentLit._id)">Confirm</button>
+                    </div>
+                  </fieldset>
+                  </form>
+                </div>
+              </div><!-- end tab 2 -->
+
+            </div> <!-- end tab content -->
+          </div><!-- end modal body -->
         </div>
       </div>
     </div>
-  </div
-
 
   <!----  All Lit ---->
   <div class="row" id="display">
@@ -127,9 +130,9 @@
         <div class="col-md-4" id="lit-item">
           <button class="btn btn-default" id="lit-button"><a href="{{allLit.url}}">{{allLit.postTitle}}</a></button>
           <div id="action-icons">
-            <button class="btn btn-default" ng-click="lit.toggleModal(); lit.toggleEdit()"><span class="glyphicon glyphicon-pencil"></span></button>
+            <button class="btn btn-default" ng-click="lit.toggleModal()"><span class="glyphicon glyphicon-pencil"></span></button>
             <button class="btn btn-default" ng-click="lit.likeLit(allLit._id)"><span class="glyphicon glyphicon-heart"><b> {{allLit.likes}}</b></span></button>
-            <button class="btn btn-default" ng-click="lit.toggleModal(); lit.toggleComment()"><span class="glyphicon glyphicon-comment"><b>  {{allLit.commentCount}}</b></span></button><br/>
+            <button class="btn btn-default" ng-click="lit.toggleModal()"><span class="glyphicon glyphicon-comment"><b>  {{allLit.commentCount}}</b></span></button><br/>
           </div>
         </div>
       </li>

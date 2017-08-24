@@ -47,9 +47,9 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
         bio: this.registeredBio
       }
     }).then(function(response){
-      //console.log(response.data);
       controller.loggedIn = response.data;
       controller.registerForm = false;
+      console.log(response.data);
     }, function(err){
       console.log(err);
     })
@@ -72,11 +72,12 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
         password: this.loginPassword
       }
     }).then(function(response){
-      console.log(response);
+      console.log(response.data);
       if(response.data === true){
       controller.loginForm = false;
       controller.loggedIn = response.data;
-      console.log('successful login');
+      console.log('succesful login');
+      controller.checkLogin()
 
     } else {
       controller.message = response.data
@@ -105,6 +106,18 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
     }, function(err){
       console.log(err);
       console.log('broke in show user call');
+    })
+  }
+  this.checkLogin = function(){
+    $http({
+      method: 'GET',
+      url: '/users/checkLogin'
+    }).then(function(response){
+      console.log(response.data);
+      controller.checkPlz = response.data;
+    }, function(err){
+      console.log(err);
+      console.log('error in checkLogin route');
     })
   }
   //ajax call to identify a certain user by id
@@ -568,10 +581,12 @@ app.controller('LitController', ['$http', function($http){
       $http({
         method: 'PUT',
         url: '/lits/comment/' + id,
-        data: this.currentLit
+        data: this.commentedLit
       }).then(function(response){
           console.log(response)
           controller.commentDisplay = false;
+          controller.commentedLit = {};
+          controller.getLits();
       }, function(err){
           console.log(err);
       })
