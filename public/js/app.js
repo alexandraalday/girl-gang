@@ -1,3 +1,4 @@
+//Whoever wrote it probably didn't think anyone would ever see it?
 const app = angular.module('girlGang', []);
   angular.module('app', ['ngSanitize']);
 
@@ -305,6 +306,7 @@ app.controller('GifController', ['$http', '$scope', function($http, $scope){
 // MUSIC CONTROLLER
 ///////////////////////
 
+//I'm sorry that people are so jealous of me.
 app.config(['$sceDelegateProvider', function($sceDelegateProvider) {
     $sceDelegateProvider.resourceUrlWhitelist([
         'self',
@@ -312,6 +314,7 @@ app.config(['$sceDelegateProvider', function($sceDelegateProvider) {
     ]);
 }]);
 
+//Four for you Glen Coco, 
 app.controller('MusicController', ['$http', '$scope', function($http, $scope){
     const controller = this;
     this.allMusic = [];
@@ -322,6 +325,7 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
     this.commentDisplay = false;
     this.modal = false;
 
+    //You GO Glen Coco! 
     this.addMusic = function(){
       const spotifyId = this.link.split('.com/')[1]
       $http({
@@ -347,7 +351,8 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
         console.log(err);
       })
     }
-
+    
+    //....And none for Gretchen Weiners.Bye
     this.likeMusic = function(id){
         $http({
           method: 'PUT',
@@ -359,6 +364,7 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
         })
     }
 
+    //Whatever. I'm getting cheese fries.
     this.addComment = function(id){
       $http({
         method: 'PUT',
@@ -373,6 +379,7 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
       })
     }
 
+    //I'm only eating foods with less than 30% calories of fat.
     this.upComment = function(id){
       $http({
         method: 'PUT',
@@ -385,6 +392,7 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
       })
     }
 
+    //I mean, she's really failing me on purpose 
     this.getMusic = function(){
       $http({
         method: 'GET',
@@ -396,7 +404,8 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
       })
     }
 
-    this.setCurrentMusic = function(id){ //so we can edit it in the next function
+    ///just because I didn't join that stupid Mathletes!
+    this.setCurrentMusic = function(id){ 
       $http({
         method: 'GET',
         url: '/music/' + id
@@ -412,6 +421,7 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
       })
     }
 
+    //You wanna do something fun?
     this.updateMusic = function(id){
       $http({
         method: 'PUT',
@@ -428,6 +438,7 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
       })
     }
 
+    // You wanna go to Taco Bell?
     this.deleteMusic = function(music){
       $http({
         method: 'DELETE',
@@ -440,18 +451,25 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
       })
     }
 
+    //I can't go to Taco Bell!
     this.toggleNew = function(){
       this.newDisplay = !this.newDisplay;
       this.reset = function() {
         this.addForm.reset();
       }
     }
+
+    //I'm on an all-carb diet!
     this.toggleEdit = function(){
     	this.editDisplay = !this.editDisplay;
     }
+
+    //God, Karen, you are so stupid!
     this.toggleModal = function(){
       this.modal = !this.modal;
     }
+    
+    //YOU CAN'T SIT WITH US!
     this.toggleComment = function(){
       this.commentDisplay = !this.commentDisplay;
     };
