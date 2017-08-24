@@ -26,12 +26,10 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
   }
   this.toggleModal = function(){
     this.modal = !this.modal;
-    this.reset()
   }
   this.toggleForms = function(){
     this.registerForm = !this.registerForm
     this.loginForm = !this.loginForm
-    this.reset()
   }
   this.register = function(email, password){
     $http({
@@ -46,6 +44,7 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
     }).then(function(response){
       controller.loggedIn = response.data;
       controller.registerForm = false;
+      console.log('You go Glen Coco!!');
     }, function(err){
       console.log(err);
     })
@@ -53,12 +52,10 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
   this.goToRegister = function(){
     this.registerForm = true;
     this.loginForm = false;
-    this.reset();
   }
   this.goToLogin = function(){
     this.loginForm = true;
     this.registerForm = false;
-    this.reset();
   }
   //ajax call to login
   this.login = function(email, password){
@@ -175,6 +172,7 @@ app.controller('GifController', ['$http', '$scope', function($http, $scope){
     this.newDisplay = false;
     this.editDisplay = false;
     this.modal = false;
+    this.regina = "I wanna lose five pounds";
     this.currentGif = {};
     this.editGif = {};
     this.addGif = function(){
@@ -265,7 +263,7 @@ app.controller('GifController', ['$http', '$scope', function($http, $scope){
         controller.currentGif = response.data[0];
         controller.currentGif.url = response.data[0].url;
         $scope.input = '';
-          if($scope.checkPlz.email !== controller.currentGif.author) {
+        if($scope.checkPlz.email !== controller.currentGif.author) {
            document.getElementById("gifedit").style.visibility = "hidden";
          }
       }, function(err){
