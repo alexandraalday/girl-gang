@@ -19,6 +19,11 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
   this.registerForm = false;
   this.message = '';
   this.profileUpdate = {};
+
+  this.check = function(u){
+    console.log('works', u.allUsers[4]._id);
+  }
+
   this.toggleEdit = function(){
     this.editDisplay = !this.editDisplay;
     this.reset = function() {
@@ -97,6 +102,7 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
       method: 'GET',
       url: '/users'
     }).then(function(response){
+      //test this to see if commenting out  controller.allUsers will stop access of allUser in update user edit route
       controller.allUsers = response.data;
     }, function(err){
       console.log(err);
@@ -127,10 +133,12 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
   }
   //ajax call to update the user
   this.updateUser = function(id){
+    console.log('works', id.allUsers[4]._id);
+    // console.log("this is update user id", id);
+
     $http({
       method: 'PUT',
-      // + id from line 153
-      url: '/users/' + id,
+      url: '/users/' + id.allUsers[4]._id,
       data: this.editedUser
     }).then(function(response){
       controller.getUsers();
@@ -313,7 +321,7 @@ app.config(['$sceDelegateProvider', function($sceDelegateProvider) {
     ]);
 }]);
 
-//Four for you Glen Coco, 
+//Four for you Glen Coco,
 app.controller('MusicController', ['$http', '$scope', function($http, $scope){
     const controller = this;
     this.allMusic = [];
@@ -325,7 +333,7 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
     this.modal = false;
     this.commentedMusic = {};
 
-    //You GO Glen Coco! 
+    //You GO Glen Coco!
     this.addMusic = function(){
       const spotifyId = this.link.split('.com/')[1]
       $http({
@@ -351,7 +359,7 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
         console.log(err);
       })
     }
-    
+
     //....And none for Gretchen Weiners.Bye
     this.likeMusic = function(id){
         $http({
@@ -392,7 +400,7 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
       })
     }
 
-    //I mean, she's really failing me on purpose 
+    //I mean, she's really failing me on purpose
     this.getMusic = function(){
       $http({
         method: 'GET',
@@ -405,7 +413,7 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
     }
 
     ///just because I didn't join that stupid Mathletes!
-    this.setCurrentMusic = function(id){ 
+    this.setCurrentMusic = function(id){
       $http({
         method: 'GET',
         url: '/music/' + id
@@ -468,7 +476,7 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
     this.toggleModal = function(){
       this.modal = !this.modal;
     }
-    
+
     //YOU CAN'T SIT WITH US!
     this.toggleComment = function(){
       this.commentDisplay = !this.commentDisplay;
