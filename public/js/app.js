@@ -19,14 +19,11 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
   this.registerForm = false;
   this.message = '';
   this.profileUpdate = {};
-<<<<<<< HEAD
-=======
 
   this.check = function(u){
     console.log('works', u.allUsers[4]._id);
   }
 
->>>>>>> 7784f60178a7020127235d16064f6213ec1e0608
   this.toggleEdit = function(){
     this.editDisplay = !this.editDisplay;
     this.reset = function() {
