@@ -107,7 +107,7 @@
                     </div>
                     <div class="form-group">
                       <button ng-click="lit.toggleModal()">Cancel</button>
-                      <button type="submit" ng-click="lit.updateLit(lit.currentLit._id)">Confirm</button>
+                      <button type="submit" ng-click="lit.updateLit(lit.currentLit._id); lit.toggleModal()">Confirm</button>
                     </div>
                   </fieldset>
                   </form>
