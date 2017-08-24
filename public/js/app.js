@@ -35,7 +35,7 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
   this.toggleForms = function(){
     this.registerForm = !this.registerForm
     this.loginForm = !this.loginForm
-    this.addForm.reset();
+
   }
   //ajax call to add a new User
   this.register = function(email, password){
@@ -51,7 +51,10 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
     }).then(function(response){
       controller.loggedIn = response.data;
       controller.registerForm = false;
+<<<<<<< HEAD
       controller.addForm.reset();
+=======
+>>>>>>> 11a50d0ca9e51d63d5c5f387a469c2ca751dfd5b
       console.log(response.data);
     }, function(err){
       console.log(err);
@@ -188,20 +191,14 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
 // GIFS CONTROLLER
 ///////////////////////
 
-//controller for gifs
 app.controller('GifController', ['$http', '$scope', function($http, $scope){
-    //an empty array so we can push the gifs we make into it to display on the page
+    const controller = this;
     this.allGifs = [];
     this.newDisplay = false;
     this.editDisplay = false;
     this.modal = false;
-    //assigning this to a variable so we can use it in our functions
-    const controller = this;
-    //empty object so we can later use this variable to select a certain gif
     this.currentGif = {};
-    //empty object we can later use this variable to edit a certain gif
     this.editGif = {};
-    //ajax function to add a gif
     this.addGif = function(){
       $http({
         method: 'POST',
@@ -212,17 +209,14 @@ app.controller('GifController', ['$http', '$scope', function($http, $scope){
           author: this.author
         }
       }).then(function(response){
-        //this will update the gifs list with the new gif instantly
         controller.newDisplay = false;
         controller.getGifs();
-        //this resets the add new gif form text boxes
         controller.url = '',
         controller.tag = ''
       }, function(err){
         console.log(err);
       })
     }
-
     this.toggleNew = function(){
       this.newDisplay = !this.newDisplay;
       this.reset = function() {
@@ -240,26 +234,22 @@ app.controller('GifController', ['$http', '$scope', function($http, $scope){
     this.toggleComment = function(){
       this.commentDisplay = !this.commentDisplay;
     };
-
     this.likeGif = function(id){
       $http({
         method: 'PUT',
         url: '/gifs/like/' + id
       }).then(function(response){
-        console.log(response)
         controller.getGifs();
       }, function(err){
           console.log(err);
       })
     }
-
     this.addComment = function(id){
       $http({
         method: 'PUT',
         url: '/gifs/comment/' + id,
         data: this.commentedGif
       }).then(function(response){
-          console.log(response)
           controller.commentDisplay = false;
           controller.commentedMusic = {};
           controller.getGifs();
@@ -267,7 +257,6 @@ app.controller('GifController', ['$http', '$scope', function($http, $scope){
           console.log(err);
       })
     }
-
     this.upComment = function(id){
       $http({
         method: 'PUT',
@@ -280,9 +269,6 @@ app.controller('GifController', ['$http', '$scope', function($http, $scope){
           console.log(err);
       })
     }
-
-
-    //ajax call to display all the gifs to the page
     this.getGifs = function(){
       $http({
         method: 'GET',
@@ -293,22 +279,14 @@ app.controller('GifController', ['$http', '$scope', function($http, $scope){
         console.log(err);
       })
     }
-    //ajax call to identify a certain gif by id
     this.setCurrentGif = function(id){
       $http({
         method: 'GET',
         url: '/gifs/' + id
       }).then(function(response){
-        //this sets the empty currentGif object to our selected gif object
         controller.currentGif = response.data[0];
-        //controller.displayGif = true;
-        //sets the url, not sure why this is the only one we did this with.
         controller.currentGif.url = response.data[0].url;
-        console.log(controller.currentGif);
-        //may take this out:
         $scope.input = '';
-        console.log($scope.checkPlz.email)
-        console.log(controller.currentGif.author)
           if($scope.checkPlz.email !== controller.currentGif.author) {
            document.getElementById("gifedit").style.visibility = "hidden";
          }
@@ -316,29 +294,20 @@ app.controller('GifController', ['$http', '$scope', function($http, $scope){
         console.log(err);
       })
     }
-    //ajax call to update gifs
     this.updateGif = function(id){
       $http({
         method: 'PUT',
         url: '/gifs/' + id,
         data: this.editedGif
       }).then(function(response){
-        //to update the gif in our gif list
         controller.getGifs();
-        //controller.editDisplay = false;
-        //controller.displayGif = false;
-        //to unselect the current gif object
         controller.currentGif = {};
-        //to empty the model if needed to then empty the form
         controller.gif = {};
-        //this resets the form after the gif has been edited UPDATE TO OTHER MODELS
         controller.editedGif = {};
       }, function(err){
         console.log(err);
-        console.log('error in the edit call');
       })
     }
-    //ajax call to delete gifs
     this.deleteGif = function(gif){
       $http({
         method: 'DELETE',
@@ -347,12 +316,10 @@ app.controller('GifController', ['$http', '$scope', function($http, $scope){
         controller.getGifs();
         controller.modal = false;
       }, function(err) {
-        console.log('error in the delete call');
         console.log(err);
             }
         );
       }
-
       this.getGifs();
 }])
 
