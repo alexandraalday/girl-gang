@@ -35,7 +35,7 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
   this.toggleForms = function(){
     this.registerForm = !this.registerForm
     this.loginForm = !this.loginForm
-    this.addForm.reset();
+    
   }
   //ajax call to add a new User
   this.register = function(email, password){
@@ -51,7 +51,6 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
     }).then(function(response){
       controller.loggedIn = response.data;
       controller.registerForm = false;
-      controller.addForm.reset()
       console.log(response.data);
     }, function(err){
       console.log(err);
@@ -83,7 +82,7 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
       controller.loggedIn = response.data;
       console.log('succesful login');
       controller.checkLogin()
-      
+
 
     } else {
       controller.message = response.data
