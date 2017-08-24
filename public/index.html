@@ -42,7 +42,7 @@
           <li><a href="#gifs" style="color: #f759c2;">GIFS</a></li>
           <li><a href="#music" style="color: #f759c2;">MUSIC</a></li>
           <li><a href="#lit" style="color: #f759c2;">LIT</a></li>
-          <li ng-if=!user.loggedIn ng-click="user.goToLogin()"><a href="#">LOGIN</a></li>
+          <li ng-if=!user.loggedIn ng-click="user.goToLogin()" ng-click="user.addForm.reset()"><a href="#">LOGIN</a></li>
           <li ng-if=user.loggedIn ng-click="user.logOut()"><a href="#" style="color:#f759c2;">LOGOUT</a></li>
           <li ng-if=!user.loggedIn ng-click="user.goToRegister()"><a href="#" style="color: #f759c2;">REGISTER</a></li>
           <li ng-if=user.loggedIn ng-click="user.toggleModal()"><a href="#" style="color:#f759c2;">{{user.loginEmail}}</a></li>
