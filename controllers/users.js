@@ -88,23 +88,24 @@ router.get('/:id', (req, res)=> {
 router.get('/checkLogin', (req, res)=> {
   if(req.session.logged){
     User.findOne({email: req.session.email}, (err, user)=>{
-      res.json(user)
+      res.json(updatedUser)
     })
   } else {
-    console.log('yo bitch ass aint the right user');
+    console.log('get user modal info');
   }
 })
 
-
-
-
-router.put('/:id', (req, res)=> {
+router.put('/checkLogin', (req, res)=> {
+  if(req.session.logged){
   User.findByIdAndUpdate(req.params.id, req.body, { new: true },
 
-    (err, updatedUser)=>{
+    (err, user)=>{
       console.log('use profile updated');
     res.json(updatedUser)
   })
+  } else {
+    console.log('user added profile data info in their modal');
+  }
 })
 
 

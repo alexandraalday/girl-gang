@@ -145,9 +145,12 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
   }
   //ajax call to update the user
   this.updateUser = function(id){
+    console.log(id);
+
     $http({
       method: 'PUT',
-      url: '/users/' + id,
+      // + id from line 153
+      url: '/users/',
       data: this.editedUser
     }).then(function(response){
       console.log(response.data);
@@ -155,11 +158,11 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
       controller.currentUser = {};
       controller.user = {};
       // adding this to see if I can grab user modal input
-      controller.editedUser = {};
 
+      controller.editedUser = {};
       // controller.editedUser._id = {};
-    }, function(error){
-      console.log(error);
+    }, function(err){
+      console.log(err);
       console.log('error in update route');
     })
   }
