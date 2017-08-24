@@ -8,7 +8,7 @@
       <h4>Badass Songs for Badass Babes</h4>
 
     <!-------- Add New Track Button ------>
-    <div class="col-lg-12">
+    <div  id="newitem-form" class="col-lg-12">
       <button class="btn btn-default" type="submit" ng-click="music.toggleNew(); music.addForm.reset()">Add A New Track</button>
     </div>
 
@@ -71,7 +71,7 @@
                 <!----  All Comments ---->
                 <ul id="comment-list">
                   <li ng-repeat="comment in music.currentMusic.comments track by $index">
-                    <div class="col-md-8" id="comment-item">
+                    <div class="col-md-10" id="comment-item">
                       <p>{{comment}}<p><br/>
                       <hr></hr>
                     </div>

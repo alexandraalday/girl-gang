@@ -21,6 +21,10 @@ fieldset {
   margin: 0 auto;
 }
 
+#newitem-form {
+  margin-bottom: 2%;
+}
+
 
 /***********************
 /* user styles
