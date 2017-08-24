@@ -31,6 +31,8 @@ app.use('/music', music)
 const lit = require('./controllers/lit.js')
 app.use('/lits', lit)
 
+const dropDatData = require('./controllers/dropDatData.js')
+app.use('/drop', dropDatData)
 
 //index route
 app.get('/', (req, res)=>{
