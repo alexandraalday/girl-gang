@@ -9,7 +9,7 @@
 
     <!-------- Add New Track Button ------>
     <div class="col-lg-12">
-      <button class="btn btn-default" type="submit" ng-click="music.toggleNew()">Add A New Track</button>
+      <button class="btn btn-default" type="submit" ng-click="music.toggleNew(); music.addForm.reset()">Add A New Track</button>
     </div>
 
     <!-------- Add New Music Form ------>
@@ -21,9 +21,6 @@
           </div>
           <div class="form-group">
             <input class="form-control" id="tag" placeholder="Tag your song" type="text" ng-model="music.tag">
-          </div>
-          <div class="form-group">
-            <input class="form-control" id="author" placeholder="Enter your name" type="text" ng-model="music.author">
           </div>
           <div class="form-group">
             <input class="ng-hide" type="text" placeholder="embed" ng-model="music.embed" value=''>
@@ -82,8 +79,19 @@
                 </ul>
               </div>
             <!---- Tab 2 Content ---->
+
+
+          <!--  
+           if (user.currentUser.email === music.currentMusic.author){
+              ng-show
+            } else {
+            ng-hide (or add disabled class)
+            } 
+            -->
+
               <div class="tab-pane fade" id="2" role="tabpanel">
                 <!---- Edit Form ---->
+
                 <button class="btn btn-danger" ng-click="music.deleteMusic(music.currentMusic._id)">Remove This Song</button>
                 <h3>Need to Make Changes?</h3>
                   <form id="musicForm" ng-submit="music.updateMusic(music.currentMusic._id)" ng-click="music.addForm.reset()">
