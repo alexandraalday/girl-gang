@@ -323,7 +323,6 @@ app.controller('GifController', ['$http', '$scope', function($http, $scope){
 // MUSIC CONTROLLER
 ///////////////////////
 
-
 app.config(['$sceDelegateProvider', function($sceDelegateProvider) {
     $sceDelegateProvider.resourceUrlWhitelist([
         'self',
@@ -356,8 +355,6 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
           comments: this.comments
         }
       }).then(function(response){
-        console.log(response.data.link);
-        // call all songs
         controller.getMusic();
         // reset form
         controller.newDisplay = false;
@@ -374,7 +371,6 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
           method: 'PUT',
           url: '/music/like/' + id
         }).then(function(response){
-          console.log(response)
           controller.getMusic();
         }, function(err){
             console.log(err);
@@ -387,7 +383,6 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
         url: '/music/comment/' + id,
         data: this.commentedMusic
       }).then(function(response){
-          console.log(response)
           controller.commentDisplay = false;
           controller.commentedMusic = {};
           controller.getMusic();
@@ -401,7 +396,6 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
         method: 'PUT',
         url: '/music/comment/up/' + id,
       }).then(function(response){
-          console.log(response)
           controller.commentDisplay = false;
           controller.getMusic();
       }, function(err){
@@ -426,11 +420,8 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
         url: '/music/' + id
       }).then(function(response){
         controller.currentMusic = response.data[0];
-        console.log(controller.currentMusic);
         //may take this out:
         $scope.input = '';
-        console.log($scope.checkPlz.email)
-        console.log(controller.currentMusic.author)
           if($scope.checkPlz.email !== controller.currentMusic.author) {
            document.getElementById("musicedit").style.visibility = "hidden";
          }
@@ -450,7 +441,6 @@ app.controller('MusicController', ['$http', '$scope', function($http, $scope){
         controller.music = {};
         controller.editedMusic = {};
         controller.editDisplay = false;
-
       }, function(err){
         console.log(err);
       })
