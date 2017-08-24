@@ -2,6 +2,7 @@ const app = angular.module('girlGang', []);
   angular.module('app', ['ngSanitize']);
 
 
+
 ///////////////////////
 // USERS CONTROLLER
 ///////////////////////
@@ -535,7 +536,6 @@ app.controller('LitController', ['$http', function($http){
     this.reset = function() {
       this.addForm.reset();
     }
-
 
     this.likeLit = function(id){
       $http({
