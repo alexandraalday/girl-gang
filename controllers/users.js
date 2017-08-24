@@ -85,7 +85,7 @@ router.get('/checkLogin', (req, res)=> {
   }
 })
 
-router.put('/:id', (req, res)=> {
+router.put('/:checkLogin', (req, res)=> {
   if(req.session.logged){
   User.findByIdAndUpdate(req.params.id, req.body, { new: true },
 
