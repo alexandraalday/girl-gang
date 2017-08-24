@@ -67,7 +67,6 @@ router.get('/logout', (req, res)=> {
   })
 })
 
-
 //show route
 router.get('/:id', (req, res)=> {
   User.find({ _id : req.params.id }, function(err, foundUser) {
@@ -82,12 +81,23 @@ router.get('/:id', (req, res)=> {
 //     res.json(createdUser)
 //   })
 // })
+
+
+
+
 //edit route
 router.put('/:id', (req, res)=> {
-  User.findByIdAndUpdate(req.params.id, {name: req.params.body, image: req.params.body, bio: req.params.body}, { new : true }, (err, updatedUser)=>{
+  User.findByIdAndUpdate(req.params.id, req.body, { new: true },
+
+    (err, updatedUser)=>{
+      console.log('use profile updated');
     res.json(updatedUser)
   })
 })
+
+
+
+
 
 //delete route'
 router.delete('/:id', (req, res)=> {

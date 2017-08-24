@@ -45,7 +45,8 @@
           <li ng-if=!user.loggedIn ng-click="user.goToLogin()"><a href="#">LOGIN</a></li>
           <li ng-if=user.loggedIn ng-click="user.logOut()"><a href="#" style="color:#f759c2;">LOGOUT</a></li>
           <li ng-if=!user.loggedIn ng-click="user.goToRegister()"><a href="#" style="color: #f759c2;">REGISTER</a></li>
-          <li ng-if=user.loggedIn ng-click="user.toggleModal()"><a href="#" style="color:#f759c2;">{{user.loginEmail}}</a></li>
+          <li ng-if=user.loggedIn ng-click="user.toggleModal()"
+          ng-click="user.setCurrentUser(user._id)"><a href="#" style="color:#f759c2;">{{user.loginEmail}}</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div>
@@ -143,7 +144,7 @@
 
                  <button ng-if="user.editDisplay" ng-click="user.currentUser.name = null">Cancel</button>
                  <button type="reset" class="btn btn-default">Reset</button>
-                 <button type="submit">Confirm</button>
+                 <button type="submit" ng-click="user.updateUser(user.currentUser._id)">Confirm</button>
 
                  {{user.editedUser._id}}
                  {{user.editedUser.name}}

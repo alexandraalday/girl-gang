@@ -22,7 +22,11 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
 
   this.toggleEdit = function(){
     this.editDisplay = !this.editDisplay;
+    this.reset = function() {
+      this.addForm.reset();
   }
+}
+
   this.toggleModal = function(){
     this.modal = !this.modal;
   }
@@ -122,11 +126,13 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
       url: '/users/' + id,
       data: this.editedUser
     }).then(function(response){
+      console.log(response.data);
       controller.getUsers();
       controller.currentUser = {};
       controller.user = {};
       // adding this to see if I can grab user modal input
       controller.editedUser = {};
+
       // controller.editedUser._id = {};
     }, function(error){
       console.log(error);
