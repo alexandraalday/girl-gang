@@ -26,7 +26,6 @@ router.get('/checkLogin', (req, res)=> {
 })
 
 
-
 //Post route to register a new user
 router.post('/register', (req, res)=> {
   //hash the password

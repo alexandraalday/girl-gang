@@ -51,7 +51,7 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
     }).then(function(response){
       controller.loggedIn = response.data;
       controller.registerForm = false;
-      controller.addForm.reset()
+      controller.addForm.reset();
       console.log(response.data);
     }, function(err){
       console.log(err);
@@ -83,7 +83,7 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
       controller.loggedIn = response.data;
       console.log('succesful login');
       controller.checkLogin()
-      
+
 
     } else {
       controller.message = response.data
@@ -537,8 +537,6 @@ app.controller('LitController', ['$http', '$scope', function($http, $scope){
     this.newDisplay = false;
     this.editDisplay = false;
     this.modal = false;
-    //take this out if reset form works, placeholder for next attempt to clear edit form:
-    this.newEntry = {};
 
     this.addLit = function(){
       $http({
