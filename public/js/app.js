@@ -86,6 +86,7 @@ app.controller('UserController', ['$http', '$scope', function($http, $scope){
       controller.loggedIn = response.data;
       console.log('succesful login');
       controller.checkLogin()
+      
 
     } else {
       controller.message = response.data
