@@ -1,5 +1,17 @@
+
+
+
+
+
+
+
+
+
+
+
 const app = angular.module('girlGang', []);
   angular.module('app', ['ngSanitize']);
+
 
 
 ///////////////////////
@@ -7,7 +19,7 @@ const app = angular.module('girlGang', []);
 ///////////////////////
 
 
-app.controller('UserController', ['$http', function($http){
+app.controller('UserController', ['$http', '$scope', function($http, $scope){
   const controller = this;
   this.currentUser = {};
   this.editUser = {};
@@ -17,6 +29,8 @@ app.controller('UserController', ['$http', function($http){
   this.loginForm = true;
   this.registerForm = false;
   this.message = '';
+  $scope.checkPlz = '';
+
   this.toggleEdit = function(){
     this.editDisplay = !this.editDisplay;
   }
@@ -105,7 +119,8 @@ app.controller('UserController', ['$http', function($http){
       url: '/users/checkLogin'
     }).then(function(response){
       console.log(response.data);
-      controller.checkPlz = response.data;
+      $scope.checkPlz = response.data; //this is our current users
+
     }, function(err){
       console.log(err);
       console.log('error in checkLogin route');
@@ -282,6 +297,11 @@ app.controller('GifController', ['$http', '$scope', function($http, $scope){
         console.log(controller.currentGif);
         //may take this out:
         $scope.input = '';
+        console.log($scope.checkPlz.email)
+        console.log(controller.currentGif.author)
+          if($scope.checkPlz.email !== controller.currentGif.author) {
+           document.getElementById("gifedit").style.visibility = "hidden";
+         }
       }, function(err){
         console.log(err);
       })
@@ -548,7 +568,6 @@ app.controller('LitController', ['$http', function($http){
     this.reset = function() {
       this.addForm.reset();
     }
-
 
     this.likeLit = function(id){
       $http({
