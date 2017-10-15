@@ -1,7 +1,7 @@
 ## Girl Gang
 http://girl-gang.herokuapp.com/
 
-Girlgang is a shared space to celebrate and empower all things femme. Created in a one week sprint. 
+Girl Gang is a shared space to celebrate and empower all things femme. 
 
 Created in a one week sprint, Girl Gang is a single-page, four model CRUD app built with MVC file organization. User authentication is handled through Bcrypt. 
 
